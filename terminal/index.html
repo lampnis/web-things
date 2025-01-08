@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>METRO</title>
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="https://unpkg.com/jquery.terminal/js/jquery.terminal.min.js"></script>
+<link rel="stylesheet" href="https://unpkg.com/jquery.terminal/css/jquery.terminal.min.css"/>
+</head>
+<body>
+    <script>
+    var currentdate = new Date();
+    let pass = prompt("Password");
+    if (pass != "M3tr0") {
+        window.location.replace("https://google.com");
+    }
+    $('body').terminal({
+        msg: function () {
+            window.location.assign("index1.php");
+        },
+        google: function () {
+            window.location.replace("https://google.com");
+        },
+        info: function () {
+            this.echo(navigator.geolocation.getCurrentPosition((position) => {
+                locate(position.coords.latitude, position.coords.longitude);
+            }));
+            this.clear;
+            this.echo("System Info:")
+            this.echo(navigator.userAgent);
+            this.echo("Page:");
+            this.echo(window.location.href);
+            this.echo("Possible commands list: info echo page google")
+        },
+        //echo
+        echo: function (anything) {
+            this.clear;
+            this.echo(anything);        
+        },
+        //print current page
+        page: function () {
+            this.clear;
+            this.echo(window.location.href);
+        },
+    }, 
+        //greeting
+        {
+        greetings: 'METRO SEKRETA SABIEDRIBA ' + currentdate.getDate() + '.' + (currentdate.getMonth()+1) + "." + currentdate.getFullYear() + "@" + currentdate.getHours() + ":" + currentdate.getMinutes() + ":" + currentdate.getSeconds()
+    });
+    </script>
+</body>
+</html>

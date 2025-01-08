@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <style>
+      /* Styling for the circle */
+      #circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        background-color: blue;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    </style>
+  </head>
+  <body>
+
+    <div id="circle"></div>
+
+    <script>
+      // Get the circle element
+      var circle = document.getElementById("circle");
+
+      // Starting size for the circle
+      var size = 50;
+
+      // Animation function to increase the size of the circle
+      function animate() {
+        size += 5;
+        circle.style.width = size + "px";
+        circle.style.height = size + "px";
+        requestAnimationFrame(animate);
+      }
+
+      // Start the animation
+      animate();
+    </script>
+  </body>
+</html>
