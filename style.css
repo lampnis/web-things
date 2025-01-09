@@ -1,3 +1,8 @@
 header {
     font-family: Arial, Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+
+footer {
+    text-align: bottom;
 }
