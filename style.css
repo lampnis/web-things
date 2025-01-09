@@ -4,5 +4,6 @@ header {
 }
 
 footer {
-    text-align: bottom;
+    position: absolute;
+    bottom: 10px;
 }
