@@ -1,9 +1,37 @@
+/* style */
+/* * {
+    border: 1px solid red;
+} */
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+  width: auto;
+  height: auto;
+  margin: 30px auto;
+}
+
 header {
-    font-family: Arial, Helvetica, sans-serif;
-    text-transform: uppercase;
+    font-family: 'Courier New', Courier, monospace;
+    /* text-transform: uppercase; */
+    text-align: center;
 }
 
 footer {
     position: absolute;
     bottom: 10px;
+    text-align: center;
+    width: 100%;
+}
+
+#projects, #projects li {
+    text-align: center;
+    /* list-style: square; */
+}
+
+ul {
+    padding-left: 0;
+}
+
+ul li {
+    list-style-position: inside;
 }
