@@ -58,12 +58,13 @@ header h1 {
 }
 
 footer {
-    position: absolute;
+    position: fixed;
     bottom: 10px;
     text-align: center;
     width: 99%;
     height: auto;
     margin: auto;
+    bottom: 0;
 }
 
 #projects, #projects li {
