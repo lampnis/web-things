@@ -54,7 +54,7 @@ body {
 }
 
 footer {
-    position: absolute;
+    position: static;
     bottom: 10px;
     text-align: center;
     width: 99%;
