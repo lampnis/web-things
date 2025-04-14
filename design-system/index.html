@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=ABeeZee&family=Abel&family=Abhaya+Libre:wght@400;700&family=Abril+Fatface&family=Aclonica&family=Acme&family=Actor&family=Adamina&family=Advent+Pro:wght@400;700&family=Aguafina+Script&family=Akronim&family=Aladin&family=Alata&family=Alatsi&family=Aldrich&family=Alef:wght@400;700&family=Alegreya:wght@400;700&family=Alegreya+Sans:wght@400;700&family=Alegreya+SC:wght@400;700&family=Aleo:wght@400;700&family=Alex+Brush&family=Alfa+Slab+One&family=Alice&family=Alike&family=Alike+Angular&family=Allan&family=Allerta&family=Allerta+Stencil&family=Allura&family=Almendra:wght@400;700&family=Almendra+Display&family=Almendra+SC&family=Amaranth:wght@400;700&family=Amatic+SC:wght@400;700&family=Amethysta&family=Amiri:wght@400;700&family=Amita:wght@400;700&family=Anaheim&family=Andada+Pro:wght@400;700&family=Andika:wght@400;700&family=Angkor&family=Annie+Use+Your+Telescope&family=Anonymous+Pro:wght@400;700&family=Antic&family=Anton&family=Arapey&family=Arbutus&family=Arbutus+Slab&family=Architects+Daughter&family=Archivo:wght@400;700&family=Archivo+Black&family=Archivo+Narrow:wght@400;700&family=Aref+Ruqaa:wght@400;700&family=Arima+Madurai:wght@400;700&family=Arimo:wght@400;700&family=Arizonia&family=Armata&family=Artifika&family=Arvo:wght@400;700&family=Asap:wght@400;700&family=Asset&family=Astloch&family=Asul:wght@400;700&family=Athiti:wght@400;700&family=Atma:wght@400;700&family=Atomic+Age&family=Aubrey:wght@400;700&family=Audiowide&family=Autour+One&family=Average&family=Average+Sans&family=Averia+Gruesa&family=Averia+Libre:wght@400;700&family=Averia+Sans+Libre:wght@400;700&family=Averta:wght@400;700&family=Bad+Script&family=Bahiana&family=Bahianita&family=Bai+Jamjuree:wght@400;700&family=Baloo+2:wght@400;700&family=Baloo+Bhai+2:wght@400;700&family=Baloo+Chettan+2:wght@400;700&family=Baloo+Da+2:wght@400;700&family=Baloo+Paaji+2:wght@400;700&family=Baloo+Tamma+2:wght@400;700&family=Baloo+Thambi+2:wght@400;700&family=Balsamiq+Sans:wght@400;700&family=Balthazar&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="./styles.css">
+    <title>Interactive Style Guide</title>
+</head>
+<body>
+    <h1>Interactive Style Picker</h1>
+
+    <div class="controls">
+        <h2>Interactive Controls</h2>
+        <div class="controls-container">
+            <div class="control-panel">
+                <h3>Background Color</h3>
+                <div class="control-group">
+                    <label for="color1">Color 1:</label>
+                    <input type="color" id="color1" value="#2d5dcc">
+                    <button onclick="setColor('color1', 'color1')">Apply</button>
+                    <button onclick="setRandomColor('color1')">Random</button>
+                </div>
+
+                <div class="control-group">
+                    <label for="color2">Color 2:</label>
+                    <input type="color" id="color2" value="#d957d9">
+                    <button onclick="setColor('color2', 'color2')">Apply</button>
+                    <button onclick="setRandomColor('color2')">Random</button>
+                </div>
+
+                <div class="control-group">
+                    <label for="color3">Color 3:</label>
+                    <input type="color" id="color3" value="#4fe0b0">
+                    <button onclick="setColor('color3', 'color3')">Apply</button>
+                    <button onclick="setRandomColor('color3')">Random</button>
+                </div>
+
+                <div class="control-group">
+                    <label for="color4">Color 4:</label>
+                    <input type="color" id="color4" value="#4fe0b0">
+                    <button onclick="setColor('color4', 'color4')">Apply</button>
+                    <button onclick="setRandomColor('color4')">Random</button>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <h3>Text Color</h3>
+                <div class="control-group">
+                    <label for="color1">Color 1:</label>
+                    <input type="color" id="color1" value="#2d5dcc">
+                    <button onclick="setColor('color1', 'color1')">Apply</button>
+                    <button onclick="setRandomColor('color1')">Random</button>
+                </div>
+
+                <div class="control-group">
+                    <label for="color2">Color 2:</label>
+                    <input type="color" id="color2" value="#d957d9">
+                    <button onclick="setColor('color2', 'color2')">Apply</button>
+                    <button onclick="setRandomColor('color2')">Random</button>
+                </div>
+
+                <div class="control-group">
+                    <label for="color3">Color 3:</label>
+                    <input type="color" id="color3" value="#4fe0b0">
+                    <button onclick="setColor('color3', 'color3')">Apply</button>
+                    <button onclick="setRandomColor('color3')">Random</button>
+                </div>
+
+                <div class="control-group">
+                    <label for="color4">Color 4:</label>
+                    <input type="color" id="color4" value="#4fe0b0">
+                    <button onclick="setColor('color4', 'color4')">Apply</button>
+                    <button onclick="setRandomColor('color4')">Random</button>
+                </div>
+            </div>
+
+            <div class="control-panel">
+                <h3>Font</h3>
+                <div class="control-group" style="text-align:right">
+                    <label for="font">H1 Font:</label>
+                    <select id="font" onchange="changeFont()">
+                        <option value="Source Code Pro">Source Code Pro</option>
+                        <option value="Nunito Sans">Nunito Sans</option>
+                        <option value="Poppins">Poppins</option>
+                        <option value="ABeeZee">ABeeZee</option>
+                        <option value="Abel">Abel</option>
+                        <option value="Abhaya Libre">Abhaya Libre</option>
+                        <option value="Abril Fatface">Abril Fatface</option>
+                        <option value="Aclonica">Aclonica</option>
+                        <option value="Acme">Acme</option>
+                        <option value="Actor">Actor</option>
+                        <option value="Adamina">Adamina</option>
+                        <option value="Advent Pro">Advent Pro</option>
+                        <option value="Aguafina Script">Aguafina Script</option>
+                        <option value="Akronim">Akronim</option>
+                        <option value="Aladin">Aladin</option>
+                        <option value="Alata">Alata</option>
+                        <option value="Alatsi">Alatsi</option>
+                        <option value="Aldrich">Aldrich</option>
+                        <option value="Alef">Alef</option>
+                        <option value="Alegreya">Alegreya</option>
+                        <option value="Alegreya Sans">Alegreya Sans</option>
+                        <option value="Alegreya SC">Alegreya SC</option>
+                        <option value="Aleo">Aleo</option>
+                        <option value="Alex Brush">Alex Brush</option>
+                        <option value="Alfa Slab One">Alfa Slab One</option>
+                        <option value="Alice">Alice</option>
+                        <option value="Alike">Alike</option>
+                        <option value="Alike Angular">Alike Angular</option>
+                        <option value="Allan">Allan</option>
+                        <option value="Allerta">Allerta</option>
+                        <option value="Allerta Stencil">Allerta Stencil</option>
+                        <option value="Allura">Allura</option>
+                        <option value="Almendra">Almendra</option>
+                        <option value="Almendra Display">Almendra Display</option>
+                        <option value="Almendra SC">Almendra SC</option>
+                        <option value="Amaranth">Amaranth</option>
+                        <option value="Amatic SC">Amatic SC</option>
+                        <option value="Amethysta">Amethysta</option>
+                        <option value="Amiri">Amiri</option>
+                        <option value="Amita">Amita</option>
+                        <option value="Anaheim">Anaheim</option>
+                        <option value="Andada Pro">Andada Pro</option>
+                        <option value="Andika">Andika</option>
+                        <option value="Angkor">Angkor</option>
+                        <option value="Annie Use Your Telescope">Annie Use Your Telescope</option>
+                        <option value="Anonymous Pro">Anonymous Pro</option>
+                        <option value="Antic">Antic</option>
+                        <option value="Anton">Anton</option>
+                        <option value="Arapey">Arapey</option>
+                        <option value="Arbutus">Arbutus</option>
+                        <option value="Arbutus Slab">Arbutus Slab</option>
+                        <option value="Architects Daughter">Architects Daughter</option>
+                        <option value="Archivo">Archivo</option>
+                        <option value="Archivo Black">Archivo Black</option>
+                        <option value="Archivo Narrow">Archivo Narrow</option>
+                        <option value="Aref Ruqaa">Aref Ruqaa</option>
+                        <option value="Arima Madurai">Arima Madurai</option>
+                        <option value="Arimo">Arimo</option>
+                        <option value="Arizonia">Arizonia</option>
+                        <option value="Armata">Armata</option>
+                        <option value="Artifika">Artifika</option>
+                        <option value="Arvo">Arvo</option>
+                        <option value="Asap">Asap</option>
+                        <option value="Asset">Asset</option>
+                        <option value="Astloch">Astloch</option>
+                        <option value="Asul">Asul</option>
+                        <option value="Athiti">Athiti</option>
+                        <option value="Atma">Atma</option>
+                        <option value="Atomic Age">Atomic Age</option>
+                        <option value="Aubrey">Aubrey</option>
+                        <option value="Audiowide">Audiowide</option>
+                        <option value="Autour One">Autour One</option>
+                        <option value="Average">Average</option>
+                        <option value="Average Sans">Average Sans</option>
+                        <option value="Averia Gruesa">Averia Gruesa</option>
+                        <option value="Averia Libre">Averia Libre</option>
+                        <option value="Averia Sans Libre">Averia Sans Libre</option>
+                        <option value="Averta">Averta</option>
+                        <option value="Bad Script">Bad Script</option>
+                        <option value="Bahiana">Bahiana</option>
+                        <option value="Bahianita">Bahianita</option>
+                        <option value="Bai Jamjuree">Bai Jamjuree</option>
+                        <option value="Baloo 2">Baloo 2</option>
+                        <option value="Baloo Bhai 2">Baloo Bhai 2</option>
+                        <option value="Baloo Chettan 2">Baloo Chettan 2</option>
+                        <option value="Baloo Da 2">Baloo Da 2</option>
+                        <option value="Baloo Paaji 2">Baloo Paaji 2</option>
+                        <option value="Baloo Tamma 2">Baloo Tamma 2</option>
+                        <option value="Baloo Thambi 2">Baloo Thambi 2</option>
+                        <option value="Balsamiq Sans">Balsamiq Sans</option>
+                        <option value="Balthazar">Balthazar</option>
+                    </select>
+                </div>
+                <div class="control-group" style="text-align:right">
+                    <label for="font"> H2 Font:</label>
+                    <select id="font" onchange="changeFont()">
+                        <option value="Source Code Pro">Source Code Pro</option>
+                        <option value="Nunito Sans">Nunito Sans</option>
+                        <option value="Poppins">Poppins</option>
+                        <option value="ABeeZee">ABeeZee</option>
+                        <option value="Abel">Abel</option>
+                        <option value="Abhaya Libre">Abhaya Libre</option>
+                        <option value="Abril Fatface">Abril Fatface</option>
+                        <option value="Aclonica">Aclonica</option>
+                        <option value="Acme">Acme</option>
+                        <option value="Actor">Actor</option>
+                        <option value="Adamina">Adamina</option>
+                        <option value="Advent Pro">Advent Pro</option>
+                        <option value="Aguafina Script">Aguafina Script</option>
+                        <option value="Akronim">Akronim</option>
+                        <option value="Aladin">Aladin</option>
+                        <option value="Alata">Alata</option>
+                        <option value="Alatsi">Alatsi</option>
+                        <option value="Aldrich">Aldrich</option>
+                        <option value="Alef">Alef</option>
+                        <option value="Alegreya">Alegreya</option>
+                        <option value="Alegreya Sans">Alegreya Sans</option>
+                        <option value="Alegreya SC">Alegreya SC</option>
+                        <option value="Aleo">Aleo</option>
+                        <option value="Alex Brush">Alex Brush</option>
+                        <option value="Alfa Slab One">Alfa Slab One</option>
+                        <option value="Alice">Alice</option>
+                        <option value="Alike">Alike</option>
+                        <option value="Alike Angular">Alike Angular</option>
+                        <option value="Allan">Allan</option>
+                        <option value="Allerta">Allerta</option>
+                        <option value="Allerta Stencil">Allerta Stencil</option>
+                        <option value="Allura">Allura</option>
+                        <option value="Almendra">Almendra</option>
+                        <option value="Almendra Display">Almendra Display</option>
+                        <option value="Almendra SC">Almendra SC</option>
+                        <option value="Amaranth">Amaranth</option>
+                        <option value="Amatic SC">Amatic SC</option>
+                        <option value="Amethysta">Amethysta</option>
+                        <option value="Amiri">Amiri</option>
+                        <option value="Amita">Amita</option>
+                        <option value="Anaheim">Anaheim</option>
+                        <option value="Andada Pro">Andada Pro</option>
+                        <option value="Andika">Andika</option>
+                        <option value="Angkor">Angkor</option>
+                        <option value="Annie Use Your Telescope">Annie Use Your Telescope</option>
+                        <option value="Anonymous Pro">Anonymous Pro</option>
+                        <option value="Antic">Antic</option>
+                        <option value="Anton">Anton</option>
+                        <option value="Arapey">Arapey</option>
+                        <option value="Arbutus">Arbutus</option>
+                        <option value="Arbutus Slab">Arbutus Slab</option>
+                        <option value="Architects Daughter">Architects Daughter</option>
+                        <option value="Archivo">Archivo</option>
+                        <option value="Archivo Black">Archivo Black</option>
+                        <option value="Archivo Narrow">Archivo Narrow</option>
+                        <option value="Aref Ruqaa">Aref Ruqaa</option>
+                        <option value="Arima Madurai">Arima Madurai</option>
+                        <option value="Arimo">Arimo</option>
+                        <option value="Arizonia">Arizonia</option>
+                        <option value="Armata">Armata</option>
+                        <option value="Artifika">Artifika</option>
+                        <option value="Arvo">Arvo</option>
+                        <option value="Asap">Asap</option>
+                        <option value="Asset">Asset</option>
+                        <option value="Astloch">Astloch</option>
+                        <option value="Asul">Asul</option>
+                        <option value="Athiti">Athiti</option>
+                        <option value="Atma">Atma</option>
+                        <option value="Atomic Age">Atomic Age</option>
+                        <option value="Aubrey">Aubrey</option>
+                        <option value="Audiowide">Audiowide</option>
+                        <option value="Autour One">Autour One</option>
+                        <option value="Average">Average</option>
+                        <option value="Average Sans">Average Sans</option>
+                        <option value="Averia Gruesa">Averia Gruesa</option>
+                        <option value="Averia Libre">Averia Libre</option>
+                        <option value="Averia Sans Libre">Averia Sans Libre</option>
+                        <option value="Averta">Averta</option>
+                        <option value="Bad Script">Bad Script</option>
+                        <option value="Bahiana">Bahiana</option>
+                        <option value="Bahianita">Bahianita</option>
+                        <option value="Bai Jamjuree">Bai Jamjuree</option>
+                        <option value="Baloo 2">Baloo 2</option>
+                        <option value="Baloo Bhai 2">Baloo Bhai 2</option>
+                        <option value="Baloo Chettan 2">Baloo Chettan 2</option>
+                        <option value="Baloo Da 2">Baloo Da 2</option>
+                        <option value="Baloo Paaji 2">Baloo Paaji 2</option>
+                        <option value="Baloo Tamma 2">Baloo Tamma 2</option>
+                        <option value="Baloo Thambi 2">Baloo Thambi 2</option>
+                        <option value="Balsamiq Sans">Balsamiq Sans</option>
+                        <option value="Balthazar">Balthazar</option>
+                    </select>
+                </div>
+                <div class="control-group" style="text-align:right">
+                    <label for="font">Paragraph Font:</label>
+                    <select id="font" onchange="changeFont()">
+                        <option value="Source Code Pro">Source Code Pro</option>
+                        <option value="Nunito Sans">Nunito Sans</option>
+                        <option value="Poppins">Poppins</option>
+                        <option value="ABeeZee">ABeeZee</option>
+                        <option value="Abel">Abel</option>
+                        <option value="Abhaya Libre">Abhaya Libre</option>
+                        <option value="Abril Fatface">Abril Fatface</option>
+                        <option value="Aclonica">Aclonica</option>
+                        <option value="Acme">Acme</option>
+                        <option value="Actor">Actor</option>
+                        <option value="Adamina">Adamina</option>
+                        <option value="Advent Pro">Advent Pro</option>
+                        <option value="Aguafina Script">Aguafina Script</option>
+                        <option value="Akronim">Akronim</option>
+                        <option value="Aladin">Aladin</option>
+                        <option value="Alata">Alata</option>
+                        <option value="Alatsi">Alatsi</option>
+                        <option value="Aldrich">Aldrich</option>
+                        <option value="Alef">Alef</option>
+                        <option value="Alegreya">Alegreya</option>
+                        <option value="Alegreya Sans">Alegreya Sans</option>
+                        <option value="Alegreya SC">Alegreya SC</option>
+                        <option value="Aleo">Aleo</option>
+                        <option value="Alex Brush">Alex Brush</option>
+                        <option value="Alfa Slab One">Alfa Slab One</option>
+                        <option value="Alice">Alice</option>
+                        <option value="Alike">Alike</option>
+                        <option value="Alike Angular">Alike Angular</option>
+                        <option value="Allan">Allan</option>
+                        <option value="Allerta">Allerta</option>
+                        <option value="Allerta Stencil">Allerta Stencil</option>
+                        <option value="Allura">Allura</option>
+                        <option value="Almendra">Almendra</option>
+                        <option value="Almendra Display">Almendra Display</option>
+                        <option value="Almendra SC">Almendra SC</option>
+                        <option value="Amaranth">Amaranth</option>
+                        <option value="Amatic SC">Amatic SC</option>
+                        <option value="Amethysta">Amethysta</option>
+                        <option value="Amiri">Amiri</option>
+                        <option value="Amita">Amita</option>
+                        <option value="Anaheim">Anaheim</option>
+                        <option value="Andada Pro">Andada Pro</option>
+                        <option value="Andika">Andika</option>
+                        <option value="Angkor">Angkor</option>
+                        <option value="Annie Use Your Telescope">Annie Use Your Telescope</option>
+                        <option value="Anonymous Pro">Anonymous Pro</option>
+                        <option value="Antic">Antic</option>
+                        <option value="Anton">Anton</option>
+                        <option value="Arapey">Arapey</option>
+                        <option value="Arbutus">Arbutus</option>
+                        <option value="Arbutus Slab">Arbutus Slab</option>
+                        <option value="Architects Daughter">Architects Daughter</option>
+                        <option value="Archivo">Archivo</option>
+                        <option value="Archivo Black">Archivo Black</option>
+                        <option value="Archivo Narrow">Archivo Narrow</option>
+                        <option value="Aref Ruqaa">Aref Ruqaa</option>
+                        <option value="Arima Madurai">Arima Madurai</option>
+                        <option value="Arimo">Arimo</option>
+                        <option value="Arizonia">Arizonia</option>
+                        <option value="Armata">Armata</option>
+                        <option value="Artifika">Artifika</option>
+                        <option value="Arvo">Arvo</option>
+                        <option value="Asap">Asap</option>
+                        <option value="Asset">Asset</option>
+                        <option value="Astloch">Astloch</option>
+                        <option value="Asul">Asul</option>
+                        <option value="Athiti">Athiti</option>
+                        <option value="Atma">Atma</option>
+                        <option value="Atomic Age">Atomic Age</option>
+                        <option value="Aubrey">Aubrey</option>
+                        <option value="Audiowide">Audiowide</option>
+                        <option value="Autour One">Autour One</option>
+                        <option value="Average">Average</option>
+                        <option value="Average Sans">Average Sans</option>
+                        <option value="Averia Gruesa">Averia Gruesa</option>
+                        <option value="Averia Libre">Averia Libre</option>
+                        <option value="Averia Sans Libre">Averia Sans Libre</option>
+                        <option value="Averta">Averta</option>
+                        <option value="Bad Script">Bad Script</option>
+                        <option value="Bahiana">Bahiana</option>
+                        <option value="Bahianita">Bahianita</option>
+                        <option value="Bai Jamjuree">Bai Jamjuree</option>
+                        <option value="Baloo 2">Baloo 2</option>
+                        <option value="Baloo Bhai 2">Baloo Bhai 2</option>
+                        <option value="Baloo Chettan 2">Baloo Chettan 2</option>
+                        <option value="Baloo Da 2">Baloo Da 2</option>
+                        <option value="Baloo Paaji 2">Baloo Paaji 2</option>
+                        <option value="Baloo Tamma 2">Baloo Tamma 2</option>
+                        <option value="Baloo Thambi 2">Baloo Thambi 2</option>
+                        <option value="Balsamiq Sans">Balsamiq Sans</option>
+                        <option value="Balthazar">Balthazar</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- <div class="control-group">
+                <label for="textStyle">Text Style:</label>
+                <select id="textStyle" onchange="changeTextStyle()">
+                    <option value="style1">Style 1 (H1)</option>
+                    <option value="style2">Style 2 (H2)</option>
+                    <option value="style3">Style 3 (Paragraph)</option>
+                </select>
+            </div> -->
+
+            <button id="randomizeButton" onclick="randomizeAll()"><strong>Randomize<br>All</strong></button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Colors</h2>
+        <div class="color-container">
+
+            <div class="color-panel" data-color-id="color1">
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+                <p class="color-label">Color 1</p>
+                <p class="color-hex">#2d5dcc</p>
+            </div>
+            <div class="color-panel" data-color-id="color2">
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+                <p class="color-label">Color 2</p>
+                <p class="color-hex">#2d5dcc</p>
+                <p>The quick brown fox jumps over the lazy dog.</p>
+            </div>
+            <div class="color-panel" data-color-id="color3">
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+                <p class="color-label">Color 3</p>
+                <p class="color-hex">#2d5dcc</p>
+            </div>
+            <div class="color-panel" data-color-id="color4">
+                <h1>Heading 1</h1>
+                <h2>Heading 2</h2>
+                <p class="color-label">Color 4</p>
+                <p class="color-hex">#2d5dcc</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Fonts</h2>
+        <div class="font-container">
+            <div class="font-panel" data-font-class="font1">
+                <p class="font-label source-code-pro">Source Code Pro</p>
+                <p class="regular source-code-pro">The quick brown fox jumps over the lazy dog.</p>
+                <p class="bold source-code-pro">The quick brown fox jumps over the lazy dog.</p>
+                <p class="italic source-code-pro">The quick brown fox jumps over the lazy dog.</p>
+            </div>
+            <div class="font-panel" data-font-class="font2">
+                <p class="font-label nunito-sans">Nunito Sans</p>
+                <p class="regular nunito-sans">The quick brown fox jumps over the lazy dog.</p>
+                <p class="bold nunito-sans">The quick brown fox jumps over the lazy dog.</p>
+                <p class="italic nunito-sans">The quick brown fox jumps over the lazy dog.</p>
+            </div>
+            <div class="font-panel" data-font-class="font3">
+                <p class="font-label poppins">Poppins</p>
+                <p class="regular poppins">The quick brown fox jumps over the lazy dog.</p>
+                <p class="bold poppins">The quick brown fox jumps over the lazy dog.</p>
+                <p class="italic poppins">The quick brown fox jumps over the lazy dog.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Text Styles</h2>
+        <div class="text-container">
+            <div class="text-panel" data-style-class="style1">
+                <h1>H1: Main page heading</h1>
+                <ul>
+                    <li>Font-weight: 700 (bold)</li>
+                    <li>Font-size: 26px</li>
+                    <li>Font-family: Nunito Sans</li>
+                </ul>
+            </div>
+            <div class="text-panel" data-style-class="style2">
+                <h2>H2: Subheading</h2>
+                <ul>
+                    <li>Font-weight: 500</li>
+                    <li>Font-size: 18px</li>
+                    <li>Font-family: Poppins</li>
+                </ul>
+            </div>
+            <div class="text-panel" data-style-class="style3">
+                <p>P: Paragraph text</p>
+                <ul>
+                    <li>Font-weight: 400 (regular)</li>
+                    <li>Font-size: 14px</li>
+                    <li>Font-family: Poppins</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

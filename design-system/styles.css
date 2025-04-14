@@ -1,0 +1,131 @@
+* {
+    border: 1px solid red;
+}
+
+body {
+    font-family: sans-serif;
+    margin: 20px;
+}
+
+.container {
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    padding: 15px;
+}
+
+h2 {
+    margin-top: 0;
+}
+
+.color-container {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+
+
+.color-panel {
+    flex: 1;
+    padding: 20px;
+    text-align: left;
+    border: 1px solid #eee;
+}
+
+.color-label {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.color-hex {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.font-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.font-panel {
+    flex: 1 0 300px;
+    padding: 15px;
+    border: 1px solid #eee;
+}
+
+.font-label {
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.regular {
+    font-style: normal;
+}
+
+.bold {
+    font-weight: 700;
+}
+
+.italic {
+    font-style: italic;
+}
+
+.text-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.text-panel {
+    flex: 1 0 300px;
+    padding: 15px;
+    border: 1px solid #eee;
+}
+
+/* Styles for the interactive controls */
+.controls-container {
+    margin-bottom: 30px;
+    border: 1px solid #ccc;
+    padding: 15px;
+    background-color: #f9f9f9;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.control-panel {
+  flex: 1;
+  padding: 20px;
+
+}
+
+.control-group label {
+    width: 80px;
+    text-align: right;
+    flex-wrap: wrap;
+}
+
+.control-group input[type="color"] {
+    width: 50px;
+    height: 30px;
+    border: none;
+    cursor: pointer;
+}
+
+.control-group select {
+    flex-grow: 1;
+    padding: 8px;
+}
+
+.controls button {
+    padding: 8px 15px;
+    cursor: pointer;
+}
+
+#randomizeButton {
+    margin-top: 20px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
