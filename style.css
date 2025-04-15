@@ -3,7 +3,11 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* border: 1px solid red; */
+    /* border: 1px solid red;  */
+}
+
+.donate li {
+  list-style: none;
 }
 
 .test-box {
@@ -96,4 +100,6 @@ ul li {
 
 #donate {
     padding: 10px;
+    display: flex;
+    flex-wrap: wrap;
 }
