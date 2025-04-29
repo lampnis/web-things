@@ -1,7 +1,20 @@
+import os
 from django.shortcuts import render
 import random
+from google import genai
 
 # Create your views here.
+def get_api_key(provider):
+    """
+    Retrieves the API key from the environment variable.
+    """
+    api_key = os.environ.get(f"{provider.upper()}_API_KEY")  # Replace with your variable name
+    if api_key:
+        return api_key
+    else:
+    # Handle the case where the API key is not set.  This is important!
+        raise EnvironmentError("API key not found.  Please set the YOUR_API_KEY_NAME environment variable.")
+
 
 fortunes = [
     "The early bird gets the worm, but the second mouse gets the cheese.",
@@ -111,6 +124,11 @@ fortunes = [
     "The best is always worth waiting for."
 ]
 
+client = genai.Client(api_key=get_api_key('gemini'))
+
+response = client.models.generate_content(
+        model="gemini-2.0-flash", contents="Fortune cookie style fortune reading. One short senctence only."
+        )
 
 def fortune(request):
-    return render(request, 'randomfortune/fortune.html', {'fortune': random.choice(fortunes)})
+    return render(request, 'randomfortune/fortune.html', {'fortune': response})
