@@ -3,16 +3,6 @@ from django.shortcuts import render
 import random
 
 # Create your views here.
-def get_api_key(provider):
-    """
-    Retrieves the API key from the environment variable.
-    """
-    api_key = os.environ.get(f"{provider.upper()}_API_KEY")  # Replace with your variable name
-    if api_key:
-        return api_key
-    else:
-    # Handle the case where the API key is not set.  This is important!
-        raise EnvironmentError("API key not found.  Please set the YOUR_API_KEY_NAME environment variable.")
 
 
 fortunes = [
