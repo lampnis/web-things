@@ -1,7 +1,6 @@
 import os
 from django.shortcuts import render
 import random
-from google import genai
 
 # Create your views here.
 def get_api_key(provider):
@@ -124,11 +123,7 @@ fortunes = [
     "The best is always worth waiting for."
 ]
 
-client = genai.Client(api_key=get_api_key('gemini'))
 
-response = client.models.generate_content(
-        model="gemini-2.0-flash", contents="Fortune cookie style fortune reading. One short senctence only."
-        )
 
 def fortune(request):
     return render(request, 'randomfortune/fortune.html', {'fortune': random.choice(fortunes)})
