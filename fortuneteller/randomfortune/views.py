@@ -111,11 +111,6 @@ fortunes = [
     "The best is always worth waiting for."
 ]
 
-fortune = random.choice(fortunes)
-
-context = {
-    'fortune': fortune,
-}
 
 def fortune(request):
-    return render(request, 'randomfortune/fortune.html', context)
+    return render(request, 'randomfortune/fortune.html', {'fortune': random.choice(fortunes)})
