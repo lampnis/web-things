@@ -131,4 +131,4 @@ response = client.models.generate_content(
         )
 
 def fortune(request):
-    return render(request, 'randomfortune/fortune.html', {'fortune': response})
+    return render(request, 'randomfortune/fortune.html', {'fortune': response.text})
