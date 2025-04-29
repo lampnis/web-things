@@ -1,8 +1,10 @@
 import os
 import sys
 
+# Adjust this path
+sys.path.insert(0, "/home/lapinslv/public_html/lapins.lv/adams/home/fortuneteller")
 
-sys.path.insert(0, os.path.dirname(__file__))
+os.environ['DJANGO_SETTINGS_MODULE'] = 'fortuneteller.settings'
 
-wsgi = imp.load_source('wsgi', 'fortuneteller/wsgi.py')
-application = wsgi.application
+from django.core.wsgi import get_wsgi_application
+application = get_wsgi_application()
