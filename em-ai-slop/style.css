@@ -1,0 +1,273 @@
+/* Basic Reset & Body */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: sans-serif;
+    line-height: 1.6;
+    color: #333;
+    margin: 0 20px 20px 20px;
+    background-color: #f4f4f4;
+}
+
+/* Header */
+header {
+    background: #333;
+    color: #fff;
+    padding: 1rem 0;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header p {
+    font-size: 0.9em;
+    color: #ccc;
+}
+
+/* Navigation */
+nav {
+    background: #444;
+    padding: 0.5rem;
+    margin-bottom: 20px;
+    border-radius: 5px;
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+nav ul li {
+    margin: 0 10px;
+}
+
+nav ul li a {
+    color: #fff;
+    text-decoration: none;
+    padding: 5px 10px;
+}
+
+nav ul li a:hover {
+    background: #555;
+    border-radius: 3px;
+}
+
+/* Main Content Area */
+main {
+    background: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+/* Sections */
+section {
+    margin-bottom: 30px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eee;
+}
+
+section:last-of-type {
+    border-bottom: none;
+}
+
+h2 {
+    color: #333;
+    margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 2px solid #4CAF50; /* Accent color */
+}
+
+h3 {
+    color: #555;
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+
+h4 {
+    color: #666;
+    margin-top: 15px;
+    margin-bottom: 5px;
+}
+
+/* Equations */
+.equation-box {
+    background-color: #eef;
+    padding: 15px;
+    margin: 15px 0;
+    border-left: 5px solid #aac;
+    border-radius: 5px;
+}
+.equation {
+    font-size: 1.1em;
+    margin: 10px 0;
+    padding: 10px;
+    overflow-x: auto; /* Handle long equations */
+}
+
+/* Interactive Elements */
+.interactive-derivation,
+.interactive-element {
+    border: 1px solid #ddd;
+    padding: 15px;
+    margin-top: 15px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.interactive-derivation .step {
+    display: none; /* Hide steps by default */
+    padding: 10px;
+    background-color: #fff;
+    border: 1px dashed #ccc;
+    margin-bottom: 10px;
+    border-radius: 3px;
+}
+
+.interactive-derivation .step.active {
+    display: block; /* Show active step */
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+input[type="range"] {
+    width: 200px;
+    margin-left: 10px;
+    margin-right: 5px;
+    vertical-align: middle;
+}
+
+input[type="number"], input[type="text"] {
+    padding: 5px;
+    margin-left: 5px;
+    max-width: 100px;
+}
+
+label {
+    display: inline-block;
+    min-width: 150px; /* Align labels */
+    margin-bottom: 5px;
+}
+.interactive-element div {
+    margin-bottom: 10px; /* Space out controls */
+}
+
+/* Code Blocks */
+pre {
+    background-color: #2d2d2d; /* Dark background */
+    color: #f0f0f0;       /* Light text */
+    padding: 15px;
+    border-radius: 5px;
+    overflow-x: auto;     /* Allow scrolling for long lines */
+    font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+    font-size: 0.9em;
+    margin: 15px 0;
+}
+
+code.language-python {
+    white-space: pre;     /* Preserve whitespace */
+}
+
+/* Quiz */
+.quiz-question {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+.quiz-question p {
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+#quiz-results {
+    padding: 15px;
+    border-radius: 5px;
+}
+#quiz-results.correct {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+#quiz-results.incorrect {
+     background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+
+/* Glossary */
+dl dt {
+    font-weight: bold;
+    margin-top: 10px;
+    color: #444;
+}
+
+dl dd {
+    margin-left: 20px;
+    margin-bottom: 5px;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid #ccc;
+    font-size: 0.9em;
+    color: #777;
+}
+
+/* Complex Plane Plot (Simple) */
+#complex-plane-plot {
+    border: 1px solid black;
+    position: relative;
+    background: linear-gradient(to right, #eee 1px, transparent 1px), linear-gradient(to bottom, #eee 1px, transparent 1px);
+    background-size: 20px 20px; /* Simple grid */
+}
+#complex-plane-plot::before, #complex-plane-plot::after { /* Axes */
+    content: '';
+    position: absolute;
+    background-color: black;
+}
+#complex-plane-plot::before { /* Y axis */
+    left: 50%;
+    top: 0; bottom: 0;
+    width: 1px;
+    transform: translateX(-50%);
+}
+#complex-plane-plot::after { /* X axis */
+    top: 50%;
+    left: 0; right: 0;
+    height: 1px;
+     transform: translateY(-50%);
+}
+#epsilon-point {
+    width: 6px;
+    height: 6px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
+    bottom: 50%; /* Start at origin (bottom-left corner of div) */
+    left: 50%;
+    transform: translate(-50%, 50%); /* Center the dot */
+    transition: all 0.2s ease; /* Smooth transition */
+    z-index: 10;
+}
