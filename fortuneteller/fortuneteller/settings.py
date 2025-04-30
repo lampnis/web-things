@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-d&bk9hr^%8gbods9)y!8k=-pn=r)10s1x(r9mt*@r42fdton5_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['adams.lapins.lv']
+ALLOWED_HOSTS = ['adams.lapins.lv', '127.0.0.1']
 
 
 # Application definition
@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'randomfortune.apps.RandomfortuneConfig',
+    'equations_app.apps.EquationsAppConfig',
 ]
 
 MIDDLEWARE = [
