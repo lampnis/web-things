@@ -4,49 +4,309 @@
 {% block title %}Maxwell's Equations Tutorial{% endblock %}
 
 {% block content %}
-    <!-- Placeholder for section content -->
-    <section id="intro" class="content-card animated" data-section-id="intro">
-        <h2>Introduction</h2>
-        <p>Loading introduction...</p>
-    </section>
 
-    <section id="maxwell-foundation" class="content-card animated" data-section-id="maxwell-foundation">
-        <h2>Foundation</h2>
-        <p>Loading foundation...</p>
-    </section>
+<!-- ========================== -->
+<!-- == SECTION: Introduction == -->
+<!-- ========================== -->
+<section id="intro" class="content-card animated" data-section-id="intro" data-animation-container-id="p5-canvas-intro">
+    <h2>Welcome to the World of Electromagnetism!</h2>
+    <p>Light, radio waves, electricity, magnetism – these diverse phenomena are elegantly unified by a single set of principles: <strong>Maxwell's Equations</strong>. This interactive tutorial guides you through the core concepts underlying classical electromagnetism.</p>
+    <p>Here's what we'll explore together:</p>
+    <ul>
+        <li>The four fundamental equations presented in both their <strong>integral</strong> (global) and <strong>differential</strong> (local) forms.</li>
+        <li>How the theorems of vector calculus elegantly connect these two crucial perspectives.</li>
+        <li>How <strong>complex numbers</strong> (phasors) provide a powerful mathematical shortcut for analyzing fields that oscillate in time.</li>
+        <li>The impact of real-world materials, introducing concepts like electric susceptibility (\(\chi_e\)) and conductivity (\(\sigma\)).</li>
+        <li>How these material properties naturally lead to the definition of <strong>complex permittivity</strong> (\(\varepsilon_c\)), a key tool for understanding waves in realistic media.</li>
+    </ul>
+    <p>This tutorial aims for clarity and intuition, building upon the rigorous foundations common in electromagnetics texts.</p>
+</section>
 
-     <section id="bridging" class="content-card animated" data-section-id="bridging">
-        <h2>Bridging Forms</h2>
-         <p>Loading bridging forms...</p>
-         <!-- Structure for interactive derivations will go here -->
-    </section>
+<!-- ============================ -->
+<!-- == SECTION: Foundation     == -->
+<!-- ============================ -->
+<section id="maxwell-foundation" class="content-card animated" data-section-id="maxwell-foundation" data-animation-container-id="p5-canvas-foundation">
+    <h2>Maxwell's Equations: The Foundation</h2>
+    <p>At their heart, these four equations describe the intricate dance between electric fields (\(\mathbf{E}\)), magnetic fields (\(\mathbf{B}\)), electric charges (\(\rho\)), and electric currents (\(\mathbf{J}\)). To handle the response of materials, we often use the auxiliary fields \(\mathbf{D}\) (electric displacement) and \(\mathbf{H}\) (magnetic intensity).</p>
 
-    <section id="complex-convention" class="content-card animated" data-section-id="complex-convention">
-        <h2>Complex Fields</h2>
-        <p>Loading complex fields...</p>
-    </section>
+    <article class="sub-section">
+        <h3>Integral Form: The Global Perspective</h3>
+        <p>Relates fields integrated over larger regions (surfaces or loops) to the total sources or rates of change within those regions.</p>
+        <div class="equation-box">
+            <p><strong>1. Gauss's Law (Electric):</strong> Total \(\mathbf{D}\) flux equals enclosed free charge \(Q_{enc}\).</p>
+            <div class="equation">$$ \oint_S \mathbf{D} \cdot d\mathbf{A} = \int_V \rho \, dV $$</div>
+            <p><strong>2. Gauss's Law (Magnetic):</strong> Total \(\mathbf{B}\) flux through any closed surface is zero (no magnetic monopoles).</p>
+            <div class="equation">$$ \oint_S \mathbf{B} \cdot d\mathbf{A} = 0 $$</div>
+            <p><strong>3. Faraday's Law of Induction:</strong> Changing \(\mathbf{B}\) flux induces circulating \(\mathbf{E}\) (EMF).</p>
+            <div class="equation">$$ \oint_C \mathbf{E} \cdot d\mathbf{l} = -\frac{d}{dt} \int_S \mathbf{B} \cdot d\mathbf{A} $$</div>
+            <p><strong>4. Ampère-Maxwell Law:</strong> Conduction current \( \mathbf{J} \) and displacement current \( \partial\mathbf{D}/\partial t \) create circulating \(\mathbf{H}\).</p>
+            <div class="equation">$$ \oint_C \mathbf{H} \cdot d\mathbf{l} = \int_S \left( \mathbf{J} + \frac{\partial \mathbf{D}}{\partial t} \right) \cdot d\mathbf{A} $$</div>
+        </div>
+        <h4 class="python-example-title">Python Example #1: Surface & Volume Integrals (Conceptual)</h4>
+        <p class="text-muted">Actual calculation requires numerical libraries (e.g., SciPy, FEniCS) and defined geometries/fields. Python can orchestrate this process.</p>
+        <div class="code-container">
+             <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <pre><code class="language-python">
+# Placeholder for Python Example #1
+# (Will be provided upon request)
+print("Example 1: Conceptual structure for numerical integration.")
+            </code></pre>
+        </div>
+    </article>
 
-    <section id="constitutive" class="content-card animated" data-section-id="constitutive">
-        <h2>Materials</h2>
-        <p>Loading materials...</p>
-    </section>
+    <article class="sub-section">
+        <h3>Differential Form: The Local Perspective</h3>
+        <p>Describes precisely how the fields behave at every single point (\(x, y, z\)) in space at a specific time \(t\).</p>
+        <div class="equation-box">
+            <p><strong>1. Gauss (E):</strong> \( \nabla \cdot \mathbf{D} = \rho \)</p>
+            <p><strong>2. Gauss (B):</strong> \( \nabla \cdot \mathbf{B} = 0 \)</p>
+            <p><strong>3. Faraday:</strong> \( \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} \)</p>
+            <p><strong>4. Ampère-Maxwell:</strong> \( \nabla \times \mathbf{H} = \mathbf{J} + \frac{\partial \mathbf{D}}{\partial t} \)</p>
+        </div>
+         <h4 class="python-example-title">Python Example #2: Divergence & Curl (Symbolic/Numerical)</h4>
+         <p class="text-muted">Requires libraries like SymPy for symbolic math or finite difference methods for numerical calculation.</p>
+         <div class="code-container">
+             <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <pre><code class="language-python">
+# Placeholder for Python Example #2
+# (Will be provided upon request)
+print("Example 2: Conceptual structure for divergence/curl.")
+            </code></pre>
+        </div>
+    </article>
+</section> <!-- End of Maxwell Foundation Section -->
 
-    <section id="complex-permittivity" class="content-card animated" data-section-id="complex-permittivity">
-        <h2>Complex \( \varepsilon \)</h2>
-        <p>Loading complex epsilon...</p>
-         <!-- Structure for Python example and explorer will go here -->
-    </section>
 
-     <section id="summary" class="content-card animated" data-section-id="summary">
-         <h2>Summary & Quiz</h2>
-         <p>Loading summary...</p>
-         <!-- Structure for Quiz will go here -->
-     </section>
+<!-- ============================ -->
+<!-- == SECTION: Bridging Forms == -->
+<!-- ============================ -->
+<section id="bridging" class="content-card animated" data-section-id="bridging" data-animation-container-id="p5-canvas-bridging">
+    <h2>Bridging the Forms: Vector Calculus Theorems</h2>
+    <p>How do we mathematically link the global (integral) view to the local (differential) view? Two fundamental theorems of vector calculus are the keys:</p>
+    <div class="theorem-box">
+        <h4>The Divergence Theorem (Gauss's Theorem)</h4>
+        <p>Connects the total flux (net outflow) of \(\mathbf{F}\) through a closed surface \(S\) to the sum of the divergence (\(\nabla \cdot \mathbf{F}\), the source density) throughout the enclosed volume \(V\).</p>
+        <div class="equation">$$ \oint_S \mathbf{F} \cdot d\mathbf{A} = \int_V (\nabla \cdot \mathbf{F}) \, dV $$</div>
+        <p class="intuition"><em>Analogy: Total water flow out of a container = sum of all faucet flows inside.</em></p>
+    </div>
+    <div class="theorem-box">
+        <h4>Stokes' Theorem (Curl Theorem)</h4>
+        <p>Connects the circulation (line integral) of \(\mathbf{F}\) around a closed loop \(C\) to the total flux of its curl (\(\nabla \times \mathbf{F}\), the "swirl density") through any open surface \(S\) bounded by \(C\).</p>
+        <div class="equation">$$ \oint_C \mathbf{F} \cdot d\mathbf{l} = \int_S (\nabla \times \mathbf{F}) \cdot d\mathbf{A} $$</div>
+        <p class="intuition"><em>Analogy: Rotation of a large paddle wheel at the edge = sum of rotations of tiny wheels inside.</em></p>
+    </div>
 
-     <section id="glossary" class="content-card animated" data-section-id="glossary">
-         <h2>Glossary</h2>
-         <p>Loading glossary...</p>
-         <!-- Structure for Glossary dl list will go here -->
-     </section>
+    <h3 class="interactive-title">Interactive Derivations: See it in Action!</h3>
+    <p>Let's apply these. Click 'Next Step' below each derivation.</p>
 
+    <!-- Gauss Derivation -->
+    <div class="interactive-derivation animated" data-derivation-id="gauss-deriv">
+        <h4>Gauss's Law (E): Integral \(\rightarrow\) Differential</h4>
+        <div class="derivation-steps">
+            <div class="step active" data-step="1"><strong>Step 1: Integral Form & Charge Density</strong><br> Start with Gauss's Law integral form and express \(Q_{enc}\) as a volume integral of charge density \(\rho\).<br> \[ \oint_S \mathbf{D} \cdot d\mathbf{A} = \int_V \rho \, dV \]</div>
+            <div class="step" data-step="2"><strong>Step 2: Apply Divergence Theorem</strong><br> Use the Divergence Theorem to convert the surface integral of \(\mathbf{D}\) on the left into a volume integral of its divergence, \(\nabla \cdot \mathbf{D}\).<br> \[ \int_V (\nabla \cdot \mathbf{D}) \, dV = \int_V \rho \, dV \]</div>
+            <div class="step" data-step="3"><strong>Step 3: Pointwise Equality Argument</strong><br> Since this equation must hold true for *any* arbitrary volume \(V\) we choose, the functions inside the integrals (the integrands) must be equal at every point.<br> \[ \implies \quad \nabla \cdot \mathbf{D} = \rho \] <p class="feedback correct" style="margin-top: 1em; display:block;">Differential form derived!</p></div>
+        </div>
+        <button class="btn btn-secondary derivation-button">Next Step</button>
+    </div>
+
+     <!-- Faraday Derivation -->
+     <div class="interactive-derivation animated" data-derivation-id="faraday-deriv">
+        <h4>Faraday's Law: Integral \(\rightarrow\) Differential</h4>
+         <div class="derivation-steps">
+            <div class="step active" data-step="1"><strong>Step 1: Integral Form & Time Derivative</strong><br> Begin with Faraday's Law. Assume the loop \(C\) and surface \(S\) are fixed. The total derivative \(d/dt\) on the flux integral can move inside as a partial derivative \( \partial / \partial t \) on \(\mathbf{B}\).<br> \[ \oint_C \mathbf{E} \cdot d\mathbf{l} = -\frac{d}{dt} \int_S \mathbf{B} \cdot d\mathbf{A} \quad \implies \quad \oint_C \mathbf{E} \cdot d\mathbf{l} = -\int_S \frac{\partial \mathbf{B}}{\partial t} \cdot d\mathbf{A} \]</div>
+            <div class="step" data-step="2"><strong>Step 2: Apply Stokes' Theorem</strong><br> Use Stokes' Theorem on the left-hand side to convert the line integral of \(\mathbf{E}\) into a surface integral of its curl (\(\nabla \times \mathbf{E}\)).<br> \[ \int_S (\nabla \times \mathbf{E}) \cdot d\mathbf{A} = -\int_S \frac{\partial \mathbf{B}}{\partial t} \cdot d\mathbf{A} \]</div>
+            <div class="step" data-step="3"><strong>Step 3: Pointwise Equality Argument</strong><br> This equality must hold for *any* surface \(S\) bounded by the loop \(C\). Therefore, the integrands must be identical everywhere on the surface.<br> \[ \implies \quad \nabla \times \mathbf{E} = -\frac{\partial \mathbf{B}}{\partial t} \] <p class="feedback correct" style="margin-top: 1em; display:block;">Differential form derived!</p></div>
+        </div>
+         <button class="btn btn-secondary derivation-button">Next Step</button>
+    </div>
+
+    <!-- Ampere-Maxwell Derivation -->
+    <div class="interactive-derivation animated" data-derivation-id="ampere-deriv">
+        <h4>Ampère-Maxwell: Integral \(\rightarrow\) Differential</h4>
+        <div class="derivation-steps">
+             <div class="step active" data-step="1"><strong>Step 1: Integral Form & Combine Terms</strong><br> Start with Ampère-Maxwell. Combine the conduction current (\(J\)) and displacement current (\(\partial D / \partial t\)) terms under a single surface integral.<br> \[ \oint_C \mathbf{H} \cdot d\mathbf{l} = \int_S \mathbf{J} \cdot d\mathbf{A} + \int_S \frac{\partial \mathbf{D}}{\partial t} \cdot d\mathbf{A} = \int_S \left( \mathbf{J} + \frac{\partial \mathbf{D}}{\partial t} \right) \cdot d\mathbf{A} \] <p class="text-muted" style="font-size: 0.85em;">(Using \( \partial/\partial t \) assuming a fixed surface S).</p></div>
+            <div class="step" data-step="2"><strong>Step 2: Apply Stokes' Theorem</strong><br> Use Stokes' Theorem on the left side, converting the line integral of \(\mathbf{H}\) into a surface integral of its curl (\(\nabla \times \mathbf{H}\)).<br> \[ \int_S (\nabla \times \mathbf{H}) \cdot d\mathbf{A} = \int_S \left( \mathbf{J} + \frac{\partial \mathbf{D}}{\partial t} \right) \cdot d\mathbf{A} \]</div>
+            <div class="step" data-step="3"><strong>Step 3: Pointwise Equality Argument</strong><br> As this holds for any surface \(S\), the integrands must be equal.<br> \[ \implies \quad \nabla \times \mathbf{H} = \mathbf{J} + \frac{\partial \mathbf{D}}{\partial t} \] <p class="feedback correct" style="margin-top: 1em; display:block;">Differential form derived!</p></div>
+        </div>
+        <button class="btn btn-secondary derivation-button">Next Step</button>
+    </div>
+</section> <!-- End of Bridging Section -->
+
+
+<!-- ================================ -->
+<!-- == SECTION: Complex Convention == -->
+<!-- ================================ -->
+<section id="complex-convention" class="content-card animated" data-section-id="complex-convention" data-animation-container-id="p5-canvas-phasor">
+    <h2>Complex Fields: Simplifying Oscillations</h2>
+    <p>When dealing with waves or AC circuits, fields often oscillate sinusoidally. Working with sines and cosines in differential equations is cumbersome. Complex exponentials make life much easier!</p>
+    <p class="highlight-box"><strong>The Convention (\( e^{-i\omega t} \)):</strong> We represent a real oscillating quantity, like \( A(t) = A_0 \cos(\omega t + \phi) \), as the real part of a complex exponential: \( A(t) = \text{Re}\{ \mathcal{A} e^{-i\omega t} \} \). Here, \( \mathcal{A} = A_0 e^{i\phi} \) is the complex <strong>phasor</strong> amplitude, encoding both magnitude (\(A_0\)) and initial phase (\(\phi\)). We use the \(e^{-i\omega t}\) convention common in physics.</p>
+     <h4 class="python-example-title">Python Example #3: Representing Phasors</h4>
+     <p class="text-muted">Using Python's built-in `complex` type and `numpy`.</p>
+     <div class="code-container">
+        <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+        <pre><code class="language-python">
+# Placeholder for Python Example #3
+# (Will be provided upon request)
+print("Example 3: Phasor definition & recovery.")
+            </code></pre>
+    </div>
+    <article class="sub-section">
+        <h3>The Magic: \( \partial / \partial t \rightarrow -i\omega \)</h3>
+        <p>The key simplification: \( \frac{d}{dt} (e^{-i\omega t}) = -i\omega e^{-i\omega t} \). This means \( \partial/\partial t \) corresponds to multiplying the complex phasor by \( -i\omega \).</p>
+        <div class="equation">$$ \boxed{ \frac{\partial}{\partial t} \iff -i\omega } $$</div>
+    </article>
+    <article class="sub-section">
+        <h3>Maxwell's Equations for Phasors</h3>
+        <p>Substituting \( -i\omega \) for \( \partial/\partial t \) gives time-independent phasor equations:</p>
+        <div class="equation-box">
+            <p>\( \nabla \cdot \mathbf{\mathcal{D}} = \rho_{\mathcal{P}} \)</p>
+            <p>\( \nabla \cdot \mathbf{\mathcal{B}} = 0 \)</p>
+            <p>\( \boxed{ \nabla \times \mathbf{\mathcal{E}} = i\omega \mathbf{\mathcal{B}} } \)</p>
+            <p>\( \boxed{ \nabla \times \mathbf{\mathcal{H}} = \mathbf{\mathcal{J}} - i\omega \mathbf{\mathcal{D}} } \)</p>
+        </div>
+        <p>These involve only spatial derivatives, simplifying wave analysis.</p>
+    </article>
+</section> <!-- End Complex Convention -->
+
+<!-- ========================================================== -->
+<!-- == SECTION: Materials & Electric Susceptibility (\(\chi\)) == -->
+<!-- ========================================================== -->
+<section id="constitutive" class="content-card animated" data-section-id="constitutive" data-animation-container-id="p5-canvas-materials">
+    <h2>Materials & Electric Susceptibility (\(\chi_e\))</h2>
+    <p>Fields interact with matter! The <strong>constitutive relations</strong> link auxiliary fields (\(\mathbf{D}, \mathbf{H}\)) and current (\(\mathbf{J}\)) to fundamental fields (\(\mathbf{E}, \mathbf{B}\)), describing the material's response.</p>
+    <article class="sub-section">
+        <h3>Electric Response: Polarization & Susceptibility</h3>
+        <p>In a dielectric, \(\mathbf{E}\) displaces bound charges, creating dipoles. Average dipole moment/volume = <strong>Polarization</strong> \(\mathbf{P}\).</p>
+        <p>For linear materials: \( \mathbf{P} = \varepsilon_0 \chi_e \mathbf{E} \), where \( \chi_e \) is <strong>electric susceptibility</strong>.</p>
+        <p>Displacement \(\mathbf{D}\) includes polarization: \( \mathbf{D} = \varepsilon_0 \mathbf{E} + \mathbf{P} = \varepsilon_0 (1 + \chi_e) \mathbf{E} \)</p>
+    </article>
+    <article class="sub-section">
+        <h3>Permittivity, Conductivity & Ohm's Law</h3>
+        <p>Comparing \(\mathbf{D} = \varepsilon_0 (1 + \chi_e) \mathbf{E}\) with \(\mathbf{D} = \varepsilon \mathbf{E}\), defines <strong>Permittivity</strong> \( \varepsilon \) as:</p>
+        <div class="equation">$$ \varepsilon = \varepsilon_0 (1 + \chi_e) $$</div>
+        <p>And <strong>relative permittivity</strong> \( \varepsilon_r \) (dielectric constant) as:</p>
+        <div class="equation">$$ \boxed{ \varepsilon_r = \varepsilon / \varepsilon_0 = 1 + \chi_e } $$</div>
+        <p>Ohm's Law relates conduction current density \(\mathbf{J}\) to \(\mathbf{E}\) via <strong>Conductivity</strong> \(\sigma\):</p>
+        <div class="equation">$$ \mathbf{J} = \sigma \mathbf{E} $$</div>
+         <h4 class="python-example-title">Python Example #4: Material Response Calculation</h4>
+         <p class="text-muted">Calculate D, J, eps_r from basic properties.</p>
+         <div class="code-container">
+             <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+            <pre><code class="language-python">
+# Placeholder for Python Example #4
+# (Will be provided upon request)
+print("Example 4: Code calculating eps_r, D, J.")
+            </code></pre>
+        </div>
+    </article>
+    <article class="sub-section">
+        <h3>Magnetic Relations (Briefly)</h3>
+        <p>Similarly, magnetization \(\mathbf{M}\) is linked to \(\mathbf{H}\) by magnetic susceptibility \(\chi_m\): \( \mathbf{M} = \chi_m \mathbf{H} \). Leading to \( \mathbf{B} = \mu \mathbf{H} \) where \( \mu_r = 1 + \chi_m \).</p>
+    </article>
+    <p class="highlight">These linear relations also hold for their corresponding complex phasors.</p>
+</section> <!-- End Constitutive -->
+
+
+<!-- ================================== -->
+<!-- == SECTION: Complex Permittivity == -->
+<!-- ================================== -->
+<section id="complex-permittivity" class="content-card animated" data-section-id="complex-permittivity" data-animation-container-id="p5-canvas-complex-epsilon">
+    <h2>Complex Permittivity \( \varepsilon_c \): Packing Loss into \( \varepsilon \)</h2>
+    <p>Combining phasor Ampère-Maxwell with constitutive relations \( \mathbf{\mathcal{J}} = \sigma \mathbf{\mathcal{E}} \) and \( \mathbf{\mathcal{D}} = \varepsilon \mathbf{\mathcal{E}} \):</p>
+    \[ \nabla \times \mathbf{\mathcal{H}} = (\sigma - i\omega \varepsilon) \mathbf{\mathcal{E}} \]
+    <p>Define <strong>complex permittivity \( \varepsilon_c \)</strong> so \( \nabla \times \mathbf{\mathcal{H}} \equiv -i\omega \varepsilon_c \mathbf{\mathcal{E}} \). Comparing yields:</p>
+    <div class="highlight-box">
+        <h4>Definition: Complex Permittivity (\(e^{-i\omega t}\) convention)</h4>
+        <div class="equation">$$ \varepsilon_c = \varepsilon' + i \varepsilon'' = \varepsilon + i \frac{\sigma}{\omega} $$</div>
+        <ul>
+            <li>\(\varepsilon' = \varepsilon \): Real part (storage/polarization).</li>
+            <li>\(\varepsilon'' = \sigma/\omega\): Positive imaginary part (loss/conduction).</li>
+        </ul>
+        <p>Relative: \( \varepsilon_{c,r} = \varepsilon_c / \varepsilon_0 = \varepsilon_r + i \frac{\sigma}{\omega \varepsilon_0} = \varepsilon'_r + i \varepsilon''_r \).</p>
+    </div>
+    <p>This simplifies wave analysis via the Helmholtz equation \( \nabla^2 \mathbf{\mathcal{E}} + k^2 \mathbf{\mathcal{E}} = 0 \) with complex wave number \( k^2 = \omega^2 \mu \varepsilon_c \).</p>
+     <h4 class="python-example-title">Python Example #5: Complex Permittivity & Wave Number</h4>
+     <p class="text-muted">Calculating \( \varepsilon_c \) and complex \(k\).</p>
+     <div class="code-container">
+         <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
+        <pre><code class="language-python">
+# Placeholder for Python Example #5
+# (Will be provided upon request)
+print("Example 5: Code calculating relative epsilon_c and complex k.")
+        </code></pre>
+    </div>
+    <!-- Epsilon Explorer -->
+    <article class="sub-section interactive-element animated" id="complex-epsilon-explorer">
+         <h3 class="interactive-title">Explore Relative Complex Permittivity \( \varepsilon_c / \varepsilon_0 \)</h3>
+         <p>Adjust the material's properties and frequency to see how \( \varepsilon'_r \) (storage) and \( \varepsilon''_r \) (loss) change, represented on the complex plane.</p>
+         <div class="controls-grid">
+             <div class="control-item"><label for="eps-r" id="eps-r-label">Rel. Permittivity (\(\varepsilon_r\)): <span id="eps-r-value" class="value-display">10.0</span></label> <input type="range" id="eps-r" min="1" max="100" value="10" step="0.5" aria-labelledby="eps-r-label"></div>
+             <div class="control-item"><label for="sigma" id="sigma-label">Conductivity (\(\sigma\), S/m): <span id="sigma-value" class="value-display">0.10</span></label> <input type="range" id="sigma" min="0" max="10" value="0.1" step="0.05" aria-labelledby="sigma-label"></div>
+             <div class="control-item"><label for="frequency" id="frequency-label">Frequency (f, GHz): <span id="frequency-value" class="value-display">1.0</span></label> <input type="range" id="frequency" min="0.1" max="100" value="1" step="0.1" aria-labelledby="frequency-label"></div>
+        </div>
+         <div class="results-container">
+             <div id="complex-epsilon-output" class="output-box">
+                <p><strong>Calculated Relative Values:</strong></p>
+                 <!-- Corrected Frequency Span ID -->
+                <p>\(f = \) <span id="frequency-ghz-display" class="result-value">-</span> GHz (\(\omega = \) <span id="omega-value" class="result-value">-</span> rad/s)</p>
+                <p>\(\varepsilon'_r = \varepsilon_r = \) <span id="epsilon-prime-rel-value" class="result-value">-</span></p>
+                <p>\(\varepsilon''_r = \sigma/(\omega \varepsilon_0) = \) <span id="epsilon-double-prime-rel-value" class="result-value">-</span></p>
+                <p class="final-result">\( \varepsilon_{c,r} = \) <span id="epsilon-c-rel-value" class="result-value">-</span></p>
+                <p class="interpretation"><span id="epsilon-interp">Adjust sliders...</span></p>
+            </div>
+             <div class="plot-box">
+                <p><strong>Relative Complex Permittivity Plane</strong></p>
+                <div id="complex-plane-plot-container">
+                    <div id="complex-plane-plot"><div id="epsilon-point-marker" title="Value: X + Yj"></div></div>
+                    <div class="axis-label axis-label-x">Real Part (\(\varepsilon'_r\))</div> <div class="axis-label axis-label-y">Imaginary Part (\(\varepsilon''_r\))</div>
+                    <span class="plot-range plot-range-x-max">100</span> <span class="plot-range plot-range-y-max">20</span> <span class="plot-range plot-range-origin">0</span>
+                 </div>
+            </div>
+        </div>
+    </article>
+</section> <!-- End Complex Permittivity -->
+
+
+<!-- ============================== -->
+<!-- == SECTION: Summary & Quiz === -->
+<!-- ============================== -->
+<section id="summary" class="content-card animated" data-section-id="summary">
+    <h2>Summary & Test Your Understanding!</h2>
+    <p>We've explored Maxwell's Equations, covering integral/differential forms, vector calculus theorems, phasor notation, material interactions (\(\chi_e, \varepsilon, \sigma\)), and complex permittivity \( \varepsilon_c = \varepsilon + i\sigma/\omega \).</p>
+    <h3>Quick Quiz</h3>
+    <p>Check your grasp of the main ideas.</p>
+    <form id="quiz-form" novalidate>
+         <div class="quiz-question animated" data-question="1"><p><strong>1.</strong> Deriving \( \nabla \cdot \mathbf{D} = \rho \) from \( \oint \mathbf{D} \cdot d\mathbf{A} = Q_{enc} \) uses:</p><div class="quiz-options"><label><input type="radio" name="q1" value="stokes"> A) Stokes' Theorem</label><label><input type="radio" name="q1" value="divergence"> B) Divergence Theorem</label><label><input type="radio" name="q1" value="ohm"> C) Ohm's Law</label></div><div class="feedback"></div></div>
+         <div class="quiz-question animated" data-question="2"><p><strong>2.</strong> For the \( \text{Re}\{ \mathcal{F} e^{-i\omega t} \} \) convention, \( \partial / \partial t \) acts on \( \mathcal{F} \) as:</p><div class="quiz-options"><label><input type="radio" name="q2" value="iomega"> A) Multiply by \( i\omega \)</label><label><input type="radio" name="q2" value="-iomega"> B) Multiply by \( -i\omega \)</label><label><input type="radio" name="q2" value="omega2"> C) Multiply by \( \omega^2 \)</label></div><div class="feedback"></div></div>
+         <div class="quiz-question animated" data-question="3"><p><strong>3.</strong> How is relative permittivity \( \varepsilon_r \) related to electric susceptibility \( \chi_e \)?</p><div class="quiz-options"><label><input type="radio" name="q3" value="inv"> A) \( \varepsilon_r = 1 / \chi_e \)</label><label><input type="radio" name="q3" value="sub"> B) \( \varepsilon_r = 1 - \chi_e \)</label><label><input type="radio" name="q3" value="add"> C) \( \varepsilon_r = 1 + \chi_e \)</label></div><div class="feedback"></div></div>
+        <div class="quiz-question animated" data-question="4"><p><strong>4.</strong> Approx. relative imaginary permittivity \( \varepsilon'' / \varepsilon_0 \) for \( \varepsilon_r = 6 \), \( \sigma = 0.02 \) S/m, at \( f = 4 \) GHz? <br><small>(Use \( \varepsilon'' / \varepsilon_0 = \sigma / (\omega \varepsilon_0) \), \( \omega=2\pi f \), \( \varepsilon_0 \approx 8.854 \times 10^{-12} \) F/m).</small></p><div class="quiz-input-group"><input type="number" step="any" name="q4" placeholder="Enter value..." required><small class="text-muted">Hint: \(0.02 / (8\pi \times 10^9 \times 8.854 \times 10^{-12})\)</small></div><div class="feedback"></div></div>
+        <button type="submit" class="btn btn-primary quiz-submit-btn">Check Answers</button>
+    </form>
+    <div id="quiz-overall-results" class="output-box quiz-results animated" style="margin-top: 1.5em; display: none;">
+        <h4>Quiz Summary</h4>
+        <p>You got <span id="quiz-score">0</span> out of <span id="quiz-total">4</span> correct!</p>
+        <button id="quiz-retry-btn" class="btn btn-secondary" style="display: none;">Retry Quiz</button>
+    </div>
+</section> <!-- End Summary -->
+
+<!-- ======================== -->
+<!-- == SECTION: Glossary === -->
+<!-- ======================== -->
+<section id="glossary" class="content-card animated" data-section-id="glossary">
+    <h2>Glossary of Key Terms</h2>
+     <dl><dt>Phasor (\(\mathcal{E}, \mathcal{B}\))</dt><dd>Complex amplitude (\(A_0 e^{i\phi}\)) representing a time-harmonic quantity, simplifying analysis (\( \partial/\partial t \leftrightarrow -i\omega \)).</dd><dt>Electric Susceptibility (\(\chi_e\))</dt><dd>Dimensionless measure of a dielectric's polarizability (\( \mathbf{P} = \varepsilon_0 \chi_e \mathbf{E} \)).</dd><dt>Permittivity (\(\varepsilon = \varepsilon'\))</dt><dd>Real part of \(\varepsilon_c\) (F/m); energy storage via polarization (\( \varepsilon = \varepsilon_0 (1 + \chi_e) \)).</dd><dt>Relative Permittivity (\(\varepsilon_r\))</dt><dd>Dimensionless \( \varepsilon / \varepsilon_0 = 1 + \chi_e \).</dd><dt>Permeability (\(\mu\))</dt><dd>Material property (H/m) related to magnetization.</dd><dt>Conductivity (\(\sigma\))</dt><dd>Material property (S/m) describing conduction current (\(\mathbf{J}=\sigma\mathbf{E}\)); related to energy loss.</dd><dt>Complex Permittivity (\(\varepsilon_c\))</dt><dd>Complex quantity (\(\varepsilon_c = \varepsilon' + i\varepsilon''\)) combining storage (\(\varepsilon'\)) and loss (\(\varepsilon'' = \sigma/\omega\)).</dd><dt>Relative Complex Permittivity (\( \varepsilon_{c,r} \))</dt><dd>Dimensionless \( \varepsilon_c / \varepsilon_0 = \varepsilon'_r + i \varepsilon''_r \).</dd><dt>Loss Factor (\(\varepsilon''\))</dt><dd>Imaginary part of \(\varepsilon_c\), represents energy dissipation.</dd><dt>Loss Tangent (\( \tan \delta \))</dt><dd>Ratio \( \varepsilon'' / \varepsilon' \), indicating relative loss vs. storage.</dd><dt>Divergence (\(\nabla \cdot\)) & Curl (\(\nabla \times\))</dt><dd>Vector operators measuring field source density and circulation density.</dd><dt>Divergence Thm. & Stokes' Thm.</dt><dd>Link integral (flux, circulation) to differential (divergence, curl) forms.</dd></dl>
+</section> <!-- End Glossary -->
+
+{% endblock %}
+
+
+{% block animations %}
+    <!-- Define p5 canvas containers (IDs MUST match data-animation-container-id) -->
+    <div id="p5-canvas-intro" class="animation-container sticky-animation"></div>
+    <div id="p5-canvas-foundation" class="animation-container sticky-animation"></div>
+    <div id="p5-canvas-bridging" class="animation-container sticky-animation"></div>
+    <div id="p5-canvas-phasor" class="animation-container sticky-animation"></div>
+    <div id="p5-canvas-materials" class="animation-container sticky-animation"></div>
+    <div id="p5-canvas-complex-epsilon" class="animation-container sticky-animation"></div>
 {% endblock %}

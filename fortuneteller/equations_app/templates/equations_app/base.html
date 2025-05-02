@@ -4,99 +4,112 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Maxwell's Equations Interactive Tutorial{% endblock %}</title>
-
-    <!-- Google Fonts (Using Roboto & Source Code Pro for code examples) -->
+    <title>{% block title %}Maxwell's Equations & p5.js{% endblock %}</title>
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet">
-
-    <!-- Prism JS Theme (Okaidia is good for dark mode, theme switcher will manage visibility) -->
-    <!-- You might eventually load themes dynamically or use CSS variables, but this is simpler for now -->
+    <!-- Prism CSS -->
     <link rel="stylesheet" href="{% static 'equations_app/libs/prism/prism-okaidia.css' %}" id="prism-theme-link">
-
-    <!-- Main Stylesheet (Contains theme variables and all styling) -->
+    <!-- Main CSS -->
     <link rel="stylesheet" href="{% static 'equations_app/css/style.css' %}">
 
-    <!-- MathJax Configuration (Loads AMS package for equation numbering) -->
+    <!-- MathJax Configuration -->
     <script>
         window.MathJax = {
           loader: {load: ['[tex]/ams']},
           tex: {
-            inlineMath: [['\\(', '\\)']], // Inline math delimiters
-            displayMath: [['$$', '$$'], ['\\[', '\\]']], // Display math delimiters
-            processEscapes: true, // Allows using \$ in text
-            tags: 'ams' // Use AMS (American Mathematical Society) tagging for equation numbers
+            inlineMath: [['\\(', '\\)']], displayMath: [['$$', '$$'], ['\\[', '\\]']],
+            processEscapes: true, tags: 'ams'
           },
-          svg: {
-            fontCache: 'global' // Improve rendering speed
-          },
+          svg: { fontCache: 'global' },
           startup: {
-            // Function to run after MathJax is typeset
             ready: () => {
-              console.log('MathJax is ready and typeset.');
+              console.log('MathJax is ready.');
               MathJax.startup.defaultReady();
-              // Trigger custom event if needed for JS that depends on MathJax completion
-              // document.body.dispatchEvent(new CustomEvent('mathjax-ready'));
             }
           }
         };
     </script>
     <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
 
+    <!-- p5.js Library -->
+    <script src="{% static 'equations_app/libs/p5/p5.js' %}"></script> <!-- Adjust path if needed -->
+
 </head>
-<!-- The 'data-theme' attribute will be added/removed by script.js for theme switching -->
 <body>
     <div class="app-container">
         <header class="app-header">
-            <div class="header-content">
-                <!-- Link back to the top/intro section -->
+             <div class="header-content">
                 <a href="#intro" class="header-logo-link">
                     <h1>Maxwell's Equations</h1>
-                    <p class="subtitle">From Fundamentals to Complex Fields</p>
+                    <p class="subtitle">Fundamentals, Complex Fields, and Visualizations</p>
                 </a>
             </div>
-            <!-- Theme Toggle Button with SVG icons -->
             <button id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle dark mode" title="Toggle Theme">
+                <!-- SVG Icons (same as before) -->
                 <svg class="icon icon-light" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12 7c-2.76 0-5 2.24-5 5s2.24 5 5 5 5-2.24 5-5-2.24-5-5-5zM2 13h2c.55 0 1-.45 1-1s-.45-1-1-1H2c-.55 0-1 .45-1 1s.45 1 1 1zm18 0h2c.55 0 1-.45 1-1s-.45-1-1-1h-2c-.55 0-1 .45-1 1s.45 1 1 1zM11 2v2c0 .55.45 1 1 1s1-.45 1-1V2c0-.55-.45-1-1-1s-1 .45-1 1zm0 18v2c0 .55.45 1 1 1s1-.45 1-1v-2c0-.55-.45-1-1-1s-1 .45-1 1zM5.64 5.64c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41L5.64 5.64zm12.73 12.73c-.39-.39-1.02-.39-1.41 0-.39.39-.39 1.02 0 1.41l1.41 1.41c.39.39 1.02.39 1.41 0 .39-.39.39-1.02 0-1.41l-1.41-1.41zM18.36 5.64l-1.41 1.41c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.41-1.41c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0zm-12.73 12.73l-1.41 1.41c-.39.39-.39 1.02 0 1.41.39.39 1.02.39 1.41 0l1.41-1.41c.39-.39.39-1.02 0-1.41-.39-.39-1.02-.39-1.41 0z"></path></svg>
                 <svg class="icon icon-dark" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" enable-background="new 0 0 24 24" viewBox="0 0 24 24" fill="currentColor" width="24" height="24"><path d="M12,3c-4.97,0-9,4.03-9,9s4.03,9,9,9s9-4.03,9-9c0-0.46-0.04-0.92-0.1-1.36c-0.98,1.37-2.58,2.26-4.4,2.26 c-2.98,0-5.4-2.42-5.4-5.4c0-1.81,0.89-3.42,2.26-4.4C12.92,3.04,12.46,3,12,3L12,3z"></path></svg>
             </button>
         </header>
 
-        <!-- Sticky Navigation Bar (Scrollspy logic in JS will highlight the active link) -->
+        <!-- Sticky Navigation -->
         <nav class="app-nav scroll-spy-nav">
-            <ul>
+            <!-- Same nav links as before -->
+             <ul>
                 <li><a href="#intro">Introduction</a></li>
                 <li><a href="#maxwell-foundation">Foundation</a></li>
                 <li><a href="#bridging">Bridging Forms</a></li>
                 <li><a href="#complex-convention">Complex Fields</a></li>
-                <li><a href="#constitutive">Materials</a></li>
+                <li><a href="#constitutive">Materials & \(\chi\)</a></li> <!-- Updated Name -->
                 <li><a href="#complex-permittivity">Complex \( \varepsilon \)</a></li>
                 <li><a href="#summary">Summary & Quiz</a></li>
                 <li><a href="#glossary">Glossary</a></li>
             </ul>
         </nav>
 
-        <!-- Main content area where index.html content will be injected -->
-        <main class="app-main-content">
-            {% block content %}
-            <!-- Child template content (index.html) appears here -->
-            {% endblock %}
-        </main>
+        <!-- Main Content Area with Side-by-Side Layout -->
+        <div class="page-layout">
+            <main class="app-main-content content-column">
+                {% block content %}
+                <!-- index.html content (cards, equations, etc.) goes here -->
+                {% endblock %}
+            </main>
+            <aside class="animation-column">
+                <div class="animation-container-wrapper">
+                    {% block animations %}
+                    <!-- p5.js canvas placeholders related to sections will be injected here -->
+                    <!-- This block can be populated dynamically by index.html or JS if needed -->
+                    <div class="animation-placeholder sticky-animation">
+                        <p>Visualizations will appear here as you scroll.</p>
+                    </div>
+                    {% endblock %}
+                </div>
+            </aside>
+        </div>
 
-        <!-- Footer -->
         <footer class="app-footer">
-            <p>© {% now "Y" %} Maxwell Interactive Tutorial. Explore the fascinating world of EM!</p>
+            <p>© {% now "Y" %} Maxwell Interactive Tutorial + p5.js Visualizations.</p>
         </footer>
     </div>
 
-    <!-- Load PrismJS Core JS (place dependency JS before main script) -->
+    <!-- Load Libraries FIRST -->
+    <script src="{% static 'equations_app/libs/p5/p5.js' %}"></script>
     <script src="{% static 'equations_app/libs/prism/prism.js' %}"></script>
-    <!-- Load Main JavaScript file -->
+
+    <!-- *** NEW: Load INDIVIDUAL p5 sketches NEXT *** -->
+    <script src="{% static 'equations_app/js/p5_sketches/intro_sketch.js' %}"></script>
+    <script src="{% static 'equations_app/js/p5_sketches/foundation_sketch.js' %}"></script>
+    <script src="{% static 'equations_app/js/p5_sketches/bridging_sketch.js' %}"></script>
+    <script src="{% static 'equations_app/js/p5_sketches/phasor_sketch.js' %}"></script>
+    <script src="{% static 'equations_app/js/p5_sketches/materials_sketch.js' %}"></script>
+    <script src="{% static 'equations_app/js/p5_sketches/complex_epsilon_sketch.js' %}"></script>
+    <!-- Add more sketch files here if created -->
+
+    <!-- Load Main App Logic LAST -->
     <script src="{% static 'equations_app/js/script.js' %}"></script>
 
     {% block extra_js %}
-    <!-- Placeholder for any page-specific JS if needed -->
     {% endblock %}
 </body>
 </html>
