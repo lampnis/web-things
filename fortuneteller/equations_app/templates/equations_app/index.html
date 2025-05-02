@@ -47,9 +47,99 @@
         <div class="code-container">
              <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
             <pre><code class="language-python">
-# Placeholder for Python Example #1
-# (Will be provided upon request)
-print("Example 1: Conceptual structure for numerical integration.")
+# === Example 1: Verify Gauss's Law via Numerical Integration ===
+import numpy as np
+from scipy import integrate
+from scipy.constants import epsilon_0, pi
+
+# --- Define D Field (Point Charge at Origin) ---
+# D = Q / (4 * pi * r^2) * r_hat
+# In spherical coords (r, theta, phi): D = [D_r, D_theta, D_phi]
+Q_SOURCE = 1e-9 # 1 nanoCoulomb source charge
+
+def d_field_spherical(r, theta, phi):
+    """ Returns D field components [Dr, Dt, Dp] in SPHERICAL coords. """
+    if r < 1e-9: return np.array([0.0, 0.0, 0.0]) # Avoid singularity
+    D_r = Q_SOURCE / (4 * pi * r**2)
+    return np.array([D_r, 0.0, 0.0])
+
+# --- Define Charge Density (Uniform sphere) ---
+R_CHARGE_DIST = 0.5 # Radius of the sphere containing charge (meters)
+# Calculate rho_0 so the total charge inside R_CHARGE_DIST equals Q_SOURCE
+charge_volume = (4/3) * pi * R_CHARGE_DIST**3
+RHO_0 = Q_SOURCE / charge_volume # Uniform charge density (C/m^3)
+
+def charge_density_rho(r, theta, phi):
+    """ Returns charge density rho (uniform sphere). """
+    return RHO_0 if r <= R_CHARGE_DIST else 0.0
+
+# --- Choose Integration Surface (Gaussian Sphere) ---
+R_GAUSSIAN = 1.0 # Radius of Gaussian surface (meters), must enclose charge
+
+# --- 1. Calculate Flux Integral (Left Side of Gauss's Law) ---
+# Integrate D dot dA over Gaussian sphere
+# dA = r^2 * sin(theta) dtheta dphi * r_hat (normal vector)
+# D dot dA = D_r * (r^2 * sin(theta) dtheta dphi)
+
+def flux_integrand(theta, phi): # Integrate over theta, phi at fixed r
+    r = R_GAUSSIAN
+    D_r = d_field_spherical(r, theta, phi)[0]
+    jacobian = (r**2) * np.sin(theta) # dA element excluding dr
+    return D_r * jacobian
+
+# Use dblquad for 2D integral (theta, phi)
+total_flux, flux_error = integrate.dblquad(
+    flux_integrand, # Function (theta, phi)
+    0, 2 * pi,      # phi limits
+    0, np.pi        # theta limits
+)
+
+print(f"--- Flux Calculation (∮ D⋅dA) ---")
+print(f"Gaussian Surface Radius R = {R_GAUSSIAN} m")
+print(f"Source Charge Q = {Q_SOURCE:.2e} C")
+print(f"Calculated Total Flux ≈ {total_flux:.3e} C")
+print(f"Theoretical Flux (should equal Q_SOURCE) = {Q_SOURCE:.3e} C")
+print(f"Numerical Error ≈ {flux_error:.1e}")
+
+
+# --- 2. Calculate Enclosed Charge (Right Side of Gauss's Law) ---
+# Integrate rho dV over the volume enclosed by Gaussian sphere
+# dV = r^2 * sin(theta) dr dtheta dphi
+
+def charge_integrand(r, theta, phi): # Integrate over r, theta, phi
+    rho = charge_density_rho(r, theta, phi)
+    jacobian = (r**2) * np.sin(theta) # dV element excluding differentials
+    return rho * jacobian
+
+# Use tplquad for 3D integral (r, theta, phi)
+# Note: Order of limits corresponds to order of args in func (r, theta, phi)
+total_charge_enclosed, charge_error = integrate.tplquad(
+    charge_integrand, # Function(r, theta, phi)
+    0, 2 * pi,        # phi limits
+    0, np.pi,         # theta limits
+    0, R_GAUSSIAN     # r limits (integrate up to Gaussian surface)
+)
+
+print(f"\n--- Enclosed Charge Calculation (∫ ρ dV) ---")
+print(f"Charge Density Radius = {R_CHARGE_DIST} m")
+print(f"Integration Volume Radius (Gaussian) = {R_GAUSSIAN} m")
+print(f"Calculated Enclosed Charge ≈ {total_charge_enclosed:.3e} C")
+
+# Calculate theoretical enclosed charge based on radii
+if R_GAUSSIAN >= R_CHARGE_DIST:
+    expected_enclosed_charge = Q_SOURCE # Gaussian surface encloses all charge
+else: # Gaussian surface is smaller than charge distribution
+    expected_enclosed_charge = RHO_0 * (4/3 * pi * R_GAUSSIAN**3)
+
+print(f"Theoretical Enclosed Charge = {expected_enclosed_charge:.3e} C")
+print(f"Numerical Error ≈ {charge_error:.1e}")
+
+print("\n--- Verification ---")
+# The two calculated values should be very close (within numerical error)
+if np.isclose(total_flux, total_charge_enclosed):
+    print("✅ Gauss's Law Verified: Calculated Flux ≈ Calculated Enclosed Charge")
+else:
+    print("❌ Gauss's Law Verification Failed: Flux ≠ Enclosed Charge")
             </code></pre>
         </div>
     </article>
@@ -68,9 +158,129 @@ print("Example 1: Conceptual structure for numerical integration.")
          <div class="code-container">
              <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
             <pre><code class="language-python">
-# Placeholder for Python Example #2
-# (Will be provided upon request)
-print("Example 2: Conceptual structure for divergence/curl.")
+# === Example 2: Calculating Divergence and Curl ===
+import numpy as np
+
+# --- Part 1: Symbolic Calculation using SymPy (Recommended for symbolic math) ---
+try:
+    import sympy
+    from sympy.vector import CoordSys3D, divergence, curl
+
+    print("--- Symbolic Calculation (using SymPy) ---")
+    # Define symbolic coordinates
+    x, y, z = sympy.symbols('x y z')
+    # Define coordinate system
+    N = CoordSys3D('N')
+    # Define a symbolic vector field F = [Fx, Fy, Fz]
+    # Example: F = (x*y*z, -y^2*z, x + z)
+    Fx = x * y * z
+    Fy = -y**2 * z
+    Fz = x + z
+    F_vector = Fx*N.i + Fy*N.j + Fz*N.k
+
+    # Calculate exact Divergence: d(Fx)/dx + d(Fy)/dy + d(Fz)/dz
+    div_F = divergence(F_vector)
+
+    # Calculate exact Curl: [dFz/dy-dFy/dz, dFx/dz-dFz/dx, dFy/dx-dFx/dy]
+    curl_F = curl(F_vector)
+
+    print(f"Vector Field F = {F_vector}")
+    print(f"Divergence (∇ · F) = {div_F}")
+    print(f"Curl (∇ × F) = {curl_F}")
+
+    # Evaluate at a point (e.g., P=(1, 2, 3))
+    point_sym = {x: 1, y: 2, z: 3}
+    div_at_P = div_F.subs(point_sym)
+    curl_at_P = curl_F.subs(point_sym)
+    print(f"\nAt Point P=(1, 2, 3):")
+    print(f"  Divergence = {div_at_P}")
+    print(f"  Curl = {curl_at_P}")
+
+except ImportError:
+    print("--- Symbolic Calculation (SymPy not installed) ---")
+    print("Install SymPy ('pip install sympy') for symbolic results.")
+
+
+# --- Part 2: Numerical Approximation (Plain Python + NumPy, Finite Differences) ---
+print("\n--- Numerical Approximation (Finite Differences) ---")
+
+# Define the same field as a Python function returning NumPy arrays
+def F_numeric(x_val, y_val, z_val):
+    fx = x_val * y_val * z_val
+    fy = -y_val**2 * z_val
+    fz = x_val + z_val
+    return np.array([fx, fy, fz])
+
+def numerical_divergence(F_func, x0, y0, z0, h=1e-4):
+    """ Approximates divergence using central differences. """
+    # Calculate field components at slightly offset points
+    Fx_plus_h = F_func(x0 + h, y0, z0)[0]
+    Fx_minus_h = F_func(x0 - h, y0, z0)[0]
+    Fy_plus_h = F_func(x0, y0 + h, z0)[1]
+    Fy_minus_h = F_func(x0, y0 - h, z0)[1]
+    Fz_plus_h = F_func(x0, y0, z0 + h)[2]
+    Fz_minus_h = F_func(x0, y0, z0 - h)[2]
+
+    # Approximate partial derivatives
+    dFx_dx = (Fx_plus_h - Fx_minus_h) / (2*h)
+    dFy_dy = (Fy_plus_h - Fy_minus_h) / (2*h)
+    dFz_dz = (Fz_plus_h - Fz_minus_h) / (2*h)
+
+    return dFx_dx + dFy_dy + dFz_dz
+
+def numerical_curl(F_func, x0, y0, z0, h=1e-4):
+    """ Approximates curl using central differences. """
+    # Get field components at offset points needed for curl
+    F_x_y_plus_h = F_func(x0, y0 + h, z0)
+    F_x_y_minus_h = F_func(x0, y0 - h, z0)
+    F_x_z_plus_h = F_func(x0, y0, z0 + h)
+    F_x_z_minus_h = F_func(x0, y0, z0 - h)
+
+    F_y_x_plus_h = F_func(x0 + h, y0, z0)
+    F_y_x_minus_h = F_func(x0 - h, y0, z0)
+    F_y_z_plus_h = F_func(x0, y0, z0 + h)
+    F_y_z_minus_h = F_func(x0, y0, z0 - h)
+
+    F_z_x_plus_h = F_func(x0 + h, y0, z0)
+    F_z_x_minus_h = F_func(x0 - h, y0, z0)
+    F_z_y_plus_h = F_func(x0, y0 + h, z0)
+    F_z_y_minus_h = F_func(x0, y0 - h, z0)
+
+    # Approximate partial derivatives needed for curl components
+    dFz_dy = (F_z_y_plus_h[2] - F_z_y_minus_h[2]) / (2*h)
+    dFy_dz = (F_y_z_plus_h[1] - F_y_z_minus_h[1]) / (2*h)
+
+    dFx_dz = (F_x_z_plus_h[0] - F_x_z_minus_h[0]) / (2*h)
+    dFz_dx = (F_z_x_plus_h[2] - F_z_x_minus_h[2]) / (2*h)
+
+    dFy_dx = (F_y_x_plus_h[1] - F_y_x_minus_h[1]) / (2*h)
+    dFx_dy = (F_x_y_plus_h[0] - F_x_y_minus_h[0]) / (2*h)
+
+    # Calculate curl components
+    curl_x = dFz_dy - dFy_dz
+    curl_y = dFx_dz - dFz_dx
+    curl_z = dFy_dx - dFx_dy
+
+    return np.array([curl_x, curl_y, curl_z])
+
+# Evaluate numerical approximation at the same point P=(1, 2, 3)
+x_P, y_P, z_P = 1, 2, 3
+div_num_P = numerical_divergence(F_numeric, x_P, y_P, z_P)
+curl_num_P = numerical_curl(F_numeric, x_P, y_P, z_P)
+
+print(f"\nAt Point P=(1, 2, 3):")
+print(f"  Numerical Divergence ≈ {div_num_P:.6f}")
+print(f"  Numerical Curl ≈ [{curl_num_P[0]:.6f}, {curl_num_P[1]:.6f}, {curl_num_P[2]:.6f}]")
+
+# Compare if SymPy was available
+if 'sympy' in globals():
+    print("\n--- Comparison ---")
+    sym_div = float(div_at_P) # Convert sympy result to float
+    sym_curl = np.array([float(c) for c in curl_at_P.components.values()])
+    print(f"  SymPy Div  = {sym_div:.6f}")
+    print(f"  SymPy Curl = [{sym_curl[0]:.6f}, {sym_curl[1]:.6f}, {sym_curl[2]:.6f}]")
+    print(f"  Div Error: {abs(div_num_P - sym_div):.2e}")
+    print(f"  Curl Error Mag: {np.linalg.norm(curl_num_P - sym_curl):.2e}")
             </code></pre>
         </div>
     </article>
@@ -146,9 +356,79 @@ print("Example 2: Conceptual structure for divergence/curl.")
      <div class="code-container">
         <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
         <pre><code class="language-python">
-# Placeholder for Python Example #3
-# (Will be provided upon request)
-print("Example 3: Phasor definition & recovery.")
+# === Example 3: Phasor Representation & Operations ===
+import numpy as np
+
+# --- Define Signal Parameters ---
+A0 = 5.0            # Real amplitude (e.g., V/m)
+phi_deg = -60.0     # Initial phase shift in degrees
+freq_hz = 2e9       # Frequency = 2 GHz
+
+# --- Calculations ---
+phi_rad = np.deg2rad(phi_deg)
+omega = 2 * np.pi * freq_hz
+
+# 1. Create the Phasor (Complex Amplitude)
+# Phasor A = A0 * exp(i * phi)
+phasor_A = A0 * np.exp(1j * phi_rad)
+
+print("--- Phasor Definition ---")
+print(f"Signal: A(t) = {A0:.1f} * cos({omega:.2e}*t + {phi_deg:.1f}°)")
+print(f"Phasor A = {phasor_A}")
+print(f"  Magnitude |A| = {np.abs(phasor_A):.3f} (Should match A0)")
+print(f"  Phase arg(A) = {np.rad2deg(np.angle(phasor_A)):.1f}° (Should match phi_deg)")
+
+# 2. Recover Real Signal at Specific Times
+print("\n--- Signal Recovery (using Re{A * exp(-iwt)}) ---")
+times_to_check_ns = np.array([0, 0.125, 0.25, 0.5]) # Example times in nanoseconds
+times_s = times_to_check_ns * 1e-9 # Convert to seconds
+
+for t_s, t_ns in zip(times_s, times_to_check_ns):
+    # Calculate the full complex value at time t
+    complex_value_at_t = phasor_A * np.exp(-1j * omega * t_s)
+    # Recover the real instantaneous value
+    real_value_at_t = complex_value_at_t.real # Same as np.real()
+
+    # Verify with direct cosine calculation
+    direct_value = A0 * np.cos(omega * t_s + phi_rad)
+
+    print(f"Time t = {t_ns} ns:")
+    print(f"  Full Complex Value = {complex_value_at_t:.2f}")
+    print(f"  Recovered Real A(t) = {real_value_at_t:.3f}")
+    print(f"  Direct cos() Check = {direct_value:.3f} {'✅' if np.isclose(real_value_at_t, direct_value) else '❌'}")
+
+# 3. Derivative Equivalence: d/dt <=> -i*omega
+print("\n--- Derivative Equivalence (d/dt <=> -i*omega) ---")
+# Analytically, d/dt [A0*cos(wt + phi)] = -A0*omega*sin(wt + phi)
+# Phasor of the derivative should be: -i*omega*Phasor_A
+phasor_dA_dt = -1j * omega * phasor_A
+
+# Calculate derivative directly at t=0 for comparison
+t0 = 0.0
+derivative_direct = -A0 * omega * np.sin(omega * t0 + phi_rad)
+
+# Recover real value from derivative phasor at t=0
+derivative_recovered = np.real(phasor_dA_dt * np.exp(-1j * omega * t0))
+
+print(f"Phasor of original A:    {phasor_A:.2f}")
+print(f"Phasor of dA/dt (-iωA): {phasor_dA_dt:.2e}")
+print(f"\nAt t=0:")
+print(f"  Recovered Real dA/dt(0) = {derivative_recovered:.3e}")
+print(f"  Direct Derivative Check = {derivative_direct:.3e} {'✅' if np.isclose(derivative_recovered, derivative_direct) else '❌'}")
+
+# The magnitude of the derivative phasor should be omega*A0
+print(f"  Magnitude |dA/dt| = {np.abs(phasor_dA_dt):.3e}")
+print(f"  Check |omega*A0|  = {omega * A0:.3e}")
+# The phase of the derivative phasor should be phi + 90deg (or phi - 90deg depending on sign convention/sin)
+# -i = e^(-i*pi/2). So mult by -i subtracts 90 deg from phase.
+expected_phase_deg = phi_deg - 90
+calculated_phase_deg = np.rad2deg(np.angle(phasor_dA_dt))
+# Adjust calculated phase to be comparable (e.g., within -180 to 180)
+calculated_phase_deg = (calculated_phase_deg + 180) % 360 - 180
+expected_phase_deg = (expected_phase_deg + 180) % 360 - 180
+
+print(f"  Phase arg(dA/dt) = {calculated_phase_deg:.1f}°")
+print(f"  Expected Phase (φ - 90°) = {expected_phase_deg:.1f}°")
             </code></pre>
     </div>
     <article class="sub-section">
@@ -194,9 +474,56 @@ print("Example 3: Phasor definition & recovery.")
          <div class="code-container">
              <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
             <pre><code class="language-python">
-# Placeholder for Python Example #4
-# (Will be provided upon request)
-print("Example 4: Code calculating eps_r, D, J.")
+# === Example 4: Applying Constitutive Relations ===
+import numpy as np
+from scipy.constants import epsilon_0
+
+# --- Define Material Properties ---
+# Example: Water at low frequency (simplified)
+chi_e = 79.0      # Electric susceptibility (approx. for water, eps_r = 80)
+sigma = 5e-6      # Conductivity (S/m, typical for purified water, can vary widely)
+# Assume non-magnetic: mu_r = 1.0, mu = mu_0
+
+# --- Applied Electric Field (Assume uniform vector) ---
+E_field_vector = np.array([0.0, 1.0, 0.0]) # 1 V/m in y-direction
+
+# --- Calculations ---
+
+# 1. Permittivity from Susceptibility
+epsilon_r = 1 + chi_e
+epsilon_abs = epsilon_0 * epsilon_r # Absolute permittivity
+
+# 2. Polarization Density (P = eps0 * chi_e * E)
+P_vector = epsilon_0 * chi_e * E_field_vector
+
+# 3. Electric Displacement Field (D = eps * E)
+D_vector_from_eps = epsilon_abs * E_field_vector
+
+# 4. Electric Displacement Field (D = eps0*E + P) - Verification
+D_vector_from_P = epsilon_0 * E_field_vector + P_vector
+
+# 5. Conduction Current Density (J = sigma * E)
+J_vector = sigma * E_field_vector
+
+# --- Print Results ---
+print("--- Material Properties ---")
+print(f"Electric Susceptibility (χe): {chi_e:.2f}")
+print(f"Conductivity          (σ):  {sigma:.2e} S/m")
+print(f"Derived Rel. Permittivity (εr = 1+χe): {epsilon_r:.2f}")
+print(f"Derived Abs. Permittivity (ε):       {epsilon_abs:.3e} F/m")
+
+print("\n--- Applied Field ---")
+print(f"E-field = {E_field_vector} V/m")
+
+print("\n--- Material Response ---")
+print(f"Polarization P = ε₀ χe E      = {P_vector} C/m²")
+print(f"Displacement D = ε E          = {D_vector_from_eps} C/m²")
+print(f"Displacement D = ε₀E + P    = {D_vector_from_P} C/m²")
+print(f" --> D fields match: {np.allclose(D_vector_from_eps, D_vector_from_P)}")
+print(f"Current Density J = σ E     = {J_vector} A/m²")
+
+# Note: If E_field was a complex phasor, these linear calculations
+# would yield the corresponding complex phasors for P, D, and J.
             </code></pre>
         </div>
     </article>
@@ -231,9 +558,108 @@ print("Example 4: Code calculating eps_r, D, J.")
      <div class="code-container">
          <button class="copy-btn" title="Copy code"><svg xmlns="http://www.w3.org/2000/svg" height="18" viewBox="0 0 24 24" width="18" fill="currentColor"><path d="M0 0h24v24H0z" fill="none"/><path d="M16 1H4c-1.1 0-2 .9-2 2v14h2V3h12V1zm3 4H8c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h11c1.1 0 2-.9 2-2V7c0-1.1-.9-2-2-2zm0 16H8V7h11v14z"/></svg></button>
         <pre><code class="language-python">
-# Placeholder for Python Example #5
-# (Will be provided upon request)
-print("Example 5: Code calculating relative epsilon_c and complex k.")
+# === Example 5: Complex Permittivity & Wave Propagation ===
+import numpy as np
+from scipy.constants import epsilon_0, mu_0, pi, c # Speed of light in vacuum
+
+def calculate_wave_properties(eps_r, sigma, freq_hz, mu_r=1.0):
+    """
+    Calculates complex permittivity, wave number, and related
+    propagation constants for a material at a given frequency.
+    Uses e^-iwt convention.
+
+    Args:
+        eps_r (float): Relative permittivity (real part).
+        sigma (float): Conductivity (S/m).
+        freq_hz (float): Frequency (Hz).
+        mu_r (float): Relative permeability (default 1.0 for non-magnetic).
+
+    Returns:
+        dict: Dictionary containing calculated properties, or None if freq invalid.
+    """
+    if freq_hz <= 0:
+        print("ERROR: Frequency must be positive.")
+        return None
+
+    omega = 2 * pi * freq_hz
+    mu_abs = mu_r * mu_0      # Absolute permeability
+
+    # 1. Calculate Relative Complex Permittivity (eps_c_rel = e'r + i*e''r)
+    eps_prime_rel = eps_r
+    eps_double_prime_rel = sigma / (omega * epsilon_0)
+    eps_c_rel = complex(eps_prime_rel, eps_double_prime_rel)
+
+    # 2. Calculate Absolute Complex Permittivity (eps_c = eps_0 * eps_c_rel)
+    epsilon_c_abs = epsilon_0 * eps_c_rel
+
+    # 3. Calculate Complex Wave Number (k = w * sqrt(mu * eps_c))
+    # Handle the square root branch correctly for attenuation (alpha > 0)
+    # k = beta + i*alpha for e^(ikz) propagation term where alpha represents loss.
+    sqrt_term = np.sqrt(mu_abs * epsilon_c_abs + 0j) # Ensure input is complex
+    k = omega * sqrt_term
+
+    # Ensure the imaginary part (alpha) is positive for physical attenuation
+    if k.imag < 0:
+        k = -k
+
+    beta = k.real   # Phase constant (rad/m)
+    alpha = k.imag  # Attenuation constant (nepers/m)
+
+    # 4. Calculate other useful properties
+    wavelength_medium = 2 * pi / beta if beta > 1e-9 else float('inf')
+    # Penetration depth (delta = 1/alpha)
+    penetration_depth = 1 / alpha if alpha > 1e-9 else float('inf')
+    # Attenuation in dB/m
+    alpha_db_per_m = 20 * alpha / np.log(10) # approx 8.686 * alpha_np
+    # Phase velocity (vp = omega / beta)
+    phase_velocity = omega / beta if beta > 1e-9 else float('inf')
+    # Refractive index (complex: n_c = sqrt(mu_r * eps_c_rel) = c0/vp + i*c0*alpha/omega)
+    n_complex = c0 * k / omega # Complex refractive index n + ikappa
+    refractive_index_real = n_complex.real
+    extinction_coefficient = n_complex.imag
+
+    return {
+        "frequency_ghz": freq_hz / 1e9,
+        "eps_r": eps_r,
+        "sigma_sm": sigma,
+        "eps_c_relative": eps_c_rel,
+        "eps_prime_relative": eps_prime_rel,
+        "eps_double_prime_relative": eps_double_prime_rel,
+        "wavenumber_k": k,
+        "phase_constant_beta_rad_m": beta,
+        "attenuation_alpha_np_m": alpha,
+        "attenuation_alpha_db_m": alpha_db_per_m,
+        "wavelength_m": wavelength_medium,
+        "penetration_depth_m": penetration_depth,
+        "phase_velocity_m_s": phase_velocity,
+        "complex_refractive_index": n_complex,
+        "refractive_index_n": refractive_index_real,
+        "extinction_coeff_kappa": extinction_coefficient
+    }
+
+# --- Run Examples ---
+print("--- Example 1: Low-Loss Material (e.g., Glass @ 1 THz) ---")
+props1 = calculate_wave_properties(eps_r=4.0, sigma=1e-4, freq_hz=1e12)
+if props1:
+    print(f"  Rel. εc ≈ {props1['eps_c_relative']:.3f}")
+    print(f"  Wave# k ≈ {props1['wavenumber_k'].real:.1f} + {props1['wavenumber_k'].imag:.4f}j rad/m")
+    print(f"  Attrib α ≈ {props1['attenuation_alpha_db_m']:.3f} dB/m (Low)")
+    print(f"  Wavelen λ ≈ {props1['wavelength_m']*1e6:.1f} μm") # Micrometers
+    print(f"  Pen. Depth δ ≈ {props1['penetration_depth_m']:.2f} m")
+    print(f"  Phase Vel. vp ≈ {props1['phase_velocity_m_s']/c0:.3f} c")
+    print(f"  Complex Index nc ≈ {props1['complex_refractive_index']:.3f}")
+
+print("\n--- Example 2: Lossy Material (Muscle Tissue @ 2.45 GHz) ---")
+# Approximate values for biological tissue
+props2 = calculate_wave_properties(eps_r=47.0, sigma=1.8, freq_hz=2.45e9)
+if props2:
+    print(f"  Rel. εc ≈ {props2['eps_c_relative']:.3f}")
+    print(f"  Wave# k ≈ {props2['wavenumber_k'].real:.1f} + {props2['wavenumber_k'].imag:.1f}j rad/m")
+    print(f"  Attrib α ≈ {props2['attenuation_alpha_db_m']:.1f} dB/m (High)")
+    print(f"  Wavelen λ ≈ {props2['wavelength_m']*100:.2f} cm") # Centimeters
+    print(f"  Pen. Depth δ ≈ {props2['penetration_depth_m']*100:.2f} cm") # Penetration is cm!
+    print(f"  Phase Vel. vp ≈ {props2['phase_velocity_m_s']/c0:.3f} c")
+    print(f"  Complex Index nc ≈ {props2['complex_refractive_index']:.3f}")
         </code></pre>
     </div>
     <!-- Epsilon Explorer -->
