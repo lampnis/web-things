@@ -36,7 +36,7 @@ function draw() {
 
   circleSize = 1000 / Math.sqrt((Math.abs(mouseX - windowWidth / 2) + Math.abs(mouseY - windowHeight / 2)));
   // background(colwheel2);
-  fill(colwheel1);
+  fill(colwheel(colwheel1));
   circle(mouseX, mouseY, circleSize);
 
 }
