@@ -8,7 +8,7 @@ function draw() {
   var g = map(i / 2, 0, 50, 100, 200);
   var b = map(cos(frameCount), -1, 1, 100, 200);
 
-  background(g, r, b);
+  background(g, b, r);
   rotateX(60);
   var mouse_scale_x = map(mouseX, 0, windowWidth, 0.0, 5.0) - 2.5;
   var mouse_scale_y = map(mouseY, 0, windowHeight, 0.0, 2.0) - 1.0;
@@ -27,7 +27,6 @@ function draw() {
       vertex(x, y, z);
     }
     endShape(CLOSE);
-
   }
 }
 
