@@ -4,8 +4,8 @@ function setup() {
 }
 
 function draw() {
-  var r = map(sin(frameCount / 3), -1, 1, 100, 200);
-  var g = map(i / 2, 0, 70, 100, 200);
+  var r = map(sin(frameCount / 2), -1, 1, 100, 200);
+  var g = map(i / 2, 0, 50, 100, 200);
   var b = map(cos(frameCount), -1, 1, 100, 200);
 
   background(g, r, b);
