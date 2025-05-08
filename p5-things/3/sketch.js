@@ -5,18 +5,19 @@ function setup() {
 
 function draw() {
 
-  var r = map(sin(frameCount / 2), -1, 1, 100, 200)
-  var g = map(i, 0, 50, 100, 200);
-  var b = map(cos(frameCount), -1, 1, 100, 200);
+  var r = map(sin(frameCount*0.1), -1, 1, 0, 255)
+  var g = map(sin(frameCount*0.1 + 90), -1, 1, 0, 255);
+  var b = map(cos(frameCount*0.1 + 180), -1, 1, 0, 255);
   console.log("mouseX: ", mouseX)
   console.log("mouseY: ", mouseY)
-  background(g, b, r);
+  background(r, g, b);
   rotateX(60);
   var mouse_scale_x = map(mouseX, 0, windowWidth, 0.0, 5.0) - 2.5;
   var mouse_scale_y = map(mouseY, 0, windowHeight, 0.0, 2.0) - 1.0; 
   noFill();
-  stroke(r, g, b);
+  
 
+  stroke(g, b, r);
   for (var i = 0; i < 70; i++) {
     beginShape();
     rotate(3*mouse_scale_x);
