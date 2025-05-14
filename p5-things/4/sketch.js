@@ -1,115 +1,141 @@
-// Global simulation constant (tune for desired effect)
-const G = 1; // Gravitational constant - adjust this! Higher means stronger gravity.
-const MIN_DISTANCE = 5; // Minimum distance to prevent extreme forces at close range
-const MAX_DISTANCE = 50; // Optional: Maximum distance for force calculation (can soften distant interactions)
-
+const G = 2;
 
 class Body {
-  constructor(x, y, vx, vy, mass) {
-    this.pos = createVector(x, y);       // Position (p5.Vector)
-    this.vel = createVector(vx, vy);     // Velocity (p5.Vector)
-    this.acc = createVector(0, 0);     // Acceleration (p5.Vector)
-    this.mass = mass;                  // Mass (Number)
-    this.radius = sqrt(this.mass);     // Radius for drawing (proportional to sqrt(mass) or mass^(1/3) is common)
+  constructor(x, y, z, vx, vy, vz, mass, radius) {
+    this.position = createVector(x, y, z);
+    this.velocity = createVector(vx, vy, vz);
+    this.acceleration = createVector(0, 0, 0);
+    this.mass = mass;
+    this.radius = radius;
+    this.path = [];
+    this.pathLength = 2000;
   }
 
-  // Calculate gravitational attraction force FROM another body ON this body
   calculateAttraction(otherBody) {
-    // Calculate direction vector (from this body towards the other body)
-    let force = p5.Vector.sub(otherBody.pos, this.pos);
+    // unit direction this->other
+    let force = p5.Vector.sub(otherBody.position, this.position);
+    let distanceSq = force.magSq();
 
-    // Calculate distance between bodies
-    let distanceSq = force.magSq(); // Use magnitude squared to avoid sqrt until necessary
-
-    // Constrain distance to avoid extreme forces / division by zero
-    distanceSq = constrain(distanceSq, MIN_DISTANCE * MIN_DISTANCE, MAX_DISTANCE * MAX_DISTANCE);
-
-    // Calculate force magnitude: F = G * m1 * m2 / r^2
+    // F = G * m1 * m2 / r^2
     let strength = (G * this.mass * otherBody.mass) / distanceSq;
 
-    // Set the magnitude of the force vector
     force.setMag(strength);
 
     return force;
   }
 
-  // Apply a force vector to this body's acceleration
   applyForce(force) {
     // Newton's 2nd Law: a = F / m
+    // check for zero division
+    if (this.mass === 0) return;
     let f = p5.Vector.div(force, this.mass);
-    this.acc.add(f);
+    this.acceleration.add(f);
   }
 
-  // Update position and velocity using Euler integration
+
   update() {
-    // Velocity changes according to acceleration
-    this.vel.add(this.acc);
-    // Position changes according to velocity
-    this.pos.add(this.vel);
-    // IMPORTANT: Reset acceleration for the next frame
-    this.acc.mult(0);
+    this.velocity.add(this.acceleration);
+    this.position.add(this.velocity);
+
+    // update path
+    this.path.push(this.position.copy());
+    if (this.path.length > this.pathLength) {
+      this.path.splice(0, 1); // Remove oldest point
+    }
+
+    // reset acceleration for next frame
+    this.acceleration.mult(0);
   }
 
-  // Draw the body
   show() {
-    stroke(255);
-    strokeWeight(1);
-    fill(255, 150); // Semi-transparent white
-    ellipse(this.pos.x, this.pos.y, this.radius * 2, this.radius * 2);
-  }
+    push(); // isolate transformations and styles..?
 
-  // Optional: Keep bodies within the canvas bounds (simple wrapping)
-  edges() {
-    if (this.pos.x > width + this.radius) {
-      this.pos.x = -this.radius;
-    } else if (this.pos.x < -this.radius) {
-      this.pos.x = width + this.radius;
+    // Translate to the body's position to draw the sphere
+    translate(this.position.x, this.position.y, this.position.z);
+
+    // Set material properties for the sphere
+    noStroke();
+    // Make color slightly dependent on mass (example)
+    let rCol = map(this.mass, 1, 1000, 150, 255);
+    let gCol = map(this.mass, 1, 1000, 200, 150);
+    let bCol = map(this.mass, 1, 1000, 255, 100);
+    ambientMaterial(rCol, gCol, bCol); // Color for the sphere
+    
+    // Draw the sphere
+    sphere(this.radius);
+
+    pop(); // Restore previous drawing style and transformation matrix
+
+    // Draw the trail
+    beginShape();
+    noFill();
+    stroke(rCol, gCol, bCol, 150); // Trail color with some transparency
+    strokeWeight(1);
+    for (let p of this.path) {
+      vertex(p.x, p.y, p.z);
     }
-    if (this.pos.y > height + this.radius) {
-      this.pos.y = -this.radius;
-    } else if (this.pos.y < -this.radius) {
-      this.pos.y = height + this.radius;
-    }
+    endShape();
   }
 }
 
 // --- Sketch Variables ---
-let body1;
-let body2;
+// let body1;
+// let body2;
+// You can add more bodies to an array for N-body simulation
+let bodies = [];
 
 function setup() {
-  createCanvas(600, 400);
+  createCanvas(windowWidth, windowHeight * 0.85, WEBGL); // Use WEBGL mode for 3D
+  pixelDensity(1); // Optional: ensure consistent rendering on high-DPI displays
 
-  // Create two bodies with initial positions, velocities, and masses
-  // Center one, offset the other, give it some initial velocity
-  body1 = new Body(width / 2, height / 2, 0, 0, 50); // Larger mass, stationary at center
-  body2 = new Body(width / 2 + 100, height / 2, 0, 2, 5); // Smaller mass, offset, moving initially upwards
-  // Adjust initial velocity (0, 2) for different orbits!
+  // Create bodies with initial positions (x,y,z), velocities (vx,vy,vz), mass, and radius
+
+  bodies.push(new Body(0, 0, 0, 0, 0, 0, 100, 20));
+  bodies.push(new Body(70, 0, 70, 1, 0, -1, 1, 5));
+  bodies.push(new Body(-90, 10, 100, 1, 0, 1, 3, 5));
+  
 }
 
 function draw() {
-  background(0); // Black background
+  background(10, 10, 25); // Dark background
 
-  // 1. Calculate Forces
-  let force1on2 = body1.calculateAttraction(body2); // Force body1 exerts on body2
-  let force2on1 = body2.calculateAttraction(body1); // Force body2 exerts on body1
-  // Note: By Newton's 3rd law, these should be equal and opposite.
-  // Our implementation calculates them independently based on position,
-  // which is fine. Or you could calculate one and invert it for the other.
+  // Camera control: allows mouse drag to rotate, scroll to zoom
+  orbitControl(4, 4);
 
-  // 2. Apply Forces
-  body1.applyForce(force2on1); // Apply the force FROM body2 ON body1
-  body2.applyForce(force1on2); // Apply the force FROM body1 ON body2
+  // Lighting
+  ambientLight(80); // Soft ambient light
+  pointLight(255, 255, 255, 0, 0, 200); // A light source
+  directionalLight(200,200,200, -1, -1, -1); // Light from a direction
 
-  // 3. Update Motion
-  body1.update();
-  body2.update();
+  // --- N-Body Simulation Logic (if using an array `bodies`) ---
+  
+  if (bodies.length > 1) {
+    // Reset forces for all bodies
+    for (let i = 0; i < bodies.length; i++) {
+      bodies[i].acceleration.mult(0); // Important to reset acceleration if not done in update
+                               // My current Body.update() does this.
+    }
 
-  // 4. Handle Edges (optional)
-  // body1.edges();
-  // body2.edges();
+    // Calculate and apply forces between all unique pairs
+    for (let i = 0; i < bodies.length; i++) {
+      for (let j = 0; j < bodies.length; j++) {
+        if (i !== j) { // Don't calculate force of a body on itself
+          let force = bodies[i].calculateAttraction(bodies[j]);
+          bodies[i].applyForce(force);
+        }
+      }
+    }
 
-  // 5. Show Bodies
-  body1.show();
-  body2.show();
+    // Update and show all bodies
+    for (let i = 0; i < bodies.length; i++) {
+      bodies[i].update();
+      bodies[i].show();
+    }
+  }
+ 
+}
+
+// Optional: Adjust canvas size when window is resized
+function windowResized() {
+  resizeCanvas(windowWidth, windowHeight * 0.85);
 }
