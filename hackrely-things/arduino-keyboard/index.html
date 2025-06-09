@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Arduino Keyboard Module: Key Simulation Reference</title>
+    <style>
+        /* Basic styling to create a clean, modern look.
+           "Latest Google CSS innovations" are abstract, so I'll apply
+           common best practices for readability and a flat design aesthetic. */
+        body {
+            font-family: 'Roboto', sans-serif; /* Google's preferred font */
+            line-height: 1.6;
+            margin: 0;
+            padding: 20px;
+            background-color: rgb(35, 1, 66); /* Light grey background */
+            color: lightblue;
+        }
+        .container {
+            max-width: 960px;
+            margin: 20px auto;
+            background-color: black; /* White content background */
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        h1, h2, h3 {
+            color: darkcyan; /* Google Blue */
+            margin-bottom: 15px;
+        }
+        h1 {
+            text-align: center;
+            font-size: 2.2em;
+            margin-bottom: 30px;
+        }
+        h2 {
+            font-size: 1.8em;
+            border-bottom: 2px solid darkcyan;
+            padding-bottom: 10px;
+            margin-top: 40px;
+        }
+        h3 {
+            font-size: 1.4em;
+            margin-top: 30px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+        th, td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid darkcyan;
+        }
+        th {
+            background-color: #4f7ac4; /* Light Google Blue */
+            color: rgb(35, 1, 66);
+            font-weight: bold;
+        }
+        tr:nth-child(even) {
+            background-color: black; /* Zebra striping */
+        }
+        tr:hover {
+            background-color: ; /* Hover effect */
+        }
+        code {
+            background-color: rgb(35, 1, 66);
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
+            font-size: 0.9em;
+            color: turquoise; /* For inline code */
+        }
+        pre {
+            background-color: rgb(35, 1, 66);
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            margin-top: 15px;
+            margin-bottom: 25px;
+        }
+        pre code {
+            display: block; /* Ensures code block takes up full width */
+            background-color: transparent;
+            padding: 0;
+            color: turquoise;
+            font-size: 0.95em;
+        }
+        ul {
+            list-style-type: disc;
+            margin-left: 20px;
+            margin-bottom: 20px;
+        }
+        li {
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Arduino Keyboard Module: Key Simulation Reference</h1>
+        <p>The <code>Keyboard</code> library aims to provide cross-platform HID (Human Interface Device) keyboard emulation. The <code>Keycode</code> constants generally work across Windows, macOS, and Linux, with the operating system interpreting these standard HID codes into its specific key behaviors.</p>
+
+        <h2>Core Functions</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Function</th>
+                    <th>Description</th>
+                    <th>Example</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><code>Keyboard.write(char)</code></td>
+                    <td>Sends a single ASCII character. Automatically handles <code>Shift</code> for uppercase letters and symbols based on standard US layout.</td>
+                    <td>
+                        <code>Keyboard.write('a');</code> <br>
+                        <code>Keyboard.write('A');</code> <br>
+                        <code>Keyboard.write('1');</code> <br>
+                        <code>Keyboard.write('!');</code> <br>
+                        <code>Keyboard.write('\n');</code> (Enter) <br>
+                        <code>Keyboard.write('\t');</code> (Tab)
+                    </td>
+                </tr>
+                <tr>
+                    <td><code>Keyboard.press(keycode)</code></td>
+                    <td>Presses and holds a key, identified by its <code>Keycode</code> constant.</td>
+                    <td><code>Keyboard.press(KEY_LEFT_CTRL);</code></td>
+                </tr>
+                <tr>
+                    <td><code>Keyboard.release(keycode)</code></td>
+                    <td>Releases a previously pressed key.</td>
+                    <td><code>Keyboard.release('c');</code></td>
+                </tr>
+                <tr>
+                    <td><code>Keyboard.releaseAll()</code></td>
+                    <td>Releases all currently pressed keys. Essential after sending combinations to prevent keys from remaining "stuck."</td>
+                    <td><code>Keyboard.releaseAll();</code></td>
+                </tr>
+                <tr>
+                    <td><code>Keyboard.print(string)</code></td>
+                    <td>Types an entire string character by character. Convenient for typing words, sentences, or passwords.</td>
+                    <td><code>Keyboard.print("Hello World!");</code></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h2><code>Keycode</code> Constants for Special Keys</h2>
+        <p>These constants are used with <code>Keyboard.press()</code> and <code>Keyboard.release()</code>.</p>
+
+        <h3>1. Modifier Keys</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th><code>Keycode</code> Constant(s)</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Left Control</td>
+                    <td><code>KEY_LEFT_CTRL</code></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Left Shift</td>
+                    <td><code>KEY_LEFT_SHIFT</code></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Left Alt</td>
+                    <td><code>KEY_LEFT_ALT</code></td>
+                    <td>(Option key on Mac)</td>
+                </tr>
+                <tr>
+                    <td>Left GUI</td>
+                    <td><code>KEY_LEFT_GUI</code> <br> (<code>KEY_LEFT_COMMAND</code>)</td>
+                    <td>Windows Key on Windows, Command Key on Mac, Super Key on Linux. <code>KEY_LEFT_COMMAND</code> is sometimes an alias/preferred name on Adafruit boards.</td>
+                </tr>
+                <tr>
+                    <td>Right Control</td>
+                    <td><code>KEY_RIGHT_CTRL</code></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Right Shift</td>
+                    <td><code>KEY_RIGHT_SHIFT</code></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Right Alt</td>
+                    <td><code>KEY_RIGHT_ALT</code></td>
+                    <td>(AltGr key on some European layouts)</td>
+                </tr>
+                <tr>
+                    <td>Right GUI</td>
+                    <td><code>KEY_RIGHT_GUI</code></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Example: Ctrl+C for Copy</strong></p>
+        <pre><code>Keyboard.press(KEY_LEFT_CTRL);
+Keyboard.press('c');
+delay(100);
+Keyboard.releaseAll();
+</code></pre>
+        <p><strong>Example: Cmd+C for Copy (Mac)</strong></p>
+        <pre><code>Keyboard.press(KEY_LEFT_GUI); // Or KEY_LEFT_COMMAND
+Keyboard.press('c');
+delay(100);
+Keyboard.releaseAll();
+</code></pre>
+
+        <h3>2. Function Keys</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th><code>Keycode</code> Constant</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>F1</td><td><code>KEY_F1</code></td></tr>
+                <tr><td>F2</td><td><code>KEY_F2</code></td></tr>
+                <tr><td>F3</td><td><code>KEY_F3</code></td></tr>
+                <tr><td>F4</td><td><code>KEY_F4</code></td></tr>
+                <tr><td>F5</td><td><code>KEY_F5</code></td></tr>
+                <tr><td>F6</td><td><code>KEY_F6</code></td></tr>
+                <tr><td>F7</td><td><code>KEY_F7</code></td></tr>
+                <tr><td>F8</td><td><code>KEY_F8</code></td></tr>
+                <tr><td>F9</td><td><code>KEY_F9</code></td></tr>
+                <tr><td>F10</td><td><code>KEY_F10</code></td></tr>
+                <tr><td>F11</td><td><code>KEY_F11</code></td></tr>
+                <tr><td>F12</td><td><code>KEY_F12</code></td></tr>
+            </tbody>
+        </table>
+
+        <h3>3. Navigation and Editing Keys</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th><code>Keycode</code> Constant</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Up Arrow</td><td><code>KEY_UP_ARROW</code></td><td></td></tr>
+                <tr><td>Down Arrow</td><td><code>KEY_DOWN_ARROW</code></td><td></td></tr>
+                <tr><td>Left Arrow</td><td><code>KEY_LEFT_ARROW</code></td><td></td></tr>
+                <tr><td>Right Arrow</td><td><code>KEY_RIGHT_ARROW</code></td><td></td></tr>
+                <tr><td>Backspace</td><td><code>KEY_BACKSPACE</code></td><td></td></tr>
+                <tr><td>Tab</td><td><code>KEY_TAB</code></td><td>Also <code>Keyboard.write('\t');</code></td></tr>
+                <tr><td>Enter</td><td><code>KEY_RETURN</code> <br> (<code>KEY_ENTER</code>)</td><td>Main Enter key. Also <code>Keyboard.write('\n');</code></td></tr>
+                <tr><td>Escape</td><td><code>KEY_ESC</code></td><td>Also <code>Keyboard.write(27);</code></td></tr>
+                <tr><td>Insert</td><td><code>KEY_INSERT</code></td><td></td></tr>
+                <tr><td>Delete</td><td><code>KEY_DELETE</code></td><td></td></tr>
+                <tr><td>Page Up</td><td><code>KEY_PAGE_UP</code></td><td></td></tr>
+                <tr><td>Page Down</td><td><code>KEY_PAGE_DOWN</code></td><td></td></tr>
+                <tr><td>Home</td><td><code>KEY_HOME</code></td><td></td></tr>
+                <tr><td>End</td><td><code>KEY_END</code></td><td></td></tr>
+            </tbody>
+        </table>
+
+        <h3>4. Other Common Keys</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>Key</th>
+                    <th><code>Keycode</code> Constant</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr><td>Caps Lock</td><td><code>KEY_CAPS_LOCK</code></td></tr>
+                <tr><td>Print Screen</td><td><code>KEY_PRINTSCREEN</code></td></tr>
+                <tr><td>Scroll Lock</td><td><code>KEY_SCROLL_LOCK</code></td></tr>
+                <tr><td>Pause/Break</td><td><code>KEY_PAUSE</code></td></tr>
+                <tr><td>Application</td><td><code>KEY_MENU</code></td></tr>
+                <tr><td>Spacebar</td><td><code>KEY_SPACE</code></td></tr>
+            </tbody>
+        </table>
+
+        <h2>Important Considerations</h2>
+        <ul>
+            <li><strong>Keyboard Layouts:</strong> The <code>Keyboard</code> library generally assumes a <strong>US English keyboard layout</strong>. For specific symbols on non-US layouts, you might need to map the desired character to the equivalent US <code>Keycode</code> or combination (e.g., <code>AltGr</code> combinations).</li>
+            <li><strong>Operating System Shortcuts:</strong> While <code>Keycode</code>s are standard, the <em>behavior</em> of key combinations can differ between operating systems. Always test your desired shortcut on all target OSes.</li>
+            <li><strong>Timing (<code>delay()</code>):</strong> After sending key presses, especially combinations, it's crucial to include small delays (e.g., <code>delay(50)</code> to <code>delay(200)</code>) to give the operating system enough time to register the input. Sending keys too quickly can result in missed or misinterpretated presses.</li>
+        </ul>
+    </div>
+</body>
+</html>
