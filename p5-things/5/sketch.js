@@ -26,7 +26,7 @@ class Walker {
 let walker;
 
 function setup() {
-  createCanvas(windowWidth, windowHeight, WEBGL);
+  createCanvas(windowWidth, windowHeight);
   walker = new Walker();
   background(0);
 }
