@@ -10,7 +10,7 @@ class Walker {
   }
 
   step() {
-    let move = random(5);
+    let move = random(2);
     let rUp = random(1);
     let rLeft = random(1);
     let pUp = 0.49;
