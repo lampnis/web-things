@@ -10,19 +10,20 @@ function draw() {
   background(0);
 
 
-  for (let i = 0; i < numLines; i++) {
-    let xoff = t + i * 1e4;
+  for (let j = 0; j < numLines; j++) {
+    let xoff = t + j * 1e4;
     noFill();
-    stroke(10, 25 * i, 10);
+    stroke(map(sin(frameCount / 1e1 * j), 0, 1, 0, 255), 25 * j, 10 * j);
     strokeWeight(2);
     beginShape();
     for (let i = 0; i < width; i++) {
-      let y = noise(xoff) * height * (i / 5);
-      xoff += 0.01 * i;
+      let y = map(noise(xoff), 0, 1, 0, height) * j / map(sin(frameCount / 1e2 * i), 0, 1, -100, 100);
+      xoff += 0.01;
       vertex(i, y);
     }
     endShape();
   }
+
   t += 0.01;
 }
 
