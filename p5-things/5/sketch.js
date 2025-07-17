@@ -1,7 +1,7 @@
 class Walker {
   constructor() {
-    this.x = 0;
-    this.y = 0;
+    this.x = width / 2;
+    this.y = height / 2;
   }
 
   show() {
