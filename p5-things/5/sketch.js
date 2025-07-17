@@ -10,20 +10,21 @@ class Walker {
   }
 
   step() {
+    let move = random(1);
     let rUp = random(1);
     let rLeft = random(1);
     let p = 0.49;
 
     if (rUp <= p) {
-      this.y--;
+      this.y -= move;
     } else {
-      this.y++;
+      this.y += move;
     }
 
     if (rLeft <= p) {
-      this.x--;
+      this.x -= move;
     } else {
-      this.x++;
+      this.x += move;
     }
   }
 }
