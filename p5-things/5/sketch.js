@@ -10,22 +10,22 @@ class Walker {
   }
 
   step() {
-    let move = randomGaussian(2, 1);
+    let move = random(5);
     let rUp = random(1);
     let rLeft = random(1);
     let pUp = 0.49;
     let pLeft = 0.49;
 
     if (rUp <= pUp) {
-      this.y -= move;
+      this.y -= Math.pow(move, 2);
     } else {
-      this.y += move;
+      this.y += Math.pow(move, 2);
     }
 
     if (rLeft <= pLeft) {
-      this.x -= move;
+      this.x -= Math.pow(move, 2);
     } else {
-      this.x += move;
+      this.x += Math.pow(move, 2);
     }
   }
 }
