@@ -13,15 +13,16 @@ class Walker {
     let move = randomGaussian(2, 1);
     let rUp = random(1);
     let rLeft = random(1);
-    let p = 0.49;
+    let pUp = 0.49;
+    let pLeft = 0.35;
 
-    if (rUp <= p) {
+    if (rUp <= pUp) {
       this.y -= move;
     } else {
       this.y += move;
     }
 
-    if (rLeft <= p) {
+    if (rLeft <= pLeft) {
       this.x -= move;
     } else {
       this.x += move;
