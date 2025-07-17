@@ -12,8 +12,8 @@ class Walker {
   step() {
     let choiceX = random(-1, 0, 1);
     let choiceY = random(-1, 0, 1);
-    this.x += choiceX;
-    this.y += choiceY;
+    this.x += choiceX + 0.1;
+    this.y += choiceY + 0.1;
   }
 }
 
