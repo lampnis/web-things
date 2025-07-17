@@ -1,47 +1,24 @@
-class Walker {
-  constructor() {
-    this.x = width / 2;
-    this.y = height / 2;
-  }
-
-  show() {
-    stroke(255);
-    point(this.x, this.y);
-  }
-
-  step() {
-    let move = random(2);
-    let rUp = random(1);
-    let rLeft = random(1);
-    let pUp = 0.49;
-    let pLeft = 0.49;
-
-    if (rUp <= pUp) {
-      this.y -= Math.pow(move, 2);
-    } else {
-      this.y += Math.pow(move, 2);
-    }
-
-    if (rLeft <= pLeft) {
-      this.x -= Math.pow(move, 2);
-    } else {
-      this.x += Math.pow(move, 2);
-    }
-  }
-}
-
-let walker;
+let t = 0.0;
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  walker = new Walker();
-  background(0);
 }
 
+
 function draw() {
-  walker.step();
-  walker.show();
-  rect
+  background(0);
+  let xoff = t;
+  noFill();
+  stroke(0);
+  strokeWeight(2);
+  beginShape();
+  for (let i = 0; i < width; i++) {
+    let y = noise(xoff) * height;
+    xoff += 0.01;
+    vertex(i, y);
+  }
+  endShape();
+  t += 0.01;
 }
 
 // Optional: Adjust canvas size when window is resized
