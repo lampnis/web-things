@@ -13,8 +13,8 @@ class Walker {
     let move = random(2);
     let rUp = random(1);
     let rLeft = random(1);
-    let pUp = 0.5;
-    let pLeft = 0.5;
+    let pUp = 0.49;
+    let pLeft = 0.49;
 
     if (rUp <= pUp) {
       this.y -= Math.pow(move, 2);
