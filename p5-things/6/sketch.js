@@ -9,7 +9,7 @@ function draw() {
   background(0);
   let xoff = t;
   noFill();
-  stroke(0);
+  stroke(255);
   strokeWeight(2);
   beginShape();
   for (let i = 0; i < width; i++) {
