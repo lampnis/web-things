@@ -14,7 +14,7 @@ class Walker {
     let rUp = random(1);
     let rLeft = random(1);
     let pUp = 0.49;
-    let pLeft = 0.45;
+    let pLeft = 0.49;
 
     if (rUp <= pUp) {
       this.y -= move;
