@@ -1,7 +1,7 @@
 class Walker {
   constructor() {
-    this.x = width / 2;
-    this.y = height / 2;
+    this.x = 0;
+    this.y = 0;
   }
 
   show() {
@@ -10,10 +10,21 @@ class Walker {
   }
 
   step() {
-    let choiceX = random(-1, 0, 1);
-    let choiceY = random(-1, 0, 1);
-    this.x += choiceX + 0.1;
-    this.y += choiceY + 0.1;
+    let rUp = random(1);
+    let rLeft = random(1);
+    let p = 0.49;
+
+    if (rUp <= p) {
+      this.y--;
+    } else {
+      this.y++;
+    }
+
+    if (rLeft <= p) {
+      this.x--;
+    } else {
+      this.x++;
+    }
   }
 }
 
@@ -28,6 +39,7 @@ function setup() {
 function draw() {
   walker.step();
   walker.show();
+  rect
 }
 
 // Optional: Adjust canvas size when window is resized
