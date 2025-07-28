@@ -5,7 +5,7 @@ class Walker {
   }
 
   show() {
-    stroke(255);
+    stroke(Math.sin(frameCount));
     point(this.x, this.y);
   }
 
