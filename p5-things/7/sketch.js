@@ -1,3 +1,9 @@
+let walker;
+let sliderOne;
+let sliderTwo;
+let t = 0.0;
+const numLines = 10;
+
 class Walker {
   constructor() {
     this.position = createVector(width / 2, height / 2);
@@ -12,8 +18,8 @@ class Walker {
     let move = random(2);
     let rUp = random(1);
     let rLeft = random(1);
-    let pUp = 0.5;
-    let pLeft = 0.5;
+    let pUp = sliderOne.value();
+    let pLeft = sliderTwo.value();
 
     if (rUp <= pUp) {
       this.position.y -= Math.pow(move, 2);
@@ -29,16 +35,12 @@ class Walker {
   }
 }
 
-let walker;
-let sliderOne;
-let sliderTwo;
-let t = 0.0;
-const numLines = 10;
+
 
 function setup() {
   createCanvas(windowWidth, windowHeight);
-  sliderOne = createSlider(0, 20, 9, 0);
-  sliderTwo = createSlider(0, 10, 2, 0);
+  sliderOne = createSlider(0, 1, 0.5, 0.01);
+  sliderTwo = createSlider(0, 1, 0.5, 0.01);
   sliderOne.position(10, 10);
   sliderTwo.position(10, 30);
   sliderOne.size(150);
