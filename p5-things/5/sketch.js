@@ -41,7 +41,6 @@ function setup() {
 function draw() {
   walker.step();
   walker.show();
-  rect
 }
 
 // Optional: Adjust canvas size when window is resized
