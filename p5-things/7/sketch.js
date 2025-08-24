@@ -44,11 +44,11 @@ function setup() {
   sliderOne.size(150);
   sliderTwo.size(150);
   walker = new Walker();
+  background(0);
 }
 
 
 function draw() {
-  background(0);
   walker.step();
   walker.show();
 
