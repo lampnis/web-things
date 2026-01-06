@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive DS&A Course</title>
+    <link rel="stylesheet" href="../styles/prism.css">
+    <style>
+        :root {
+            --primary: #2563eb;
+            --secondary: #64748b;
+            --bg: #f8fafc;
+            --text: #1e293b;
+            --card-bg: #ffffff;
+        }
+
+        body {
+            font-family: 'Merriweather', serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: var(--bg);
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            background: #1e293b;
+            color: white;
+            padding: 2rem 1rem;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .ds-card {
+            background: var(--card-bg);
+            border-radius: 8px;
+            box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .ds-header {
+            background: #f1f5f9;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .ds-content {
+            padding: 1.5rem;
+            display: none;
+        }
+
+        .ds-content.active {
+            display: block;
+        }
+
+        .code-toggle {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .toggle-btn {
+            padding: 0.5rem 1rem;
+            border: none;
+            background: #e2e8f0;
+            cursor: pointer;
+            border-radius: 4px;
+        }
+
+        .toggle-btn.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .code-block {
+            display: none;
+        }
+
+        .code-block.active {
+            display: block;
+        }
+
+        pre {
+            border-radius: 4px;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Mastering Data Structures & Algorithms</h1>
+        <p>Top 100 DS&A with examples in Python and C</p>
+    </header>
+
+    <div class="container">
+        <!-- 1. Array -->
+        <div class="ds-card">
+            <div class="ds-header" onclick="toggleContent('array')">
+                <h2>1. Dynamic Array (ArrayList)</h2>
+                <span>▼</span>
+            </div>
+            <div id="array" class="ds-content">
+                <p>A dynamic array is an array that can grow or shrink in size. It provides O(1) random access.</p>
+                
+                <div class="code-toggle">
+                    <button class="toggle-btn active" onclick="showCode('array', 'python')">Python</button>
+                    <button class="toggle-btn" onclick="showCode('array', 'c')">C</button>
+                </div>
+
+                <div id="array-python" class="code-block active">
+                    <pre><code class="language-python"># Python list is dynamic by default
+my_list = [1, 2, 3]
+my_list.append(4)  # O(1) amortized
+print(my_list)</code></pre>
+                </div>
+
+                <div id="array-c" class="code-block">
+                    <pre><code class="language-clike">// Simple dynamic array implementation in C
+#include &lt;stdio.h&gt;
+#include &lt;stdlib.h&gt;
+
+typedef struct {
+    int *array;
+    size_t size;
+    size_t capacity;
+} DynamicArray;
+
+void initArray(DynamicArray *a, size_t initialCapacity) {
+    a->array = malloc(initialCapacity * sizeof(int));
+    a->size = 0;
+    a->capacity = initialCapacity;
+}</code></pre>
+                </div>
+            </div>
+        </div>
+
+        <!-- 2. Linked List -->
+        <div class="ds-card">
+            <div class="ds-header" onclick="toggleContent('linked-list')">
+                <h2>2. Singly Linked List</h2>
+                <span>▼</span>
+            </div>
+            <div id="linked-list" class="ds-content">
+                <p>A linear data structure where elements are stored in nodes, each pointing to the next.</p>
+                
+                <div class="code-toggle">
+                    <button class="toggle-btn active" onclick="showCode('linked-list', 'python')">Python</button>
+                    <button class="toggle-btn" onclick="showCode('linked-list', 'c')">C</button>
+                </div>
+
+                <div id="linked-list-python" class="code-block active">
+                    <pre><code class="language-python">class Node:
+    def __init__(self, data):
+        self.data = data
+        self.next = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None</code></pre>
+                </div>
+
+                <div id="linked-list-c" class="code-block">
+                    <pre><code class="language-clike">struct Node {
+    int data;
+    struct Node* next;
+};
+
+void printList(struct Node* n) {
+    while (n != NULL) {
+        printf("%d ", n->data);
+        n = n->next;
+    }
+}</code></pre>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../styles/prism.js"></script>
+    <script>
+        function toggleContent(id) {
+            const content = document.getElementById(id);
+            content.classList.toggle('active');
+        }
+
+        function showCode(section, lang) {
+            const container = document.getElementById(section);
+            const blocks = container.querySelectorAll('.code-block');
+            const buttons = container.querySelectorAll('.toggle-btn');
+
+            blocks.forEach(b => b.classList.remove('active'));
+            buttons.forEach(b => b.classList.remove('active'));
+
+            document.getElementById(`${section}-${lang}`).classList.add('active');
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>
