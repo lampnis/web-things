@@ -6,6 +6,31 @@
 /*     border: 1px solid red;  */
 /* } */
 
+.counters {
+    display: flex;
+    justify-content: center; /* Centers them horizontally */
+    gap: 15px; /* Space between the two counters */
+    margin-top: 20px;
+    padding: 10px;
+    background-color: #000000;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.counter-box {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-family: monospace; /* Retro font */
+    font-size: 12px;
+}
+
+/* This targets the actual image FC2 loads to ensure it aligns nicely */
+.counter-box img {
+    vertical-align: middle;
+    image-rendering: pixelated; /* Keeps the pixel counter sharp */
+}
+
 .neighbor-sliver {
     position: fixed;
     top: 0;
