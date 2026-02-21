@@ -3,7 +3,65 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    /* border: 1px solid red;  */
+    border: 1px solid red; 
+}
+
+.neighbor-sliver {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 88px;
+    height: 100vh;
+    background-color: #111;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 10px;
+    gap: 10px;
+    z-index: 1000;
+    scrollbar-width: none;
+}
+
+.link-me-section { text-align: center; }
+
+.my-button { image-rendering: pixelated; margin-bottom: 10px; }
+
+textarea {
+    color: lightgreen;
+    background-color: black;
+    width: 75%;
+    height: 60px;
+    font-family: monospace;
+    font-size: 12px;
+    resize: none;
+    padding: 5px;
+    border: 1px solid #ccc;
+}
+
+.container {
+  display: grid;
+/* repeat(3, 1fr) is the same as 1fr 1fr 1fr*/
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 768px) {
+  .container {
+    grid-template-columns: 1fr;
+  }
+}
+
+.card {
+  padding: 30px;
+  background-color: #000000;
+  text-align: left;
+  font-family: monospace;
+}
+
+#about-me {
+  font-family: 'Courier New', Courier, monospace;
+  width: 100%;
 }
 
 .donate li {
@@ -41,6 +99,7 @@
 }
 
 body {
+  padding-left: 100px;
   font-family: 'Courier New', Courier, monospace;
   width: auto;
   height: auto;
@@ -62,6 +121,7 @@ header h1 {
 }
 
 footer {
+    background-color: #000000;
     position: fixed;
     bottom: 10px;
     text-align: center;
@@ -73,6 +133,7 @@ footer {
 
 #projects, #projects li {
     text-align: center;
+    width: 100%;
     /* color: aquamarine; */
     /* visibility: collapse; */
     /* list-style: square; */

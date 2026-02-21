@@ -4,6 +4,28 @@
     <link href="style.css" rel="stylesheet" type="text/css">
 </head>
 <body>
+    <!-- The Neighbor Sliver -->
+    <aside class="neighbor-sliver">
+        <!-- Example Neighbors -->
+
+        <a href="https://sixevil.neocities.org" target="_blank">
+            <img src="https://adams.lapins.lv/out.gif" alt="sixevils site" width="88" height="31">
+        </a>
+
+        <a href="https://neocities.org" target="_blank">
+            <img src="https://neocities.org/img/neocities_button.gif" alt="Neocities" width="88" height="31">
+        </a>
+
+        <a href="https://onio.cafe" title="Visit Onio Café">
+            <img src="https://onio.cafe/thebutton.gif" alt="Come Chat With Us!" width="88" height="31">
+        </a>
+
+        <a href="https://ellesho.me/page" target="_blank">
+            <img src="https://ellesho.me/elles8831.webp" alt="elles homepage" width="88" height="31">
+        </a>
+
+        <!-- Add as many as you want, the bar will scroll! -->
+    </aside>
     <header>
         <h1>Navigate to wherever you want!</h1>
         <div class="donate">
@@ -15,25 +37,62 @@
         </div>
     </header>
     <main>
-        <section id="projects">
-            <h2>All Projects</h2>
-            <ul>
-                <li><a href="./terminal">Terminal</a></li>
-                <li><a href="./1.html">Blue expanding circle</a></li>
-                <li><a href="./html-css-cheatsheet-starting">HTML &#38 CSS cheatsheet</a></li>
-                <li><a href="./design-system">Design System</a></li>
-                <li><a href="./fortuneteller">Django test app</a></li>
-                <li><a href="./fortuneteller/maxwell">em-ai-slop</a></li>
-                <li><a href="./p5-things">random</a></li>
-                <li><a href="./hackrely-things">useful references</a></li>
-                <li><a href="./dsa-course">Interactive DS&A Course</a></li>
-            </ul>
-        </section>
+        <div class="container">
+            <div class="card">
+                <section id="about-me">
+                    <h2>About Me</h2>
+                    <p>
+                        Hello! My name is Adams. I understand that this setup is not great for internet anonymity, but whatever... I am sporadically doing something in this site. You can look what I have made in the `All Projects` section. This is just a hobby site. In real life I am doing various kinds of laser spectroscopy (FTIR, CEPAS). You can find me on <a href=""></a>
+                    </p>
+                </section>
+            </div>
+            <div class="card">
+                <section id="diary-wall">
+                    <h2>Latest happenings</h2>
+                    <p>
+                         Under construction!
+                    </p>
+                </section>
+            </div>
+            <div class="card">
+                <section id="projects">
+                    <h2>All Projects</h2>
+                    <ul>
+                        <li><a href="./terminal">Terminal</a></li>
+                        <li><a href="./1.html">Blue expanding circle</a></li>
+                        <li><a href="./html-css-cheatsheet-starting">HTML &#38 CSS cheatsheet</a></li>
+                        <li><a href="./design-system">Design System</a></li>
+                        <li><a href="./fortuneteller">Django test app</a></li>
+                        <li><a href="./fortuneteller/maxwell">em-ai-slop</a></li>
+                        <li><a href="./p5-things">random</a></li>
+                        <li><a href="./hackrely-things">useful references</a></li>
+                        <li><a href="./dsa-course">Interactive DS&A Course</a></li>
+                    </ul>
+                </section>
+            </div>
+        </div>
+        <div class="card link-me-section">
+            <h3>Link Me!</h3>
+            <!-- Your Button -->
+            <img src="out.gif" alt="sixevil" class="my-button">
+
+            <!-- Copy Box -->
+            <label for="code-box">Copy this code:</label>
+            <textarea id="code-box" readonly onclick="this.select()">
+                <a href="https://sixevil.neocities.org" target="_blank"><img src="https://adams.lapins.lv/out.gif" alt="sixevils site" width="88" height="31"></a>
+            </textarea>
+        </div>
         <div class="test-box">
             <p><div id="line-1">O O</div><div id="line-2"><br></div><div id="line-3">_</div></p>
         </div>
     </main>
     <footer>
-        <p>Copyright &copy; 2025 Adams Lapins. All rights reserved. | <a href="https://github.com/lampnis">Github</a></p>
+        <p>Copyright &copy; 2026 Adams Lapins. All rights reserved. | <a href="https://github.com/lampnis">Github</a> | <a href="https://codeberg.org/lampnis">Codeberg</a></p>
     </footer>
+    <!-- FC2 Counter  Starts here -->
+    <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=40735430&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=40735430&main=1" /></noscript>
+    <!-- FC2 Counter  Ends here -->
+    <!-- FC2 Counter  Starts here -->
+    <script language="javascript" type="text/javascript" src="//counter1.fc2.com/counter.php?id=40735430&main=1"></script><noscript><img src="//counter1.fc2.com/counter_img.php?id=40735430&main=1" /></noscript>
+    <!-- FC2 Counter  Ends here -->
 </body>
