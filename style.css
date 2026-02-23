@@ -6,6 +6,14 @@
 /*     border: 1px solid red;  */
 /* } */
 
+#prev-button, #next-button {
+  color: lightgreen;
+}
+
+#prev-button:hover, #next-button:hover {
+  color: pink
+}
+
 .counters {
     display: flex;
     justify-content: center; /* Centers them horizontally */
@@ -44,7 +52,7 @@
     align-items: center;
     padding-top: 10px;
     gap: 10px;
-    z-index: 1000;
+    z-index: :1000;
     scrollbar-width: none;
 }
 
