@@ -1,10 +1,10 @@
-/* style */
-/* * { */
-/*     margin: 0; */
-/*     padding: 0; */
-/*     box-sizing: border-box; */
-/*     border: 1px solid red;  */
-/* } */
+style
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    border: 1px solid red;
+}
 
 #prev-button, #next-button {
   color: lightgreen;
@@ -43,7 +43,7 @@
     position: fixed;
     top: 0;
     left: 0;
-    width: 88px;
+    width: 120px;
     height: 100vh;
     background-color: #111;
     overflow-y: auto;
