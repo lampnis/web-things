@@ -2,6 +2,7 @@
 <head>
     <title>HOME</title>
     <link href="style.css" rel="stylesheet" type="text/css">
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
 </head>
 <body>
     <aside class="neighbor-sliver">
@@ -123,6 +124,32 @@
                     </ul>
                 </section>
             </div>
+            <div class="card">
+                <section id="wavenumber-calculator">
+                    <h2>Energy calculator</h2>
+                    <div id="equations">
+                      You can do these by hand using something like
+                      $$E=h\nu$$
+                      $$c=\lambda\nu$$
+                      $$\tilde{\nu}=10^7/\lambda_{\text{nm}}$$
+                      $$E_{\text{eV}} = E / e$$
+                    </div>
+                    <div id="io-fields">
+                        <label>Wavelength (nm)</label>
+                        <input type="number" id="input-nm" oninput="updateValues('input-nm', this.value)"></input>
+                        <label>Frequency (Hz)</label>
+                        <input type="number" id="input-hz" oninput="updateValues('input-hz', this.value)"></input>
+                        <label>Wavenumber (cm-1)</label>
+                        <input type="number" id="input-cm-1" oninput="updateValues('input-cm-1', this.value)"></input>
+                        <label>Energy (J)</label>
+                        <input type="number" id="input-j" oninput="updateValues('input-j', this.value)"></input>
+                        <label>Energy (eV)</label>
+                        <input type="number" id="input-ev" oninput="updateValues('input-ev', this.value)"></input>
+                    </div>
+                    <div id="p5-illustration">
+                    </div>
+                </section>
+            </div>
         </div>
         <div class="card link-me-section">
             <h3>Link Me!</h3>
@@ -132,7 +159,7 @@
             <!-- Copy Box -->
             <label for="code-box">Copy this code:</label>
             <textarea id="code-box" readonly onclick="this.select()">
-                <a href="https://sixevil.neocities.org" target="_blank"><img src="https://adams.lapins.lv/home/88x31s/out.gif" alt="sixevils site" width="88" height="31"></a>
+<a href="https://sixevil.neocities.org" target="_blank"><img src="https://adams.lapins.lv/home/88x31s/out.gif" alt="sixevils site" width="88" height="31"></a>
             </textarea>
         </div>
         <div class="test-box">
@@ -143,4 +170,13 @@
         <p>Copyright &copy; 2026 Adams Lapins. All rights reversed. | <a href="https://github.com/lampnis">Github</a> | <a href="https://codeberg.org/lampnis">Codeberg</a></p>
     </footer>
 <script src="blogs.js"></script>
+<script src="energy-calculator.js"></script>
+<script>
+    window.MathJax = {
+      svg: {
+        scale: 1.5
+      }
+    };
+</script>
+<script src="./libraries/mathjax/tex-svg.js"></script>
 </body>
