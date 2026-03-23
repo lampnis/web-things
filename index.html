@@ -146,7 +146,7 @@
                         <label>Energy (eV)</label>
                         <input type="number" id="input-ev" oninput="updateValues('input-ev', this.value)"></input>
                     </div>
-                    <div id="p5-illustration">
+                    <div class="p5-figs" id="p5-illustration-1">
                     </div>
                 </section>
             </div>
@@ -170,7 +170,7 @@
         <p>Copyright &copy; 2026 Adams Lapins. All rights reversed. | <a href="https://github.com/lampnis">Github</a> | <a href="https://codeberg.org/lampnis">Codeberg</a></p>
     </footer>
 <script src="blogs.js"></script>
-<script src="energy-calculator.js"></script>
+<script src="./calculators/logic/energy-calculator.js"></script>
 <script>
     window.MathJax = {
       svg: {
@@ -179,4 +179,6 @@
     };
 </script>
 <script src="./libraries/mathjax/tex-svg.js"></script>
+<script src="./libraries/p5/p5.min.js"></script>
+<script src="./calculators/illustrations/1.js"></script>
 </body>

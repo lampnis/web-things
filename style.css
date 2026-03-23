@@ -5,6 +5,14 @@
     border: 1px solid red;
 }
 
+.p5-figs {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px;
+  padding: 10px;
+}
+
 #io-fields {
   display: grid;
   grid-template-columns: max-content 1fr;
