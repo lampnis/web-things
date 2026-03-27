@@ -1,3 +1,5 @@
 fortuneteller/equations_app/__pycache__/
 fortuneteller/fortuneteller/__pycache__/
 fortuneteller/randomfortune/__pycache__/
+fortuneteller/equations_app/migrations/
+fortuneteller/randomfortune/miagrations/

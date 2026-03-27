@@ -54,8 +54,8 @@ function loginForm() {
         <img id="flag" src="flag.png" alt="For Ukraine!">
         <div id="wrapper">
             <div id="menu">
-                <p class="welcome">Sveiks, <b><?php echo $_SESSION['name']; ?></b></p>
-                <p class="logout"><a id="exit" href="#">iziet</a></p>
+                <p class="welcome">Hello, <b><?php echo $_SESSION['name']; ?></b></p>
+                <p class="logout"><a id="exit" href="#">back to home</a></p>
             </div>
  
             <div id="chatbox">
