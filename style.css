@@ -94,6 +94,13 @@
     scrollbar-width: none;
 }
 
+.sticker-sliver a {
+    overflow: auto;
+    margin-left: 15px;
+    /* animation: autoscroll 10s linear infinite; */
+    scrollbar-width: none;
+}
+
 .link-me-section {
     border: 2px white;
     position: 50%;
