@@ -1,19 +1,28 @@
-/* * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    border: 1px solid red;
-} */
+html {
+  box-sizing: border-box;
+}
+
+*, *:before, *:after {
+  box-sizing: inherit;
+  margin: 0;
+  padding: 0;
+  border: 1px solid red;
+}
+
+li {
+    list-style-type: none;
+}
 
 header {
     text-align: center;
+    overflow-wrap: anywhere;
 }
 
 footer {
     text-align: center;
     /* position: sticky; */
     bottom: 10px;
-    min-width:
+    overflow-wrap: normal;
 }
 
 .page-wrapper {
@@ -21,19 +30,22 @@ footer {
     justify-content: space-between;
     align-items: flex-start;
     flex-direction: row;
-    width: 70%;
-    min-width: 10%
     height: 80%;
     bottom: 10px;
-    overflow: auto;
-    /* margin: 10px; */
+    width: 100%;
+    min-width: 0%;
+    overflow-wrap: anywhere;
+    box-sizing: border-box;
+    margin-left: 140px;
+    margin-right: 140px;
 }
 
 .neighbor-sliver {
     display: flex;
+    flex: 1;
     flex-direction: column;
     position: fixed;
-    width: 140px;
+    width: 130px;
     left: 0;
     top: 0;
     padding: 10px;
@@ -41,14 +53,16 @@ footer {
     height: 100%;
     background: #111;
     overflow-y: scroll;
+    overflow-x: scroll;
     scrollbar-width: none;
 }
 
 .sticker-sliver {
     display: flex;
+    flex: 1;
     flex-direction: column;
     position: fixed;
-    width: 140px;
+    width: 130px;
     right: 0;
     top: 0;
     height: 100%;
@@ -69,16 +83,14 @@ body {
     font-family: "Courier New", monospace;
     display: flex;
     justify-content: center;
-    /* text-align: center; */
-    flex-wrap: wrap;
-    flex-basis: 100%;
-    scrollbar-width: none;
-    color: white;
     background: black;
-    min-width: 10px;
-    width: 50%;
-    overflow: scroll;
+    color: white;
+    min-width: 0;
+    overflow-x: scroll;
     scrollbar-width: none;
+    a {
+        color: cyan;
+    }
 }
 
 #prev-button, #next-button {
@@ -106,7 +118,6 @@ body {
     display: grid;
     grid-template-columns: 1fr;
     gap: 30px;
-    max-width: 50%;
 }
 
 @media (min-width: 900px) {
@@ -114,7 +125,6 @@ body {
         display: grid;
         grid-template-columns: repeat(3, 1fr);
         gap: 30px;
-        max-width: 50%;
     }
 }
 
@@ -122,7 +132,8 @@ body {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
-    min-width: 30px;
+    min-width: 10px;
+    padding-top: 10px;
 }
 
 #io-fields {
@@ -137,6 +148,13 @@ body {
 
 .link-me-section {
     text-align: left;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+    img {
+        height: 33px;
+        width: 81px;
+    }
 }
 
 .test-box {
@@ -146,11 +164,21 @@ body {
     justify-content: center;
     align-items: center;
     color: lightgreen;
-    width: 90px;
+    width: 60px;
+    height: 60px;
     background: darkgreen;
     text-align: center;
     border: 3px solid lightgreen;
     border-radius: 3px;
+    #line-1 {
+        top: 20px;
+    }
+    #line-2 {
+        min-height: 0px;
+    }
+    #line-3 {
+        bottom: 20px;
+    }
 }
 
 .test-box:hover {
