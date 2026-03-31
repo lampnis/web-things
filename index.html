@@ -112,101 +112,107 @@
 
 
     </aside>
-    <header>
-        <map name="noaimini13">
-        <area href="https://baccyflap.com/noai" shape="poly" coords="0,1,0,18,20,18,20,30,67,30,67,18,76,18,76,1" target="_blank" alt="no ai webring" title="no ai webring">
-        <area href="https://baccyflap.com/noai/?prv&s=sse" target="_top" shape="rect" coords="2,21,18,29" alt="previous" title="previous">
-        <area href="https://baccyflap.com/noai/?rnd" target="_top" shape="rect" coords="79,5,85,15" alt="random" title="random">
-        <area href="https://baccyflap.com/noai/?nxt&s=sse" target="_top" shape="rect" coords="69,21,85,29" alt="next" title="next">
-        </map>
-        <img usemap="#noaimini13" src="https://baccyflap.com/noai/miniwidget13.gif" alt="a black field showing the words THE NO AI WEBRING in gothic lettering, with the word NO in blood red. there are two slender arrows pointing left and right and one gray question mark (also gothic)">
-        <h1>Navigate to wherever you want!</h1>
-        <div class="donate">
-            <h4>Money laundering</h4>
-            <ul>
-                <li id="crypaddr"><strong>BTC</strong>: bc1quaujdrtg8s5f8xkp72pqyyzanmzlfw76nn73v6</li>
-                <li id="crypaddr"><strong>XLM</strong>: GA5M62F65C3QENWSM4WOTHJITWYE2VAUAAX7VWGWTYO6J42U4DZTNKIX</li>
-            </ul>
-        </div>
-    </header>
-    <main>
-        <div class="container">
-            <div class="card">
-                <section id="about-me">
-                    <h2>About Me</h2>
-                    <p>
-                        Hello! My name is Six.... I am sporadically doing something in this site. You can look what I have made in the `All Projects` section. This is just a hobby site. You can find me on <a href="https://cyberspace.online/sixevil">cyberspace</a>.
-                    </p>
-                </section>
+    <div class="central-content">
+        <header>
+            <map name="noaimini13">
+            <area href="https://baccyflap.com/noai" shape="poly" coords="0,1,0,18,20,18,20,30,67,30,67,18,76,18,76,1" target="_blank" alt="no ai webring" title="no ai webring">
+            <area href="https://baccyflap.com/noai/?prv&s=sse" target="_top" shape="rect" coords="2,21,18,29" alt="previous" title="previous">
+            <area href="https://baccyflap.com/noai/?rnd" target="_top" shape="rect" coords="79,5,85,15" alt="random" title="random">
+            <area href="https://baccyflap.com/noai/?nxt&s=sse" target="_top" shape="rect" coords="69,21,85,29" alt="next" title="next">
+            </map>
+            <img usemap="#noaimini13" src="https://baccyflap.com/noai/miniwidget13.gif" alt="a black field showing the words THE NO AI WEBRING in gothic lettering, with the word NO in blood red. there are two slender arrows pointing left and right and one gray question mark (also gothic)">
+            <h1>Navigate to wherever you want!</h1>
+            <div class="donate">
+                <h4>Money laundering</h4>
+                <ul>
+                    <li id="crypaddr"><strong>BTC</strong>: bc1quaujdrtg8s5f8xkp72pqyyzanmzlfw76nn73v6</li>
+                    <li id="crypaddr"><strong>XLM</strong>: GA5M62F65C3QENWSM4WOTHJITWYE2VAUAAX7VWGWTYO6J42U4DZTNKIX</li>
+                </ul>
             </div>
-            <div class="card">
-                <section id="diary-wall">
-                    <h2>Latest happenings</h2>
-                    <p id="blog-content">
-                         Under construction!
-                    </p>
-                    <p>
-                        <a id="prev-button">&ltprev</a>
-                        <a id="next-button">next&gt</a>
-                    </p>
-                </section>
+        </header>
+        <main>
+            <div class="card-container">
+                <div class="card">
+                    <section id="about-me">
+                        <h2>About Me</h2>
+                        <p>
+                            Hello! My name is Six.... I am sporadically doing something in this site. You can look what I have made in the `All Projects` section. This is just a hobby site. You can find me on <a href="https://cyberspace.online/sixevil">cyberspace</a>.
+                        </p>
+                    </section>
+                </div>
+                <div class="card">
+                    <section id="diary-wall">
+                        <h2>Latest happenings</h2>
+                        <p id="blog-content">
+                            Under construction!
+                        </p>
+                        <p>
+                            <a id="prev-button">&ltprev</a>
+                            <a id="next-button">next&gt</a>
+                        </p>
+                    </section>
+                </div>
+                <div class="card">
+                    <section id="projects">
+                        <h2>All Projects</h2>
+                        <ul>
+                            <li><a href="./terminal">Terminal</a></li>
+                            <li><a href="./1.html">Blue expanding circle</a></li>
+                            <li><a href="./html-css-cheatsheet-starting">HTML &#38 CSS cheatsheet</a></li>
+                            <li><a href="./design-system">Design System</a></li>
+                            <li><a href="./fortuneteller">Django test app</a></li>
+                            <li><a href="./p5-things">random</a></li>
+                            <li><a href="./TODO-list">Simple todo list</a></li>
+                        </ul>
+                    </section>
+                </div>
+                <div class="card">
+                    <section id="wavenumber-calculator">
+                        <h2>Energy calculator</h2>
+                        <div id="equations">
+                        You can do these by hand using something like
+                        $$E=h\nu$$
+                        $$c=\lambda\nu$$
+                        $$\tilde{\nu}=10^7/\lambda_{\text{nm}}$$
+                        $$E_{\text{eV}} = E / e$$
+                        </div>
+                        <div id="io-fields">
+                            <label>Wavelength (nm)</label>
+                            <input type="number" id="input-nm" oninput="updateValues('input-nm', this.value)"></input>
+                            <label>Frequency (Hz)</label>
+                            <input type="number" id="input-hz" oninput="updateValues('input-hz', this.value)"></input>
+                            <label>Wavenumber (cm-1)</label>
+                            <input type="number" id="input-cm-1" oninput="updateValues('input-cm-1', this.value)"></input>
+                            <label>Energy (J)</label>
+                            <input type="number" id="input-j" oninput="updateValues('input-j', this.value)"></input>
+                            <label>Energy (eV)</label>
+                            <input type="number" id="input-ev" oninput="updateValues('input-ev', this.value)"></input>
+                        </div>
+                        <div class="p5-figs" id="p5-illustration-1">
+                        </div>
+                    </section>
+                </div>
             </div>
-            <div class="card">
-                <section id="projects">
-                    <h2>All Projects</h2>
-                    <ul>
-                        <li><a href="./terminal">Terminal</a></li>
-                        <li><a href="./1.html">Blue expanding circle</a></li>
-                        <li><a href="./html-css-cheatsheet-starting">HTML &#38 CSS cheatsheet</a></li>
-                        <li><a href="./design-system">Design System</a></li>
-                        <li><a href="./fortuneteller">Django test app</a></li>
-                        <li><a href="./p5-things">random</a></li>
-                        <li><a href="./TODO-list">Simple todo list</a></li>
-                    </ul>
-                </section>
-            </div>
-            <div class="card">
-                <section id="wavenumber-calculator">
-                    <h2>Energy calculator</h2>
-                    <div id="equations">
-                      You can do these by hand using something like
-                      $$E=h\nu$$
-                      $$c=\lambda\nu$$
-                      $$\tilde{\nu}=10^7/\lambda_{\text{nm}}$$
-                      $$E_{\text{eV}} = E / e$$
-                    </div>
-                    <div id="io-fields">
-                        <label>Wavelength (nm)</label>
-                        <input type="number" id="input-nm" oninput="updateValues('input-nm', this.value)"></input>
-                        <label>Frequency (Hz)</label>
-                        <input type="number" id="input-hz" oninput="updateValues('input-hz', this.value)"></input>
-                        <label>Wavenumber (cm-1)</label>
-                        <input type="number" id="input-cm-1" oninput="updateValues('input-cm-1', this.value)"></input>
-                        <label>Energy (J)</label>
-                        <input type="number" id="input-j" oninput="updateValues('input-j', this.value)"></input>
-                        <label>Energy (eV)</label>
-                        <input type="number" id="input-ev" oninput="updateValues('input-ev', this.value)"></input>
-                    </div>
-                    <div class="p5-figs" id="p5-illustration-1">
-                    </div>
-                </section>
-            </div>
-        </div>
-        <div class="link-me-section">
-            <h3>Link Me!</h3>
-            <!-- Your Button -->
-            <img src="./88x31s/out.gif" alt="sixevil" class="my-button">
+            <div class="link-me-section">
+                <h3>Link Me!</h3>
+                <!-- Your Button -->
+                <img src="./88x31s/out.gif" alt="sixevil" class="my-button">
 
-            <!-- Copy Box -->
-            <label for="code-box">Copy this code:</label>
-            <textarea id="code-box" readonly onclick="this.select()">
-<a href="https://sixevil.neocities.org" target="_blank"><img src="https://sixevil.org/home/88x31s/out.gif" alt="sixevils site" width="88" height="31"></a>
-            </textarea>
-        </div>
-        <div class="test-box">
-            <p><div id="line-1">O O</div><div id="line-2"><br></div><div id="line-3">_</div></p>
-        </div>
-    </main>
+                <!-- Copy Box -->
+                <label for="code-box">Copy this code:</label>
+                <textarea id="code-box" readonly onclick="this.select()">
+    <a href="https://sixevil.neocities.org" target="_blank"><img src="https://sixevil.org/home/88x31s/out.gif" alt="sixevils site" width="88" height="31"></a>
+                </textarea>
+            </div>
+            <div class="test-box">
+                <p><div id="line-1">O O</div><div id="line-2"><br></div><div id="line-3">_</div></p>
+            </div>
+        </main>
+
+        <footer>
+            <p>Copyright &copy; 2026 Six Evil. All rights reversed. | <a href="https://github.com/lampnis">Github</a> | <a href="https://codeberg.org/lampnis">Codeberg</a></p>
+        </footer>
+    </div>
     <aside class="sticker-sliver">
         <p>Graphics</p>
         <a><img src="./88x31s/vim.gif" width="88" height="31"/></a>
@@ -222,9 +228,6 @@
         <a><img src="./88x31s/linux_powered.gif" width="88" height="31"/></a>
         <a><img src="./88x31s/neocities6.gif" width="88" height="31"/></a>
     </aside>
-    <footer>
-        <p>Copyright &copy; 2026 Six Evil. All rights reversed. | <a href="https://github.com/lampnis">Github</a> | <a href="https://codeberg.org/lampnis">Codeberg</a></p>
-    </footer>
 </div>
 <script src="blogs.js"></script>
 <script src="./calculators/logic/energy-calculator.js"></script>
