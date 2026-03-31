@@ -13,6 +13,7 @@ footer {
     text-align: center;
     /* position: sticky; */
     bottom: 10px;
+    min-width:
 }
 
 .page-wrapper {
@@ -21,9 +22,11 @@ footer {
     align-items: flex-start;
     flex-direction: row;
     width: 70%;
+    min-width: 10%
     height: 80%;
     bottom: 10px;
-    overflow-y: hidden;
+    overflow: auto;
+    /* margin: 10px; */
 }
 
 .neighbor-sliver {
@@ -37,6 +40,8 @@ footer {
     text-align: center;
     height: 100%;
     background: #111;
+    overflow-y: scroll;
+    scrollbar-width: none;
 }
 
 .sticker-sliver {
@@ -58,19 +63,22 @@ footer {
 #cool-links {
     display: flex;
     flex-flow: wrap column;
-    overflow-y: scroll;
-    scrollbar-width: none;
 }
 
 body {
     font-family: "Courier New", monospace;
     display: flex;
     justify-content: center;
+    /* text-align: center; */
     flex-wrap: wrap;
     flex-basis: 100%;
     scrollbar-width: none;
     color: white;
     background: black;
+    min-width: 10px;
+    width: fit-content;
+    overflow: scroll;
+    scrollbar-width: none;
 }
 
 #prev-button, #next-button {
@@ -96,23 +104,24 @@ body {
 
 .card-container {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 1fr;
     gap: 30px;
 }
 
-/* @media (min-width: 600px) { */
-/*     .card-container { */
-/*         display: grid; */
-/*         grid-template-columns: repeat(1, 1fr); */
-/*         gap: 30px; */
-/*         ; */
-/*     } */
-/* } */
+@media (min-width: 900px) {
+    .card-container {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 30px;
+        ;
+    }
+}
 
 .card {
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
+    min-width: 30px;
 }
 
 #io-fields {
