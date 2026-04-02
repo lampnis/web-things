@@ -11,20 +11,35 @@ function setRandomColor(colorId) {
   const randomColor = getRandomColor();
   document.getElementById(colorId).value = randomColor;
   const colorPanel = document.querySelector(`.color-panel[data-color-id="${colorId}"]`);
+  const colorPanelText = document.querySelector(`#color-panel-text[data-color-id="${colorId}"]`);
+
   if (colorPanel) {
     colorPanel.style.backgroundColor = randomColor;
-    colorPanel.querySelector('.color-hex').textContent = randomColor;
+    colorPanel.querySelector('.background-color-hex').textContent = randomColor;
   }
+
+  if (colorPanelText) {
+      colorPanelText.style.color = randomColor;
+      colorPanelText.querySelector('.text-color-hex').textContent = randomColor;
+    }
 }
 
 function setColor(elementId, colorPickerId) {
   const colorPicker = document.getElementById(colorPickerId);
   const selectedColor = colorPicker.value;
+  const selectedColorText = colorPicker.value;
   const element = document.querySelector(`.color-panel[data-color-id="${elementId}"]`);
+  const elementText = document.querySelector(`#color-panel-text[data-color-id="${elementId}"]`);
   if (element) {
     element.style.backgroundColor = selectedColor;
   } else {
-    console.error("Element with ID '${elementId}' not found");
+    console.error(`Element with ID '${elementId}' not found`);
+  }
+  if (elementText) {
+    elementText.style.color = selectedColorText;
+
+  } else {
+    console.error(`Element with ID '${elementId}' not found`);
   }
 
 }
@@ -180,5 +195,9 @@ setRandomColor("color1");
 setRandomColor("color2");
 setRandomColor("color3");
 setRandomColor("color4");
+setRandomColor("color1text");
+setRandomColor("color2text");
+setRandomColor("color3text");
+setRandomColor("color4text");
 changeFont();
 changeTextStyle();

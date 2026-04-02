@@ -9,6 +9,68 @@ html {
   /* border: 1px solid red; */
 }
 
+/* Variables for theme colors */
+:root,
+[data-selected-theme="dark"]{
+    --body-background: black;
+    --body-text: white;
+    --sliver-background: #222;
+    --sliver-text: white;
+    --button-text: green;
+    --button-hover: lightgreen;
+    --link-color: lightgreen;
+    --link-hover: cyan;
+    --box-hover: violet;
+    --box-default: darkgreen;
+    --box-border-hover: cyan;
+    --box-border-default: lightgreen;
+}
+
+[data-selected-theme="light"]{
+    --body-background: white;
+    --body-text: black;
+    --sliver-background: #f2f2f2;
+    --sliver-text: black;
+    --button-text: darkgreen;
+    --button-hover: lightgreen;
+    --link-color: blue;
+    --link-hover: darkred;
+    --box-hover: lightgreen;
+    --box-default: lightblue;
+    --box-border-hover: green;
+    --box-border-default: darkviolet;
+}
+
+[data-selected-theme="blood-orange"]{
+    --body-background: #ea6c06;
+    --body-text: #710b24;
+    --sliver-background: #e0642e;
+    --sliver-text: #710b24;
+    --button-text: darkgreen;
+    --button-hover: #8b5088;
+    --link-color: darkblue;
+    --link-hover: darkmagenta;
+    --box-hover: darkviolet;
+    --box-default: green;
+    --box-border-hover: lightblue;
+    --box-border-default: lightgreen;
+}
+
+[data-selected-theme="pink-moon"]{
+    --body-background: #BADAFF;
+    --body-text: #8b5088;
+    --sliver-background: #a5cefd;
+    --sliver-text: #8b5088;
+    --button-text: darkgreen;
+    --button-hover: green;
+    --link-color: darkblue;
+    --link-hover: darkmagenta;
+    --box-hover: orange;
+    --box-default: #ea6c06;
+    --box-border-hover: darkcyan;
+    --box-border-default: #710b24;
+}
+
 li {
     list-style-type: none;
 }
@@ -20,6 +82,28 @@ img {
 header {
     text-align: center;
     overflow-wrap: anywhere;
+    .donate {
+        color: var(--sliver-background);
+    }
+    .theme-switcher {
+        display: flex;
+        justify-content: space-around;
+        flex-direction: row;
+        flex-wrap: column;
+        button {
+            background: var(--body-background);
+            color: var(--body-text);
+        };
+        button:hover {
+            background: var(--body-text);
+            color: var(--body-background);
+        };
+        button[aria-pressed="true"] {
+            background: var(--body-text);
+            color: var(--body-background);
+            border: 2px solid var(--box-border-default);
+        }
+    }
 }
 
 footer {
@@ -28,7 +112,7 @@ footer {
     width: 50%;
     min-width: 5%;
     /* text-align: center; */
-    background: black;
+    background: var(--body-background);
     position: fixed;
     bottom: 10px;
     overflow-wrap: anywhere;
@@ -65,7 +149,8 @@ footer {
     padding: 10px;
     text-align: center;
     height: 100%;
-    background: #111;
+    background: var(--sliver-background);
+    color: var(--sliver-text);
     overflow-y: scroll;
     overflow-x: scroll;
     scrollbar-width: none;
@@ -82,7 +167,8 @@ footer {
     height: 100%;
     text-align: center;
     padding: 10px;
-    background: #111;
+    background: var(--sliver-background);
+    color: var(--sliver-text);
     overflow-y: scroll;
     scrollbar-width: none;
 }
@@ -98,22 +184,25 @@ body {
     font-family: "Courier New", monospace;
     display: flex;
     justify-content: center;
-    background: black;
-    color: white;
+    background: var(--body-background);
+    color: var(--body-text);
     min-width: 0;
     overflow-x: scroll;
     scrollbar-width: none;
     a {
-        color: cyan;
+        color: var(--link-color);
+        :hover {
+            color: var(--link-hover);
+        }
     }
 }
 
 #prev-button, #next-button {
-    color: green;
+    color: var(--button-text);
 }
 
 #prev-button:hover, #next-button:hover {
-    color: lightgreen;
+    color: var(--button-hover);
 }
 
 #projects {
@@ -122,11 +211,11 @@ body {
 }
 
 #projects a {
-    color: lightgreen;
+    color: var(--link-color);
 }
 
 #projects a:hover {
-    color: aqua;
+    color: var(--link-hover);
 }
 
 .card-container {
@@ -149,6 +238,12 @@ body {
     flex-wrap: wrap;
     min-width: 10px;
     padding-top: 10px;
+    a {
+        color: var(--link-color);
+    }
+    a:hover {
+        color(--link-hover);
+    }
 }
 
 #io-fields {
@@ -184,12 +279,12 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: lightgreen;
+    color: var(--box-border-default);
     width: 60px;
     height: 60px;
-    background: darkgreen;
+    background: var(--box-default);
     text-align: center;
-    border: 3px solid lightgreen;
+    border: 3px solid var(--box-border-default);
     border-radius: 3px;
     #line-1 {
         padding-top: 20px;
@@ -203,7 +298,7 @@ body {
 }
 
 .test-box:hover {
-    background: violet;
-    color: cyan;
-    border-color: cyan;
+    background: var(--box-hover);
+    color: var(--box-border-hover);
+    border-color: var(--box-border-hover);
 }

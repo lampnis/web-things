@@ -47,31 +47,31 @@
             <div class="control-panel">
                 <h3>Text Color</h3>
                 <div class="control-group">
-                    <label for="color1">Color 1:</label>
-                    <input type="color" id="color1" value="#2d5dcc">
-                    <button onclick="setColor('color1', 'color1')">Apply</button>
-                    <button onclick="setRandomColor('color1')">Random</button>
+                    <label for="color1text">Color 1:</label>
+                    <input type="color" id="color1text" value="#2d5dcc">
+                    <button onclick="setColor('color1text', 'color1text')">Apply</button>
+                    <button onclick="setRandomColor('color1text')">Random</button>
                 </div>
 
                 <div class="control-group">
-                    <label for="color2">Color 2:</label>
-                    <input type="color" id="color2" value="#d957d9">
-                    <button onclick="setColor('color2', 'color2')">Apply</button>
-                    <button onclick="setRandomColor('color2')">Random</button>
+                    <label for="color2text">Color 2:</label>
+                    <input type="color" id="color2text" value="#d957d9">
+                    <button onclick="setColor('color2text', 'color2text')">Apply</button>
+                    <button onclick="setRandomColor('color2text')">Random</button>
                 </div>
 
                 <div class="control-group">
-                    <label for="color3">Color 3:</label>
-                    <input type="color" id="color3" value="#4fe0b0">
-                    <button onclick="setColor('color3', 'color3')">Apply</button>
-                    <button onclick="setRandomColor('color3')">Random</button>
+                    <label for="color3text">Color 3:</label>
+                    <input type="color" id="color3text" value="#4fe0b0">
+                    <button onclick="setColor('color3text', 'color3text')">Apply</button>
+                    <button onclick="setRandomColor('color3text')">Random</button>
                 </div>
 
                 <div class="control-group">
-                    <label for="color4">Color 4:</label>
-                    <input type="color" id="color4" value="#4fe0b0">
-                    <button onclick="setColor('color4', 'color4')">Apply</button>
-                    <button onclick="setRandomColor('color4')">Random</button>
+                    <label for="color4text">Color 4:</label>
+                    <input type="color" id="color4text" value="#4fe0b0">
+                    <button onclick="setColor('color4text', 'color4text')">Apply</button>
+                    <button onclick="setRandomColor('color4text')">Random</button>
                 </div>
             </div>
 
@@ -385,37 +385,52 @@
         <div class="color-container">
 
             <div class="color-panel" data-color-id="color1">
-                <h1>Heading 1</h1>
-                <h2>Heading 2</h2>
-                <p class="color-label">Color 1</p>
-                <p class="color-hex">#2d5dcc</p>
+                <div id="color-panel-text" data-color-id="color1text">
+                    <h1>Heading 1</h1>
+                    <h2>Heading 2</h2>
+                    <p class="color-label">Color 1</p>
+                    <p class="background-color-hex">#2d5dcc</p>
+                    <p class="text-color-hex">#aaaaaa</p>
+                    <p>The quick brown fox jumps over the lazy dog.</p>
+                    <p><b>The quick brown fox jumps over the lazy dog.</b></p>
+                    <p><i>The quick brown fox jumps over the lazy dog.</i></p>
+                </div>
             </div>
             <div class="color-panel" data-color-id="color2">
-                <h1>Heading 1</h1>
-                <h2>Heading 2</h2>
-                <p class="color-label">Color 2</p>
-                <p class="color-hex">#2d5dcc</p>
-                <p>The quick brown fox jumps over the lazy dog.</p>
-                <p><b>The quick brown fox jumps over the lazy dog.</b></p>
-                <p><i>The quick brown fox jumps over the lazy dog.</i></p>
+                <div id="color-panel-text" data-color-id="color2text">
+                    <h1>Heading 1</h1>
+                    <h2>Heading 2</h2>
+                    <p class="color-label">Color 2</p>
+                    <p class="background-color-hex">#2d5dcc</p>
+                    <p class="text-color-hex">#000000</p>
+                    <p data-color-id="color2text">The quick brown fox jumps over the lazy dog.</p>
+                    <p data-color-id="color2text"><b>The quick brown fox jumps over the lazy dog.</b></p>
+                    <p data-color-id="color2text"><i>The quick brown fox jumps over the lazy dog.</i></p>
+                </div>
             </div>
             <div class="color-panel" data-color-id="color3">
-                <h1>Heading 1</h1>
-                <h2>Heading 2</h2>
-                <p class="color-label">Color 3</p>
-                <p class="color-hex">#2d5dcc</p>
-                <p>The quick brown fox jumps over the lazy dog.</p>
-                <p><b>The quick brown fox jumps over the lazy dog.</b></p>
-                <p><i>The quick brown fox jumps over the lazy dog.</i></p>
+                <div id="color-panel-text" data-color-id="color3text">
+                    <h1>Heading 1</h1>
+                    <h2>Heading 2</h2>
+                    <p class="color-label">Color 3</p>
+                    <p class="background-color-hex">#2d5dcc</p>
+                    <p class="text-color-hex">#000000</p>
+                    <p data-color-id="color3text">The quick brown fox jumps over the lazy dog.</p>
+                    <p data-color-id="color3text"><b>The quick brown fox jumps over the lazy dog.</b></p>
+                    <p data-color-id="color3text"><i>The quick brown fox jumps over the lazy dog.</i></p>
+                </div>
             </div>
             <div class="color-panel" data-color-id="color4">
-                <h1>Heading 1</h1>
-                <h2>Heading 2</h2>
-                <p class="color-label">Color 4</p>
-                <p class="color-hex">#2d5dcc</p>
-                <p>The quick brown fox jumps over the lazy dog.</p>
-                <p><b>The quick brown fox jumps over the lazy dog.</b></p>
-                <p><i>The quick brown fox jumps over the lazy dog.</i></p>
+                <div id="color-panel-text" data-color-id="color4text">
+                    <h1>Heading 1</h1>
+                    <h2>Heading 2</h2>
+                    <p class="color-label">Color 4</p>
+                    <p class="background-color-hex">#2d5dcc</p>
+                    <p class="text-color-hex">#000000</p>
+                    <p data-color-id="color4text">The quick brown fox jumps over the lazy dog.</p>
+                    <p data-color-id="color4text"><b>The quick brown fox jumps over the lazy dog.</b></p>
+                    <p data-color-id="color4text"><i>The quick brown fox jumps over the lazy dog.</i></p>
+                </div>
             </div>
         </div>
     </div>
