@@ -235,8 +235,29 @@
         <a><img src="./88x31s/linux_powered.gif" width="88" height="31"/></a>
         <a><img src="./88x31s/neocities6.gif" width="88" height="31"/></a>
     </aside>
+    <div class="chatty">
+        <button type="button" class="collapsible" id="chat-button" aria-pressed="false">
+            <b>Toggle chat</b>
+        </button>
+        <!-- Login form window (shown once per user, unless cache cleared)-->
+        <div class="login-form">
+            <input type="text" id="user-name-input" placeholder="Your nickname..." oninput="showUsername('user-name-input', this.value)"></input>
+            <button id="submit-username-btn">submit</button>
+        </div>
+        <!-- Chat window -->
+        <div class="chat-content">
+            <div class="chat-grid">
+                <div class="chat-messages">
+                    <p>Placeholder where the chat messages will go</p>
+                </div>
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-message-btn">send</button>
+            </div>
+        </div>
+    </div>
 </div>
-<script src="blogs.js"></script>
+<script src="/socket.io/socket.io.js"></script>
+<script src="./scripts/blogs.js"></script>
 <script src="./calculators/logic/energy-calculator.js"></script>
 <script>
     window.MathJax = {
@@ -248,5 +269,7 @@
 <script src="./libraries/mathjax/tex-svg.js"></script>
 <script src="./libraries/p5/p5.min.js"></script>
 <script src="./calculators/illustrations/1.js"></script>
-<script src="./themes.js"></script>
+<script src="./scripts/themes.js"></script>
+<script src="./scripts/chatty-logic.js"></script>
+<script src="./scripts/chatty-css.js"></script>
 </body>

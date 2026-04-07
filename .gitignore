@@ -3,3 +3,4 @@ fortuneteller/fortuneteller/__pycache__/
 fortuneteller/randomfortune/__pycache__/
 fortuneteller/equations_app/migrations/__pycache__/
 fortuneteller/randomfortune/miagrations/__pycache__/
+node_modules/

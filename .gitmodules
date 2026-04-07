@@ -1,3 +1,3 @@
-[submodule "libraries/mathjax"]
-	path = libraries/mathjax
+[submodule "public/libraries/mathjax"]
+	path = public/libraries/mathjax
 	url = https://github.com/mathjax/MathJax.git

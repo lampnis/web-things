@@ -4,7 +4,7 @@ const displayElement = document.getElementById('blog-content');
 const prevBtn = document.getElementById('prev-button')
 const nextBtn = document.getElementById('next-button')
 
-fetch('./blogs.conf')
+fetch('./scripts/blogs.conf')
   .then(response => response.text())
   .then(text => {
     maxId = parseInt(text.trim());

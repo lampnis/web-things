@@ -97,6 +97,7 @@ header {
         button:hover {
             background: var(--body-text);
             color: var(--body-background);
+            cursor: pointer;
         };
         button[aria-pressed="true"] {
             background: var(--body-text);
@@ -173,6 +174,126 @@ footer {
     scrollbar-width: none;
 }
 
+.chatty {
+    bottom: 10px;
+    right: 10px;
+    width: 88px;
+    height: 31px;
+
+    #chat-button {
+        color: var(--body-text);
+        background: var(--body-background);
+        box-shadow: 1px 1px 1px #8b5088;
+        width: 88px;
+        height: 31px;
+        position: fixed;
+        justify-self: center;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    #chat-button:hover {
+        box-shadow: 2px 2px 3px #8b5088;
+        cursor: pointer;
+    }
+
+    #chat-button:active {
+        box-shadow: none;
+    }
+
+    /* Style the button that is used to open and close the collapsible content */
+    .collapsible {
+        background: var(--body-background);
+        color: var(--body-text);
+    }
+
+    /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+    .active, .collapsible:hover {
+        background: var(--sliver-background);
+    }
+
+    /* Style the collapsible content. Note: hidden by default */
+    .chat-content {
+        padding: 5px 5px;
+        background-color: var(--sliver-background);
+        color: var(--body-text);
+        display: none;
+        position: fixed;
+        overflow-y: scroll;
+        scrollbar-width: none;
+        text-align: left;
+        bottom: 0;
+        right: 130px;
+        width: 70%;
+        height: 40%;
+    }
+
+    .login-form {
+        padding: 5px 5px;
+        background-color: var(--sliver-background);
+        color: var(--body-text);
+        display: none;
+        position: fixed;
+        overflow: scroll;
+        scrollbar-width: none;
+        text-align: left;
+        bottom: 0;
+        right: 130px;
+        width: 70%;
+        height: 40%;
+        #submit-username-btn {
+            padding-left: 3px;
+            padding-right: 3px;
+            background: var(--body-background);
+        }
+    }
+
+    .chat-grid {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        grid-template-rows: repeat(7, 1fr);
+        gap: 2px;
+        bottom: 10px;
+        right: 135px;
+        position: fixed;
+        width: 68%;
+        height: 38%;
+    }
+
+    .chat-messages {
+        grid-column: span 5 / span 5;
+        grid-row: span 6 / span 6;
+        background: var(--body-background);
+        overflow-y: scroll;
+        .message {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+            gap: 2px;
+            .message-user, .message-time {
+                background: var(--body-text);
+                color: var(--body-background);
+            }
+        }
+    }
+
+    #message-input {
+        grid-column: span 4 / span 4;
+        grid-row-start: 7;
+    }
+
+    #send-message-btn {
+        grid-column-start: 5;
+        grid-row-start: 7;
+        border-bottom: 3px solid black;
+        border-right: 3px solid black;
+        :active {
+            border: none;
+        }
+    }
+
+}
+
 
 
 #cool-links {
@@ -242,7 +363,7 @@ body {
         color: var(--link-color);
     }
     a:hover {
-        color(--link-hover);
+        color: (--link-hover);
     }
 }
 
