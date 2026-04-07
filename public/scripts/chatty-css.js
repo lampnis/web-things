@@ -1,5 +1,5 @@
 const socket = io();
-const MAX_MESSAGES = 3;
+const MAX_MESSAGES = 50;
 
 let coll = document.getElementsByClassName("collapsible")[0];
 let chatVisible = false;

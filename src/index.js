@@ -8,8 +8,8 @@ const server = http.createServer(app);
 const io = new Server(server);
 const PORT = 3000;
 
-const MAX_USERS = 2;
-const MAX_MESSAGES = 3;
+const MAX_USERS = 100;
+const MAX_MESSAGES = 50;
 let activeUsers = [];
 let messages = [];
 
