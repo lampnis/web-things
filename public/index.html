@@ -215,6 +215,33 @@
                         </div>
                     </section>
                 </div>
+                <div class="card">
+                    <section id="pressure-calculator">
+                        <h2>Pressure calculator</h2>
+                        <div id="equations">
+                        Here just a conversion to/from
+                        atm/mbar/Torr/pascal/mmHg.
+                        $$1\ \text{atm} = 1013.25\ \text{mbar}$$
+                        $$1\ \text{mbar} = 0.7500617\ \text{Torr}$$
+                        $$1\ \text{atm} = 101325\ \text{Pa}$$
+                        And in general, pressure units are Newtons per square meter
+                        $$p = F/A$$
+                        where p is pressure, F is force and A is area.<br><br>
+                        </div>
+                        <div id="io-fields">
+                            <label>Pressure (mbar)</label>
+                            <input type="number" id="input-mbar" oninput="updatePressure('input-mbar', this.value)"></input>
+                            <label>Pressure (atm)</label>
+                            <input type="number" id="input-atm" oninput="updatePressure('input-atm', this.value)"></input>
+                            <label>Pressure (Pa)</label>
+                            <input type="number" id="input-pa" oninput="updatePressure('input-pa', this.value)"></input>
+                            <label>Pressure (Torr)</label>
+                            <input type="number" id="input-torr" oninput="updatePressure('input-torr', this.value)"></input>
+                        </div>
+                        <div class="p5-figs" id="p5-illustration-2">
+                        </div>
+                    </section>
+                </div>
             </div>
             <div class="link-me-section">
                 <h3>Link Me!</h3>
@@ -275,6 +302,7 @@
 <script src="/socket.io/socket.io.js"></script>
 <script src="./scripts/blogs.js"></script>
 <script src="./calculators/logic/energy-calculator.js"></script>
+<script src="./calculators/logic/pressure-calculator.js"></script>
 <script>
     window.MathJax = {
       svg: {
@@ -285,6 +313,7 @@
 <script src="./libraries/mathjax/tex-svg.js"></script>
 <script src="./libraries/p5/p5.min.js"></script>
 <script src="./calculators/illustrations/1.js"></script>
+<script src="./calculators/illustrations/2.js"></script>
 <script src="./scripts/themes.js"></script>
 <script src="./scripts/chatty-logic.js"></script>
 <script src="./scripts/chatty-css.js"></script>
