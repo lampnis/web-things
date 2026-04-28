@@ -42,7 +42,7 @@ io.on('connection', (socket) => {
             console.log("User submitted name:", name);
             activeUsers.push(name);
 
-            if (activeUsers.length > 2) {
+            if (activeUsers.length > MAX_USERS) {
                 let removedUser = activeUsers.shift();
                 console.log(`Name "${removedUser}" freed`);
                 io.emit('chat-message', {
