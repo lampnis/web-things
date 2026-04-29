@@ -1,3 +1,15 @@
+# 1. ALLOW the 88x31 bot specifically
+User-agent: eightyeightthirtyone
+Allow: /
+
+# 2. BLOCK Google specifically
+User-agent: Googlebot
+User-agent: Googlebot-Image
+User-agent: Googlebot-Video
+User-agent: Googlebot-News
+Disallow: /
+
+# 3. BLOCK the massive list of AI bots
 User-agent: 2^32$
 User-agent: AddSearchBot
 User-agent: AdsBot-Google
@@ -309,7 +321,10 @@ User-agent: Zero GTP
 User-agent: Zhipu
 User-agent: Zimm
 Disallow: /
-Disallow: *
+
+# 4. CATCH-ALL: Block everyone else not mentioned above
+User-agent: *
+Disallow: /
 DisallowAITraining: /
 
 Content-Usage: ai=n
