@@ -9,6 +9,18 @@ html {
   /* border: 1px solid red; */
 }
 
+/* For theme wallpaper fields */
+.wallpaper {
+    disaply: flex;
+    justify-content: center;
+    text-align: center;
+    padding: 10px;
+    img {
+        width: 40em;
+        height: auto;
+    }
+}
+
 /* Variables for theme colors */
 :root,
 [data-selected-theme="dark"]{
