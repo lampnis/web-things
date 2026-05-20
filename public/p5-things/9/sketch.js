@@ -34,7 +34,7 @@ class Sliders {
             label.position(x + width + 10, y);
             label.style('font-family', 'sans-serif');
             label.style('font-size', '12px');
-            label.style('color', 'white');
+            label.style('color', 'green');
 
 
 
