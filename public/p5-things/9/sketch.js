@@ -5,6 +5,7 @@ let ballRadius;
 let r;
 let theta;
 let sliders;
+let params;
 
 let period = 120; // in frameCount units
 let amplitude = 100;
@@ -34,7 +35,7 @@ class Sliders {
             label.position(x + width + 10, y);
             label.style('font-family', 'sans-serif');
             label.style('font-size', '12px');
-            label.style('color', 'green');
+            label.style('color', 'lightgreen');
 
 
 
@@ -62,6 +63,10 @@ class Oscillators {
         this.oscillators = [];
     }
 
+    add_oscillator() {
+
+    }
+
 
 
 }
@@ -76,25 +81,33 @@ function setup() {
     params.add_slider("small_radius", 0, 200, 10, 0.5);
     params.add_slider("period", 0, 100, 50, 0.5, "(smaller -> faster)");
     params.add_slider("offset", -windowHeight, windowHeight, 0, windowHeight/1000)
+    params.add_slider("z_pos", -3, 3, 0, 0.1, "(depth coord)");
 
     position = createVector(100, 100, 100);
     velocity = createVector(2.5, 2, 2);
-    r = height * 0.4;
-    theta = 0;
+    radius = height * 0.4;
+    theta = 1;
     background(0);
     params.create_sliders()
 }
 
 function draw() {
 
-    // background(0);
+    var r = map(sin(frameCount*0.005), -1, 1, 0, 255)
+    var g = map(sin(frameCount*0.005 + 90), -1, 1, 0, 255);
+    var b = map(cos(frameCount*0.005 + 180), -1, 1, 0, 255);
+
+    // background(r, g, b);
+    // stroke(b, r, g);
     // translate(width/2, height/2);
     orbitControl();
 
     // let x = r * cos(theta);
     // let y = r * sin(theta);
-    let position = p5.Vector.fromAngle(theta); // would be the same as above two lines
-    position.mult(params.get("amplitude") * r * sin(PI * frameCount / params.get("period") + params.get("phase")) + params.get("offset"));
+    position.x = p5.Vector.fromAngle(theta).x; // would be the same as above two lines
+    position.y = p5.Vector.fromAngle(theta).y;
+    position.z = params.get("z_pos");
+    position.mult(params.get("amplitude") * radius * sin(PI * frameCount / params.get("period") + params.get("phase")) + params.get("offset"));
     // position.x += params.get("offset");
     // position.y += params.get("offset");
 
@@ -103,8 +116,10 @@ function draw() {
     // line(0, 0, position.x, position.y);
     // circle(position.x, position.y, 10);
     push();
+    // fill(g, b, r, 255);
     fill(0, 0, 0, 255);
-    stroke(255);
+    stroke(r, g, b);
+    strokeWeight(0.5);
     translate(position.x, position.y, position.z);
     sphere(params.get("small_radius"));
     pop();
@@ -117,5 +132,5 @@ function draw() {
 
 // Optional: Adjust canvas size when window is resized
 function windowResized() {
-  resizecanvas(windowwidth, windowheight);
+  resizeCanvas(windowwidth, windowheight);
 }
