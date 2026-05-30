@@ -6,9 +6,14 @@ let r;
 let theta;
 let sliders;
 let params;
+let spheres = [];
 
 let period = 120; // in frameCount units
 let amplitude = 100;
+
+function clearSpheres() {
+    spheres = [];
+}
 
 class Sliders {
     constructor() {
@@ -74,6 +79,7 @@ class Oscillators {
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
 
+    // sliders
     params = new Sliders;
     params.add_slider("big_radius", 0, 1, 0.5, 0.01);
     params.add_slider("amplitude", 0, 1, 0.5, 0.01);
@@ -83,15 +89,21 @@ function setup() {
     params.add_slider("offset", -windowHeight, windowHeight, 0, windowHeight/1000)
     params.add_slider("z_pos", -3, 3, 0, 0.1, "(depth coord)");
 
+    // buttons
+    let button = createButton('clear spheres');
+    button.position(windowWidth/3*2, 10);
+    button.mousePressed(clearSpheres);
+
     position = createVector(100, 100, 100);
     velocity = createVector(2.5, 2, 2);
     radius = height * 0.4;
     theta = 1;
-    background(0);
     params.create_sliders()
 }
 
 function draw() {
+
+    background(0);
 
     var r = map(sin(frameCount*0.005), -1, 1, 0, 255)
     var g = map(sin(frameCount*0.005 + 90), -1, 1, 0, 255);
@@ -111,18 +123,28 @@ function draw() {
     // position.x += params.get("offset");
     // position.y += params.get("offset");
 
+    spheres.push({
+        x: position.x,
+        y: position.y,
+        z: position.z,
+        r: r,
+        g: g,
+        b: b
+    });
 
     
     // line(0, 0, position.x, position.y);
     // circle(position.x, position.y, 10);
-    push();
-    // fill(g, b, r, 255);
-    fill(0, 0, 0, 255);
-    stroke(r, g, b);
-    strokeWeight(0.5);
-    translate(position.x, position.y, position.z);
-    sphere(params.get("small_radius"));
-    pop();
+    for (let s of spheres) {
+        push();
+        // fill(g, b, r, 255);
+        fill(0, 0, 0, 255);
+        stroke(s.r, s.g, s.b);
+        strokeWeight(0.5);
+        translate(s.x, s.y, s.z);
+        sphere(params.get("small_radius"));
+        pop();
+    }
 
     theta += 0.0125;
     params.update_labels();
