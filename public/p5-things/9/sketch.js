@@ -1,13 +1,20 @@
+const detail = 8; // how many triangles to use for 3d shapes
+const TRAIL_LENGTH = 5000;
+
 let position;
-let velocity;
-let boxSide;
+// let velocity;
+// let boxSide;
 let ballRadius;
 let r;
 let theta;
 let sliders;
 let params;
-let spheres = [];
+// let myShader;
+// let trailModel;
+let radius;
 
+
+let spheres = [];
 let period = 120; // in frameCount units
 let amplitude = 100;
 
@@ -79,6 +86,8 @@ class Oscillators {
 function setup() {
     createCanvas(windowWidth, windowHeight, WEBGL);
 
+    pixelDensity(1);
+    
     // sliders
     params = new Sliders;
     params.add_slider("big_radius", 0, 1, 0.5, 0.01);
@@ -87,7 +96,7 @@ function setup() {
     params.add_slider("small_radius", 0, 200, 10, 0.5);
     params.add_slider("period", 0, 100, 50, 0.5, "(smaller -> faster)");
     params.add_slider("offset", -windowHeight, windowHeight, 0, windowHeight/1000)
-    params.add_slider("z_pos", -3, 3, 0, 0.1, "(depth coord)");
+    params.add_slider("z_pos", -3.0, 3.0, 0.0, 0.1, "(depth coord)");
 
     // buttons
     let button = createButton('clear spheres');
@@ -95,7 +104,7 @@ function setup() {
     button.mousePressed(clearSpheres);
 
     position = createVector(100, 100, 100);
-    velocity = createVector(2.5, 2, 2);
+    // velocity = createVector(2.5, 2, 2);
     radius = height * 0.4;
     theta = 1;
     params.create_sliders()
@@ -104,6 +113,9 @@ function setup() {
 function draw() {
 
     background(0);
+    orbitControl();
+
+    // P5 ONLY    
 
     var r = map(sin(frameCount*0.005), -1, 1, 0, 255)
     var g = map(sin(frameCount*0.005 + 90), -1, 1, 0, 255);
@@ -112,7 +124,7 @@ function draw() {
     // background(r, g, b);
     // stroke(b, r, g);
     // translate(width/2, height/2);
-    orbitControl();
+    orbitControl(1, 1, 1);
 
     // let x = r * cos(theta);
     // let y = r * sin(theta);
@@ -142,17 +154,22 @@ function draw() {
         stroke(s.r, s.g, s.b);
         strokeWeight(0.5);
         translate(s.x, s.y, s.z);
-        sphere(params.get("small_radius"));
+        sphere(params.get("small_radius"), detail, detail);
         pop();
     }
-
+    
     theta += 0.0125;
+
+    if (spheres.length > TRAIL_LENGTH) {
+        spheres.shift();
+    }
+
     params.update_labels();
-
-
 }
+
+
 
 // Optional: Adjust canvas size when window is resized
 function windowResized() {
-  resizeCanvas(windowwidth, windowheight);
+    resizeCanvas(windowWidth, windowHeight);
 }
