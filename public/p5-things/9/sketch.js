@@ -92,7 +92,7 @@ class Oscillators {
                     id: i,
                     originX: random(-windowWidth/2, windowWidth/2),
                     originY: random(-windowHeight/2, windowHeight/2),
-                    originZ: random(-3, 3),
+                    originZ: random(-1000, 1000),
                     theta: random(TWO_PI),
                     angle: 0,
                     trail: [],
@@ -144,7 +144,7 @@ function setup() {
     params.add_slider("offset", -windowHeight, windowHeight, 0, windowHeight/1000)
     params.add_slider("z_pos", -3.0, 3.0, 0.0, 0.1, "(depth coord)");
     params.add_slider("angle_velocity", 0.05, 100, 0.05, 0.05, "(larger -> faster)")
-    params.add_slider("color_shift", 0.01, 0.1, 0.05, 0.005, "(color speed)")
+    params.add_slider("color_shift", 0.001, 0.1, 0.05, 0.001, "(color speed)")
 
     // buttons
     let button = createButton('clear spheres');
