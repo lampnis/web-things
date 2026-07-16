@@ -40,7 +40,7 @@ class Sliders {
     this.container[name].input.value(val);
   }
 
-  create_sliders(x=10, startY=10, spacing=25, width=200) {
+  create_sliders(x=10, startY=10, spacing=25, width=windowWidth/3) {
     let idx = 0;
     for (let name in this.container) {
 
