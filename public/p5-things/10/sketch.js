@@ -14,7 +14,7 @@ function setup() {
 
     params = new Sliders();
 
-    params.add_slider("angle_velocity", 0.01, 1, 0.01, 0.01, "(speed)");
+    params.add_slider("angle_velocity", 0.001, 1, 0.01, 0.001, "(speed)");
     params.add_slider("n_waves", 1, 1000, 2, 1, "(number of waves)");
     params.add_slider("n_balls", 10, 10000, 1000, 1, "(reduce for performance..?)");
     params.add_slider("circle_size", 1, 1000, 15, 1, "(just the size)");
@@ -31,17 +31,24 @@ function setup() {
 
 function draw() {
   
-    var r = map(sin(angle * params.get("color_shift")), -1, 1, 0, 255)
-    var g = map(sin(angle * params.get("color_shift") + 90), -1, 1, 0, 255);
-    var b = map(cos(angle * params.get("color_shift") + 180), -1, 1, 0, 255);
+    // var r = map(sin(angle * params.get("color_shift")), -1, 1, 0, 255)
+    // var g = map(sin(angle * params.get("color_shift") + 90), -1, 1, 0, 255);
+    // var b = map(cos(angle * params.get("color_shift") + 180), -1, 1, 0, 255);
 
     button.mousePressed(toggle_3d);
   
     background(0);
-    stroke(r, g, b);
-    fill(b, r, g);
+    // stroke(r, g, b);
+    // fill(b, r, g);
     NUM = params.get("n_balls");
     for (let i = 0; i < NUM; i++) {
+
+      var r = map(sin(angle * params.get("color_shift")), -1, 1, 0, 255) + random(0, map(sin(NUM), -1, 1, 0, 75), 0.01);
+      var g = map(sin(angle * params.get("color_shift") + 90), -1, 1, 0, 255) + random(0, map(sin(NUM), -1, 1, 0, 75), 0.01);
+      var b = map(cos(angle * params.get("color_shift") + 180), -1, 1, 0, 255) + random(0, map(sin(NUM), -1, 1, 0, 75), 0.01);
+
+      stroke(r, g, b);
+      fill(b, r, g);
 
       if (dims) {
         
@@ -50,7 +57,7 @@ function draw() {
         let y = windowHeight * wave_y + windowHeight/2;
         let x = windowWidth * wave_x + windowWidth/2;
         
-        circle(x, y, params.get("circle_size"));
+        circle(x, y, params.get("circle_size") * random(0, 4, 0.1));
       
       } else {
         
@@ -58,7 +65,7 @@ function draw() {
         let wave_y = sin(params.get("n_waves") * (TWO_PI * params.get("phase_y")) / NUM * i + angle) / 2;
         let y = windowHeight * wave_y + windowHeight/2;
 
-        circle(x, y, params.get("circle_size"));
+        circle(x, y, params.get("circle_size") * random(0, 4, 0.1));
       
       }
     }
