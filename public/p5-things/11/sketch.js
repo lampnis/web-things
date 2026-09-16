@@ -3,8 +3,10 @@ let N_WALKERS = 200;
 const CELL_SIZE = 8;
 let grid;
 let params;
+let stats;
 
 function init_population() {
+  walkers = [];
   let N_WALKERS = params.get("global", "n_walkers");
   let step = params.get("global", "step_size");
 
@@ -31,24 +33,27 @@ async function setup() {
   params.add_slider("global", "step_size", 1, 10, 3, 1, "step size");
 
   params.add_slider("walkers", "p_aging", 0.4, 0.6, 0.5, 0.001, "aging speed");
-  params.add_slider("walkers", "d_reproduction", 1, 5, 0.1, "reproduction distance");
+  params.add_slider("walkers", "d_reproduction", 1, 5, 2, 0.1, "reproduction distance");
 
   params.add_slider("hunters", "p_aging", 0.4, 0.6, 0.5, 0.001, "aging speed");
-  params.add_slider("hunters", "d_reproduction", 1, 5, 0.1, "reproduction distance");
+  params.add_slider("hunters", "d_reproduction", 1, 5, 2, 0.1, "reproduction distance");
+
+  stats = new Statistics();
+  stats.init_stats();
 
   grid = new SpatialGrid(CELL_SIZE);
 
   init_population(walkers);
 
-  button = createButton("reset population");
-  button.position(windowWidth - 150, 10);
-  button.mousePressed(init_population);
+  button_1 = createButton("reset population");
+  button_1.position(windowWidth - 150, 10);
+  button_1.mousePressed(init_population);
 
-  button = createButton("reset camera");
-  button.position(windowWidth - 150, 40);
-  button.mousePressed(reset_camera);
+  button_2 = createButton("reset camera");
+  button_2.position(windowWidth - 150, 40);
+  button_2.mousePressed(reset_camera);
 
-  font = await loadFont("assets/FiraSansCondensed-Regular.ttf");
+  font = await loadFont("assets/Fira_Sans_Condensed/FiraSansCondensed-Regular.ttf");
   fill("white");
   textFont(font);
   textSize(22);
@@ -103,7 +108,7 @@ function draw() {
 
   walkers = walkers.filter(w => !w.is_dead());
 
-  text(`Current world population: ${walkers.length}`, 0, 10);
+  stats.update_stat("Current world population", walkers.length);
 
 }
 

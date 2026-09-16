@@ -11,7 +11,7 @@ class SliderTree {
     this.panel.style("overflow-y", "auto");
     this.panel.style("background", "rgba(20, 20, 20, 0.85)");
     this.panel.style("color", "#fff");
-    this.panel.style("font-family", "sans-serif");
+    this.panel.style("font-family", "'Fira Sans Condensed', sans-serif");
     this.panel.style("padding", "12px");
     this.panel.style("border-radius", "8px");
     this.panel.style("box-shadow", "0 4px 10px rgba(0,0,0,0.5)");
@@ -21,6 +21,7 @@ class SliderTree {
     let title = createElement("h3", panel_title);
     title.parent(this.panel);
     title.style("margin", "0 0 10px 0");
+    title.style("font-family", "'Fira Sans Condensed', sans-serif !important");
     title.style("font-size", "16px");
     title.style("color", "4DF");
 
